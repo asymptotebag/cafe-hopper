@@ -429,7 +429,7 @@
         <!--Map-->
         <scene sceneID="dsf-hG-nUx">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cFv-vN-Fkc" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mapNavController" automaticallyAdjustsScrollViewInsets="NO" id="cFv-vN-Fkc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" id="kpg-u4-ezb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gN6-Pp-aqY">
