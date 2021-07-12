@@ -61,6 +61,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright 2021 Google
 
+## GooglePlaces
+
+Copyright 2021 Google
+
 ## MBProgressHUD
 
 Copyright © 2009-2020 Matej Bukovinski

@@ -10,6 +10,7 @@ target 'cafe-hopper' do
   pod 'Parse'
   pod 'AFNetworking'
   pod 'GoogleMaps', '5.1.0'
+  pod 'GooglePlaces', '5.0.0'
   pod 'MBProgressHUD'
 
   target 'cafe-hopperTests' do

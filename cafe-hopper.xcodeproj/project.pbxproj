@@ -22,6 +22,7 @@
 		7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17573A269C8A9200393B53 /* AccountViewController.m */; };
 		7C17573E269C8C8E00393B53 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17573D269C8C8E00393B53 /* MapViewController.m */; };
 		7C175741269C903600393B53 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175740269C903600393B53 /* User.m */; };
+		7C175743269CB13A00393B53 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C175742269CB13A00393B53 /* Keys.plist */; };
 		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		7C17573D269C8C8E00393B53 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		7C17573F269C903600393B53 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		7C175740269C903600393B53 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		7C175742269CB13A00393B53 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				7C175709269C74A800393B53 /* LaunchScreen.storyboard */,
 				7C17570C269C74A800393B53 /* Info.plist */,
 				7C17570D269C74A800393B53 /* main.m */,
+				7C175742269CB13A00393B53 /* Keys.plist */,
 			);
 			path = "cafe-hopper";
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C175743269CB13A00393B53 /* Keys.plist in Resources */,
 				7C17570B269C74A800393B53 /* LaunchScreen.storyboard in Resources */,
 				7C175708269C74A800393B53 /* Assets.xcassets in Resources */,
 				7C175706269C74A700393B53 /* Main.storyboard in Resources */,
