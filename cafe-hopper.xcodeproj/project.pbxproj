@@ -3,19 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E607E4F85477953CD77BFF5 /* Pods_cafe_hopper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0267B46841A203AD5B47382B /* Pods_cafe_hopper.framework */; };
+		5671CE937331CAA9A6D139E9 /* Pods_cafe_hopperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 451987C2729995C9528AFE4C /* Pods_cafe_hopperTests.framework */; };
 		7C1756FD269C74A700393B53 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1756FC269C74A700393B53 /* AppDelegate.m */; };
 		7C175700269C74A700393B53 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C1756FF269C74A700393B53 /* SceneDelegate.m */; };
-		7C175703269C74A700393B53 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175702269C74A700393B53 /* ViewController.m */; };
 		7C175706269C74A700393B53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C175704269C74A700393B53 /* Main.storyboard */; };
 		7C175708269C74A800393B53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C175707269C74A800393B53 /* Assets.xcassets */; };
 		7C17570B269C74A800393B53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C175709269C74A800393B53 /* LaunchScreen.storyboard */; };
 		7C17570E269C74A800393B53 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17570D269C74A800393B53 /* main.m */; };
 		7C175718269C74A800393B53 /* cafe_hopperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175717269C74A800393B53 /* cafe_hopperTests.m */; };
 		7C175723269C74A800393B53 /* cafe_hopperUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175722269C74A800393B53 /* cafe_hopperUITests.m */; };
+		7C175735269C797700393B53 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175734269C797700393B53 /* LoginViewController.m */; };
+		7C175738269C803C00393B53 /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175737269C803C00393B53 /* SignupViewController.m */; };
+		7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17573A269C8A9200393B53 /* AccountViewController.m */; };
+		7C17573E269C8C8E00393B53 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C17573D269C8C8E00393B53 /* MapViewController.m */; };
+		7C175741269C903600393B53 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175740269C903600393B53 /* User.m */; };
+		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +43,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0267B46841A203AD5B47382B /* Pods_cafe_hopper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		054BA16EE3709700052BA239 /* Pods-cafe-hopper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopper.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper.release.xcconfig"; sourceTree = "<group>"; };
+		451987C2729995C9528AFE4C /* Pods_cafe_hopperTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopperTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6424A1CD217A3090245AFDF2 /* Pods-cafe-hopper-cafe-hopperUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopper-cafe-hopperUITests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7C1756F8269C74A700393B53 /* cafe-hopper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cafe-hopper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C1756FB269C74A700393B53 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7C1756FC269C74A700393B53 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7C1756FE269C74A700393B53 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		7C1756FF269C74A700393B53 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		7C175701269C74A700393B53 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		7C175702269C74A700393B53 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		7C175705269C74A700393B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7C175707269C74A800393B53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7C17570A269C74A800393B53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +63,21 @@
 		7C17571E269C74A800393B53 /* cafe-hopperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "cafe-hopperUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C175722269C74A800393B53 /* cafe_hopperUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cafe_hopperUITests.m; sourceTree = "<group>"; };
 		7C175724269C74A800393B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7C175733269C797700393B53 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		7C175734269C797700393B53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		7C175736269C803C00393B53 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = "cafe-hopper/SignupViewController.h"; sourceTree = SOURCE_ROOT; };
+		7C175737269C803C00393B53 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = "cafe-hopper/SignupViewController.m"; sourceTree = SOURCE_ROOT; };
+		7C175739269C8A9200393B53 /* AccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
+		7C17573A269C8A9200393B53 /* AccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		7C17573C269C8C8E00393B53 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		7C17573D269C8C8E00393B53 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		7C17573F269C903600393B53 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		7C175740269C903600393B53 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
+		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
+		F7592225586F966A920FD7AF /* Pods-cafe-hopper-cafe-hopperUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopper-cafe-hopperUITests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FCD7B01E1B7BBDFB5ADD9A01 /* Pods-cafe-hopper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopper.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E607E4F85477953CD77BFF5 /* Pods_cafe_hopper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5671CE937331CAA9A6D139E9 /* Pods_cafe_hopperTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +101,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53D17031621777161608C0EB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FCD7B01E1B7BBDFB5ADD9A01 /* Pods-cafe-hopper.debug.xcconfig */,
+				054BA16EE3709700052BA239 /* Pods-cafe-hopper.release.xcconfig */,
+				6424A1CD217A3090245AFDF2 /* Pods-cafe-hopper-cafe-hopperUITests.debug.xcconfig */,
+				F7592225586F966A920FD7AF /* Pods-cafe-hopper-cafe-hopperUITests.release.xcconfig */,
+				8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */,
+				D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7C1756EF269C74A700393B53 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +128,8 @@
 				7C175716269C74A800393B53 /* cafe-hopperTests */,
 				7C175721269C74A800393B53 /* cafe-hopperUITests */,
 				7C1756F9269C74A700393B53 /* Products */,
+				53D17031621777161608C0EB /* Pods */,
+				CDC742317639D40D7564AFEB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,12 +146,13 @@
 		7C1756FA269C74A700393B53 /* cafe-hopper */ = {
 			isa = PBXGroup;
 			children = (
+				7C175732269C796700393B53 /* Models */,
+				7C175731269C796100393B53 /* Views */,
+				7C175730269C795600393B53 /* ViewControllers */,
 				7C1756FB269C74A700393B53 /* AppDelegate.h */,
 				7C1756FC269C74A700393B53 /* AppDelegate.m */,
 				7C1756FE269C74A700393B53 /* SceneDelegate.h */,
 				7C1756FF269C74A700393B53 /* SceneDelegate.m */,
-				7C175701269C74A700393B53 /* ViewController.h */,
-				7C175702269C74A700393B53 /* ViewController.m */,
 				7C175704269C74A700393B53 /* Main.storyboard */,
 				7C175707269C74A800393B53 /* Assets.xcassets */,
 				7C175709269C74A800393B53 /* LaunchScreen.storyboard */,
@@ -137,6 +180,47 @@
 			path = "cafe-hopperUITests";
 			sourceTree = "<group>";
 		};
+		7C175730269C795600393B53 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7C175736269C803C00393B53 /* SignupViewController.h */,
+				7C175737269C803C00393B53 /* SignupViewController.m */,
+				7C175733269C797700393B53 /* LoginViewController.h */,
+				7C175734269C797700393B53 /* LoginViewController.m */,
+				7C175739269C8A9200393B53 /* AccountViewController.h */,
+				7C17573A269C8A9200393B53 /* AccountViewController.m */,
+				7C17573C269C8C8E00393B53 /* MapViewController.h */,
+				7C17573D269C8C8E00393B53 /* MapViewController.m */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7C175731269C796100393B53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7C175732269C796700393B53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7C17573F269C903600393B53 /* User.h */,
+				7C175740269C903600393B53 /* User.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CDC742317639D40D7564AFEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0267B46841A203AD5B47382B /* Pods_cafe_hopper.framework */,
+				BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */,
+				451987C2729995C9528AFE4C /* Pods_cafe_hopperTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +228,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C175727269C74A800393B53 /* Build configuration list for PBXNativeTarget "cafe-hopper" */;
 			buildPhases = (
+				A846295D235CF601D91766F7 /* [CP] Check Pods Manifest.lock */,
 				7C1756F4269C74A700393B53 /* Sources */,
 				7C1756F5269C74A700393B53 /* Frameworks */,
 				7C1756F6269C74A700393B53 /* Resources */,
+				A70F87A9D285E737E562E144 /* [CP] Embed Pods Frameworks */,
+				21A821CEB2CB04CABEBCE242 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -161,6 +248,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C17572A269C74A800393B53 /* Build configuration list for PBXNativeTarget "cafe-hopperTests" */;
 			buildPhases = (
+				D7A5FD15326AACD08DAEE5CA /* [CP] Check Pods Manifest.lock */,
 				7C17570F269C74A800393B53 /* Sources */,
 				7C175710269C74A800393B53 /* Frameworks */,
 				7C175711269C74A800393B53 /* Resources */,
@@ -179,9 +267,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7C17572D269C74A800393B53 /* Build configuration list for PBXNativeTarget "cafe-hopperUITests" */;
 			buildPhases = (
+				3205E4B205C22780CF304F97 /* [CP] Check Pods Manifest.lock */,
 				7C17571A269C74A800393B53 /* Sources */,
 				7C17571B269C74A800393B53 /* Frameworks */,
 				7C17571C269C74A800393B53 /* Resources */,
+				F371139C62EC808517867CBC /* [CP] Embed Pods Frameworks */,
+				6A7358C2EA8890FF180A6B06 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -261,15 +352,156 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		21A821CEB2CB04CABEBCE242 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3205E4B205C22780CF304F97 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cafe-hopper-cafe-hopperUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A7358C2EA8890FF180A6B06 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A70F87A9D285E737E562E144 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper/Pods-cafe-hopper-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A846295D235CF601D91766F7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cafe-hopper-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D7A5FD15326AACD08DAEE5CA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cafe-hopperTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F371139C62EC808517867CBC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cafe-hopper-cafe-hopperUITests/Pods-cafe-hopper-cafe-hopperUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7C1756F4269C74A700393B53 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C175703269C74A700393B53 /* ViewController.m in Sources */,
+				7C175741269C903600393B53 /* User.m in Sources */,
+				7C175735269C797700393B53 /* LoginViewController.m in Sources */,
 				7C1756FD269C74A700393B53 /* AppDelegate.m in Sources */,
 				7C17570E269C74A800393B53 /* main.m in Sources */,
 				7C175700269C74A700393B53 /* SceneDelegate.m in Sources */,
+				7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */,
+				7C175738269C803C00393B53 /* SignupViewController.m in Sources */,
+				7C17573E269C8C8E00393B53 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +670,7 @@
 		};
 		7C175728269C74A800393B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCD7B01E1B7BBDFB5ADD9A01 /* Pods-cafe-hopper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +689,7 @@
 		};
 		7C175729269C74A800393B53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 054BA16EE3709700052BA239 /* Pods-cafe-hopper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -474,6 +708,7 @@
 		};
 		7C17572B269C74A800393B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -494,6 +729,7 @@
 		};
 		7C17572C269C74A800393B53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -514,6 +750,7 @@
 		};
 		7C17572E269C74A800393B53 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6424A1CD217A3090245AFDF2 /* Pods-cafe-hopper-cafe-hopperUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JV2M23W9B7;
@@ -532,6 +769,7 @@
 		};
 		7C17572F269C74A800393B53 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7592225586F966A920FD7AF /* Pods-cafe-hopper-cafe-hopperUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JV2M23W9B7;
