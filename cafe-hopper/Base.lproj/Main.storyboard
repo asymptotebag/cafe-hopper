@@ -264,7 +264,7 @@
         <scene sceneID="TT9-e5-0lD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pCQ-lO-YMb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Trips" id="0Jv-g4-Xev"/>
+                    <tabBarItem key="tabBarItem" title="Trips" image="figure.walk" catalog="system" id="0Jv-g4-Xev"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nuT-Vg-MA5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -299,7 +299,7 @@
         <scene sceneID="8lU-I8-gIy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tgk-HA-9ad" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Places" id="hbL-Vg-HlG"/>
+                    <tabBarItem key="tabBarItem" title="Places" image="mappin.and.ellipse" catalog="system" id="hbL-Vg-HlG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0NR-CZ-0tk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -386,7 +386,7 @@
         <scene sceneID="T2t-LI-VtO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bhb-RG-gE3" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" id="Pv4-CE-kiQ"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="person.fill" catalog="system" id="Pv4-CE-kiQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKS-zW-jcV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -408,15 +408,6 @@
                     <view key="view" contentMode="scaleToFill" id="zVV-wy-pSo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="map map map map " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMD-r7-nwu">
-                                <rect key="frame" x="132" y="315" width="151" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZmQ-UM-Azr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -430,7 +421,7 @@
         <scene sceneID="dsf-hG-nUx">
             <objects>
                 <navigationController storyboardIdentifier="mapNavController" automaticallyAdjustsScrollViewInsets="NO" id="cFv-vN-Fkc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" id="kpg-u4-ezb"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="kpg-u4-ezb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gN6-Pp-aqY">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -450,7 +441,11 @@
         <segue reference="woe-wn-tSv"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="figure.walk" catalog="system" width="95" height="128"/>
+        <image name="map" catalog="system" width="128" height="110"/>
+        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

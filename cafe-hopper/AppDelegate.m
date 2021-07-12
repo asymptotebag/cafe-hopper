@@ -30,7 +30,9 @@
         }];
     [Parse initializeWithConfiguration:config];
     
-    [GMSPlacesClient provideAPIKey:[dict objectForKey:@"googleMapsAPIKey"]];
+    NSString *googleAPIKey = [dict objectForKey:@"googleMapsAPIKey"];
+    [GMSServices provideAPIKey:googleAPIKey];
+    [GMSPlacesClient provideAPIKey:googleAPIKey];
     
     return YES;
 }
