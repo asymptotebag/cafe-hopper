@@ -408,14 +408,28 @@
                     <view key="view" contentMode="scaleToFill" id="zVV-wy-pSo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search for Places" translatesAutoresizingMaskIntoConstraints="NO" id="Xyd-YX-gZZ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="ZmQ-UM-Azr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Xyd-YX-gZZ" firstAttribute="trailing" secondItem="ZmQ-UM-Azr" secondAttribute="trailing" id="Q5q-1g-0gg"/>
+                            <constraint firstItem="Xyd-YX-gZZ" firstAttribute="leading" secondItem="ZmQ-UM-Azr" secondAttribute="leading" id="cyO-ns-88T"/>
+                            <constraint firstItem="Xyd-YX-gZZ" firstAttribute="top" secondItem="ZmQ-UM-Azr" secondAttribute="top" id="ecK-kd-r3R"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="8jA-JJ-wSM"/>
+                    <connections>
+                        <outlet property="searchBar" destination="Xyd-YX-gZZ" id="ZC8-AK-SBB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aF-Iu-c7N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="2258"/>
+            <point key="canvasLocation" x="-584.05797101449275" y="2257.3660714285711"/>
         </scene>
         <!--Map-->
         <scene sceneID="dsf-hG-nUx">

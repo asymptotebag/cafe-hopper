@@ -7,12 +7,13 @@
 
 #import "MapViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-//#import <GooglePlaces/GooglePlaces.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 @import GooglePlaces;
 
-@interface MapViewController ()
-@property (strong, nonatomic) NSString *placeName;
-@property (strong, nonatomic) NSString *placeAddress;
+@interface MapViewController () <UISearchBarDelegate, GMSAutocompleteResultsViewControllerDelegate>
+@property (strong, nonatomic) GMSAutocompleteResultsViewController *resultsViewController;
+@property (strong, nonatomic) UISearchController *searchController;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -23,10 +24,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
+    self.searchBar.delegate = self;
     [self displayUserLocation];
+//    [self sampleSearch];
 }
 
 - (void)displayUserLocation {
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    
     GMSPlaceField placeFields = (GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate);
     
     __weak typeof(self) weakSelf = self;
@@ -47,6 +52,7 @@
         NSLog(@"Place: %@", place.name);
         NSLog(@"Address: %@", place.formattedAddress);
         [self showLocationAtPlace:place];
+        [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
 
@@ -63,6 +69,79 @@
     marker.snippet = @"hello hello";
     marker.map = mapView;
 }
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    // TODO: find a way to display autocomplete results in a table view
+    if (searchText.length >= 5) { // idk i want to prevent making too many requests
+        GMSAutocompleteSessionToken *token = [[GMSAutocompleteSessionToken alloc] init];
+        // create type filter
+        GMSAutocompleteFilter *_filter = [[GMSAutocompleteFilter alloc] init];
+        _filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+        
+        [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
+            } else if (results) {
+                for (GMSAutocompletePrediction *result in results) {
+                    NSLog(@"Result %@ with PlaceID %@", result.attributedFullText, result.placeID);
+                }
+            }
+        }];
+    }
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
+
+- (void)sampleSearch {
+//    UISearchController *searchController = [UISearchController ]
+    _resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
+    _resultsViewController.delegate = self;
+
+    _searchController = [[UISearchController alloc]
+                             initWithSearchResultsController:_resultsViewController];
+    _searchController.searchResultsUpdater = _resultsViewController;
+
+    UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(0, 88.0, 250, 50)];
+
+    [subView addSubview:_searchController.searchBar];
+    [_searchController.searchBar sizeToFit];
+    [self.view addSubview:subView];
+
+    // When UISearchController presents the results view, present it in
+    // this view controller, not one further up the chain.
+    self.definesPresentationContext = YES;
+}
+
+- (void)resultsController:(nonnull GMSAutocompleteResultsViewController *)resultsController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"Place name %@", place.name);
+    NSLog(@"Place address %@", place.formattedAddress);
+    NSLog(@"Place attributions %@", place.attributions.string);
+}
+
+- (void)resultsController:(nonnull GMSAutocompleteResultsViewController *)resultsController didFailAutocompleteWithError:(nonnull NSError *)error {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    // handle the error.
+    NSLog(@"Error: %@", error.localizedDescription);
+}
+
+//- (void)didRequestAutocompletePredictionsForResultsController:
+//    (GMSAutocompleteResultsViewController *)resultsController {
+//  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+//}
+//
+//- (void)didUpdateAutocompletePredictionsForResultsController:
+//    (GMSAutocompleteResultsViewController *)resultsController {
+//  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+//}
 
 - (void)showSampleMap {
     // Sample code to create a GMSCameraPosition that tells the map to display the
