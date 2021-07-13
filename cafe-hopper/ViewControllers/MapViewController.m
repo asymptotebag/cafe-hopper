@@ -14,6 +14,7 @@
 @property (strong, nonatomic) GMSAutocompleteResultsViewController *resultsViewController;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end
 
@@ -24,7 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
+    self.searchResults = [NSMutableArray new];
     self.searchBar.delegate = self;
+    self.searchController.hidesNavigationBarDuringPresentation = NO;
+    
     [self displayUserLocation];
 //    [self sampleSearch];
 }
@@ -82,9 +86,16 @@
             if (error) {
                 NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
             } else if (results) {
+                // TODO: do something with the results
                 for (GMSAutocompletePrediction *result in results) {
                     NSLog(@"Result %@ with PlaceID %@", result.attributedFullText, result.placeID);
+                    NSLog(@"Type?: %@", result.types);
+                    if ([result.types containsObject:@"cafe"] || [result.types containsObject:@"bakery"] || [result.types containsObject:@"bar"]) {
+                        NSLog(@"acceptable place found!!");
+                        [self.searchResults addObject:result];
+                    }
                 }
+                // reload table view data here once table view is implemented?
             }
         }];
     }

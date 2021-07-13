@@ -12,6 +12,11 @@
 #import <Parse/Parse.h>
 
 @interface AccountViewController ()
+@property (strong, nonatomic) User *user;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *pfpView;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UIButton *signoutButton;
 
 @end
@@ -24,6 +29,11 @@
 }
 
 - (void)configView {
+    self.user = [User currentUser];
+    self.nameLabel.text = self.user.name;
+    self.usernameLabel.text = self.user.username;
+    self.emailField.text = self.user.email;
+    
     self.signoutButton.layer.cornerRadius = 5;
     self.signoutButton.clipsToBounds = true;
 }
