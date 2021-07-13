@@ -6,11 +6,13 @@
 //
 
 #import "SearchViewController.h"
+#import "SearchResultCell.h"
 @import GooglePlaces;
 
 @interface SearchViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *searchResults;
 
 @end
 
@@ -22,8 +24,66 @@
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
     self.searchBar.delegate = self;
+    self.searchResults = [NSMutableArray new];
+    [self setupTableView];
+}
+
+- (void)setupTableView {
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void)filterSearchResults:(NSArray<GMSAutocompletePrediction *> *)results {
+    for (GMSAutocompletePrediction *result in results) {
+        if ([result.types containsObject:@"cafe"] || [result.types containsObject:@"bakery"] || [result.types containsObject:@"bar"]) {
+            [self.searchResults addObject:result];
+        }
+    }
+    [self.tableView reloadData];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    if (searchText.length > 0) { // idk i want to prevent making too many requests
+        GMSAutocompleteSessionToken *token = [[GMSAutocompleteSessionToken alloc] init];
+        // create type filter
+        GMSAutocompleteFilter *_filter = [[GMSAutocompleteFilter alloc] init];
+        _filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+        
+        self.searchResults = [NSMutableArray new];
+        
+        [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
+            } else if (results) {
+                [self filterSearchResults:results];
+            }
+        }];
+    }
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    self.searchBar.text = @"";
+    [self.searchBar resignFirstResponder];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.searchResults.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    SearchResultCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
+    GMSAutocompletePrediction *result = self.searchResults[indexPath.row];
+    cell.result = result;
+    cell.placeNameLabel.attributedText = result.attributedPrimaryText;
+    cell.placeAddressLabel.attributedText = result.attributedSecondaryText;
+    return cell;
 }
 
 /*

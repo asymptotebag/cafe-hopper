@@ -91,7 +91,7 @@
                         <outlet property="loginButton" destination="jFZ-cW-mKT" id="bhe-fZ-U7e"/>
                         <outlet property="passwordField" destination="Bwe-Mu-fWn" id="Nhh-XN-IW8"/>
                         <outlet property="usernameField" destination="vKu-S5-ZZr" id="NAy-90-JJS"/>
-                        <segue destination="Nre-At-U6Z" kind="show" identifier="toSignupSegue" id="WEz-69-dR6"/>
+                        <segue destination="Nre-At-U6Z" kind="show" identifier="toSignupSegue" animates="NO" id="WEz-69-dR6"/>
                         <segue destination="cnL-mC-XXu" kind="presentation" identifier="loginSegue" id="woe-wn-tSv"/>
                     </connections>
                 </viewController>
@@ -208,7 +208,7 @@
                         <outlet property="passwordField" destination="zdL-KR-9tU" id="AD1-sr-WpX"/>
                         <outlet property="signupButton" destination="Ihc-wC-rxS" id="ec8-SA-z0g"/>
                         <outlet property="usernameField" destination="CdE-fK-ycf" id="vIs-bj-Axa"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toLoginSegue" id="v8t-Gj-lGu"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toLoginSegue" animates="NO" id="v8t-Gj-lGu"/>
                         <segue destination="cnL-mC-XXu" kind="presentation" identifier="signupSegue" id="Dcg-sd-saV"/>
                     </connections>
                 </viewController>
@@ -430,26 +430,37 @@
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for places" id="ki9-VA-EXl">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="72" id="nmJ-fi-mrs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" rowHeight="72" id="nmJ-fi-mrs" customClass="SearchResultCell">
                                         <rect key="frame" x="0.0" y="68.5" width="414" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nmJ-fi-mrs" id="vw2-hz-vsG">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La Colombe Coffee Roasters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJw-fj-2Fk">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJw-fj-2Fk">
                                                     <rect key="frame" x="20" y="10" width="374" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <nil key="textColor"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="La Colombe Coffee Roasters">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="system" size="18"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="270 Lafayette Street, New York, NY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssS-lk-AM9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ssS-lk-AM9">
                                                     <rect key="frame" x="20" y="40" width="374" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="270 Lafayette Street, New York, NY">
+                                                            <attributes>
+                                                                <color key="NSColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <font key="NSFont" metaFont="system" size="14"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -463,6 +474,10 @@
                                                 <constraint firstItem="ssS-lk-AM9" firstAttribute="leading" secondItem="dJw-fj-2Fk" secondAttribute="leading" id="zWE-tw-QsY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="placeAddressLabel" destination="ssS-lk-AM9" id="CDs-ca-RjO"/>
+                                            <outlet property="placeNameLabel" destination="dJw-fj-2Fk" id="BYI-fc-1hs"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

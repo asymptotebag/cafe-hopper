@@ -27,6 +27,7 @@
     _placesClient = [GMSPlacesClient sharedClient];
     self.searchResults = [NSMutableArray new];
     self.searchBar.delegate = self;
+    [self.searchBar endEditing:true];
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     [self displayUserLocation];
@@ -74,41 +75,9 @@
     marker.map = mapView;
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-    // TODO: find a way to display autocomplete results in a table view
-    if (searchText.length >= 5) { // idk i want to prevent making too many requests
-        GMSAutocompleteSessionToken *token = [[GMSAutocompleteSessionToken alloc] init];
-        // create type filter
-        GMSAutocompleteFilter *_filter = [[GMSAutocompleteFilter alloc] init];
-        _filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
-        
-        [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
-            } else if (results) {
-                // TODO: do something with the results
-                for (GMSAutocompletePrediction *result in results) {
-                    NSLog(@"Result %@ with PlaceID %@", result.attributedFullText, result.placeID);
-                    NSLog(@"Type?: %@", result.types);
-                    if ([result.types containsObject:@"cafe"] || [result.types containsObject:@"bakery"] || [result.types containsObject:@"bar"]) {
-                        NSLog(@"acceptable place found!!");
-                        [self.searchResults addObject:result];
-                    }
-                }
-                // reload table view data here once table view is implemented?
-            }
-        }];
-    }
-}
-
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = YES;
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-    self.searchBar.showsCancelButton = NO;
-    self.searchBar.text = @"";
-    [self.searchBar resignFirstResponder];
+    // segue into search (results) vc
+    [self performSegueWithIdentifier:@"mapSearchSegue" sender:nil];
 }
 
 - (void)sampleSearch {
@@ -143,16 +112,6 @@
     // handle the error.
     NSLog(@"Error: %@", error.localizedDescription);
 }
-
-//- (void)didRequestAutocompletePredictionsForResultsController:
-//    (GMSAutocompleteResultsViewController *)resultsController {
-//  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-//}
-//
-//- (void)didUpdateAutocompletePredictionsForResultsController:
-//    (GMSAutocompleteResultsViewController *)resultsController {
-//  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//}
 
 - (void)showSampleMap {
     // Sample code to create a GMSCameraPosition that tells the map to display the
