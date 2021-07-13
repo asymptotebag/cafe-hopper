@@ -7,6 +7,8 @@
 
 #import "SearchViewController.h"
 #import "SearchResultCell.h"
+#import "MapViewController.h"
+#import "MainTabBarController.h"
 @import GooglePlaces;
 
 @interface SearchViewController () <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -88,14 +90,23 @@
     return cell;
 }
 
-/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MainTabBarController *tabBar = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+    GMSAutocompletePrediction *result = self.searchResults[indexPath.row];
+    NSString *placeId = result.placeID;
+    tabBar.placeId = placeId;
+    [self presentViewController:tabBar animated:YES completion:nil];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+//    NSString *segId = [segue identifier];
 }
-*/
 
 @end

@@ -1,5 +1,5 @@
 //
-//  SearchViewController.h
+//  MainTabBarController.h
 //  cafe-hopper
 //
 //  Created by Emily Jiang on 7/13/21.
@@ -9,8 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-@interface SearchViewController : UIViewController
+@interface MainTabBarController : UITabBarController
+@property (strong, nonatomic) NSString *placeId;
 
 @end
 

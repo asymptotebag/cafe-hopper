@@ -221,10 +221,10 @@
             </objects>
             <point key="canvasLocation" x="777" y="129"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="rZA-04-7h7">
             <objects>
-                <tabBarController storyboardIdentifier="TabBarController" modalPresentationStyle="fullScreen" id="cnL-mC-XXu" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="cnL-mC-XXu" customClass="MainTabBarController" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KBT-ds-AmE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -414,12 +414,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCv-JF-gFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="3606"/>
+            <point key="canvasLocation" x="90" y="3613"/>
         </scene>
         <!--Search-->
         <scene sceneID="S4N-FZ-uVS">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="5jy-Nd-cdt" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="fullScreen" id="5jy-Nd-cdt" customClass="SearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w26-Vj-bw6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -499,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLW-xs-1M8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584" y="3619"/>
+            <point key="canvasLocation" x="-584" y="3613"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="R4o-Ds-1gZ">
@@ -676,7 +676,7 @@
         <!--Map-->
         <scene sceneID="ZVp-SE-sAM">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" id="GC1-dC-vDo" customClass="MapViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" modalPresentationStyle="fullScreen" id="GC1-dC-vDo" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zVV-wy-pSo">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -707,7 +707,7 @@
         <!--Map-->
         <scene sceneID="dsf-hG-nUx">
             <objects>
-                <navigationController storyboardIdentifier="mapNavController" automaticallyAdjustsScrollViewInsets="NO" id="cFv-vN-Fkc" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mapNavController" automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="cFv-vN-Fkc" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Map" image="map" catalog="system" id="kpg-u4-ezb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gN6-Pp-aqY">

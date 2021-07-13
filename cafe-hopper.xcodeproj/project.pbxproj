@@ -25,6 +25,7 @@
 		7C175743269CB13A00393B53 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C175742269CB13A00393B53 /* Keys.plist */; };
 		7C175746269E03D800393B53 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175745269E03D800393B53 /* SearchViewController.m */; };
 		7C175749269E136E00393B53 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175748269E136E00393B53 /* SearchResultCell.m */; };
+		7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B4269E57A800D02758 /* MainTabBarController.m */; };
 		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		7C175745269E03D800393B53 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		7C175747269E136E00393B53 /* SearchResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
 		7C175748269E136E00393B53 /* SearchResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
+		7CDB52B3269E57A800D02758 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		7CDB52B4269E57A800D02758 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				7C175732269C796700393B53 /* Models */,
 				7C175731269C796100393B53 /* Views */,
 				7C175730269C795600393B53 /* ViewControllers */,
+				7C175747269E136E00393B53 /* SearchResultCell.h */,
+				7C175748269E136E00393B53 /* SearchResultCell.m */,
 				7C1756FB269C74A700393B53 /* AppDelegate.h */,
 				7C1756FC269C74A700393B53 /* AppDelegate.m */,
 				7C1756FE269C74A700393B53 /* SceneDelegate.h */,
@@ -202,6 +207,8 @@
 				7C17573D269C8C8E00393B53 /* MapViewController.m */,
 				7C175744269E03D800393B53 /* SearchViewController.h */,
 				7C175745269E03D800393B53 /* SearchViewController.m */,
+				7CDB52B3269E57A800D02758 /* MainTabBarController.h */,
+				7CDB52B4269E57A800D02758 /* MainTabBarController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -209,8 +216,6 @@
 		7C175731269C796100393B53 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				7C175747269E136E00393B53 /* SearchResultCell.h */,
-				7C175748269E136E00393B53 /* SearchResultCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -513,6 +518,7 @@
 				7C175749269E136E00393B53 /* SearchResultCell.m in Sources */,
 				7C1756FD269C74A700393B53 /* AppDelegate.m in Sources */,
 				7C17570E269C74A800393B53 /* main.m in Sources */,
+				7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */,
 				7C175746269E03D800393B53 /* SearchViewController.m in Sources */,
 				7C175700269C74A700393B53 /* SceneDelegate.m in Sources */,
 				7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */,
