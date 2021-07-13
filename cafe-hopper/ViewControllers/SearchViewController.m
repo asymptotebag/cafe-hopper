@@ -24,6 +24,7 @@
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
     self.searchBar.delegate = self;
+    [self.searchBar becomeFirstResponder];
     self.searchResults = [NSMutableArray new];
     [self setupTableView];
 }
@@ -71,6 +72,7 @@
     self.searchBar.showsCancelButton = NO;
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
+    [self dismissViewControllerAnimated:YES completion:^{}];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

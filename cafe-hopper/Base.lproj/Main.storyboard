@@ -416,10 +416,10 @@
             </objects>
             <point key="canvasLocation" x="90" y="3606"/>
         </scene>
-        <!--Search View Controller-->
+        <!--Search-->
         <scene sceneID="S4N-FZ-uVS">
             <objects>
-                <viewController id="5jy-Nd-cdt" customClass="SearchViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="5jy-Nd-cdt" customClass="SearchViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="w26-Vj-bw6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -491,7 +491,7 @@
                             <constraint firstItem="SYJ-I2-HBr" firstAttribute="trailing" secondItem="4QD-EK-9TF" secondAttribute="trailing" id="go1-Bq-Fe3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="1lO-ZU-Osj"/>
+                    <navigationItem key="navigationItem" title="Search" id="1lO-ZU-Osj"/>
                     <connections>
                         <outlet property="searchBar" destination="ki9-VA-EXl" id="GQ1-c1-9lU"/>
                         <outlet property="tableView" destination="SYJ-I2-HBr" id="tLu-9w-Aee"/>
@@ -499,7 +499,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLW-xs-1M8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584.05797101449275" y="2933.7053571428569"/>
+            <point key="canvasLocation" x="-584" y="3619"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="R4o-Ds-1gZ">
@@ -542,7 +542,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pne-7R-S9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89.855072463768124" y="2933.7053571428569"/>
+            <point key="canvasLocation" x="90" y="2934"/>
         </scene>
         <!--Places-->
         <scene sceneID="8lU-I8-gIy">
@@ -697,7 +697,7 @@
                     <navigationItem key="navigationItem" title="Map" id="8jA-JJ-wSM"/>
                     <connections>
                         <outlet property="searchBar" destination="Xyd-YX-gZZ" id="ZC8-AK-SBB"/>
-                        <segue destination="5jy-Nd-cdt" kind="show" identifier="mapSearchSegue" id="oxa-VL-9hG"/>
+                        <segue destination="dTE-06-Ijb" kind="presentation" identifier="mapSearchSegue" modalTransitionStyle="crossDissolve" id="oxa-VL-9hG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aF-Iu-c7N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -722,6 +722,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KsA-Qu-snx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-584" y="1583"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Srv-xL-v6T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="dTE-06-Ijb" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O09-b2-ed8">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5jy-Nd-cdt" kind="relationship" relationship="rootViewController" id="EhR-0P-rdm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PJf-46-nev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-584.05797101449275" y="2933.7053571428569"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

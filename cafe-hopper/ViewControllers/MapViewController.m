@@ -27,7 +27,6 @@
     _placesClient = [GMSPlacesClient sharedClient];
     self.searchResults = [NSMutableArray new];
     self.searchBar.delegate = self;
-    [self.searchBar endEditing:true];
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
     [self displayUserLocation];
@@ -78,6 +77,8 @@
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     // segue into search (results) vc
     [self performSegueWithIdentifier:@"mapSearchSegue" sender:nil];
+    [self.searchBar endEditing:true];
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)sampleSearch {
