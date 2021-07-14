@@ -396,18 +396,6 @@
                                     <constraint firstAttribute="height" constant="175" id="x8i-NG-eYQ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpH-xH-ybF">
-                                <rect key="frame" x="370" y="262.5" width="29" height="33"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="WGq-dy-nR1"/>
-                                    <constraint firstAttribute="width" constant="29" id="pII-yz-jQm"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal">
-                                    <imageReference key="backgroundImage" image="bookmark" catalog="system" symbolScale="large"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="thin"/>
-                                </state>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La Colombe Coffee Roasters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQB-7K-sdk">
                                 <rect key="frame" x="15" y="355.5" width="384" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
@@ -425,13 +413,11 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="BQB-7K-sdk" secondAttribute="trailing" constant="15" id="1c9-Dc-0Ue"/>
-                            <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="DpH-xH-ybF" secondAttribute="trailing" constant="15" id="5fB-Gq-Rmp"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="9HC-WZ-HiV"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="CxJ-0G-OtR"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="top" secondItem="BQB-7K-sdk" secondAttribute="bottom" constant="10" id="KUP-nm-11s"/>
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Khp-o1-WGs"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Nto-46-VRD"/>
-                            <constraint firstItem="DpH-xH-ybF" firstAttribute="top" secondItem="sAP-sE-Ayi" secondAttribute="bottom" constant="15" id="Nzf-K9-w1n"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="top" secondItem="gMK-NB-evC" secondAttribute="bottom" constant="18" id="TaN-Wg-XIN"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="trailing" secondItem="9Tu-xR-pnv" secondAttribute="trailing" id="Up7-Dh-ANn"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="top" secondItem="muf-YL-3dy" secondAttribute="top" id="bjh-53-45M"/>
@@ -441,13 +427,15 @@
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" id="sgI-Na-iaf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Place Details" id="awj-Lk-Gh6"/>
+                    <navigationItem key="navigationItem" title="Place Details" id="awj-Lk-Gh6">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="94G-ok-nrZ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="zvu-a3-dZB" id="txr-iB-R64"/>
                         <outlet property="collectionView" destination="sAP-sE-Ayi" id="cVF-yz-cEn"/>
                         <outlet property="nameLabel" destination="BQB-7K-sdk" id="RJE-RH-JrS"/>
                         <outlet property="pictureView" destination="gMK-NB-evC" id="c8z-HP-fFm"/>
-                        <outlet property="saveButton" destination="DpH-xH-ybF" id="kGl-Uw-2ox"/>
+                        <outlet property="saveBarButton" destination="94G-ok-nrZ" id="7l0-ll-95V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCv-JF-gFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

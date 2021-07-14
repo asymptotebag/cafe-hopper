@@ -14,7 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
+@property (strong, nonatomic) UIMenu *saveMenu;
 
 @end
 
@@ -33,26 +34,29 @@
     self.pictureView.clipsToBounds = true;
     
     [self showStarRating];
+    [self setupMenu];
+}
+
+- (void)setupMenu {
+    UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        NSLog(@"Tapped save button");
+    }];
+    self.saveMenu = [UIMenu menuWithChildren:@[savePlace]];
+    [self.saveBarButton setMenu:self.saveMenu];
 }
 
 - (void)showStarRating {
     HCSStarRatingView *starRatingView = [HCSStarRatingView new];
-    
-    // config frame
-//    [starRatingView setFrame:CGRectMake(starRatingView.frame.origin.x, starRatingView.frame.origin.y, 100, 25)];
-    
     starRatingView.maximumValue = 5;
     starRatingView.minimumValue = 0;
     starRatingView.tintColor = [UIColor yellowColor];
     starRatingView.allowsHalfStars = YES;
     starRatingView.accurateHalfStars = YES;
-//    starRatingView.editingInteractionConfigurati
     starRatingView.value = self.place.rating;
     [starRatingView setUserInteractionEnabled:NO];
     starRatingView.emptyStarImage = [[UIImage imageNamed:@"heart-empty"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     starRatingView.filledStarImage = [[UIImage imageNamed:@"heart-full"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.view addSubview:starRatingView];
-    
     
     // autolayout star rating view
     starRatingView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -74,7 +78,6 @@
                             toItem:self.view
                             attribute:NSLayoutAttributeWidth
                             multiplier:.45f constant:0.f] setActive:YES];
-    
 }
 
 /*

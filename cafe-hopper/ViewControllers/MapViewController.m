@@ -133,7 +133,6 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DetailsViewController *detailsVC = [storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
         detailsVC.place = self.currentPlace;
-//        [self presentViewController:detailsVC animated:YES completion:nil];
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
 }

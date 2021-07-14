@@ -21,7 +21,6 @@
 
 - (void)setResult:(GMSAutocompletePrediction *)result { // custom setter
     _result = result;
-    NSLog(@"setting cell");
     self.placeNameLabel.attributedText = result.attributedPrimaryText;
     self.placeAddressLabel.attributedText = result.attributedSecondaryText;
 }
