@@ -85,8 +85,8 @@
     SearchResultCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
     GMSAutocompletePrediction *result = self.searchResults[indexPath.row];
     cell.result = result;
-    cell.placeNameLabel.attributedText = result.attributedPrimaryText;
-    cell.placeAddressLabel.attributedText = result.attributedSecondaryText;
+//    cell.placeNameLabel.attributedText = result.attributedPrimaryText;
+//    cell.placeAddressLabel.attributedText = result.attributedSecondaryText;
     return cell;
 }
 

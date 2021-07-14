@@ -7,6 +7,7 @@
 
 #import "MapViewController.h"
 #import "MainTabBarController.h"
+#import "DetailsViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <MBProgressHUD/MBProgressHUD.h>
 @import GooglePlaces;
@@ -17,6 +18,8 @@
 @property (strong, nonatomic) UISearchController *searchController;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *searchResults;
+@property (weak, nonatomic) IBOutlet UIButton *detailsButton;
+@property (strong, nonatomic) GMSPlace *currentPlace;
 
 @end
 
@@ -44,12 +47,14 @@
 
 - (void)showPlaceFromId:(NSString *)placeID {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldCoordinate);
+    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel);
+//    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldCoordinate | GMSPlaceFieldPhotos);
     [_placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error fetching place from ID: %@", error.localizedDescription);
         } else if (place) {
             NSLog(@"Displaying %@", place.name);
+            self.currentPlace = place;
             [self showLocationAtPlace:place];
         }
     }];
@@ -122,14 +127,27 @@
     [self.searchBar resignFirstResponder];
 }
 
-/*
+- (IBAction)onTapDetailsButton:(id)sender {
+    if (self.currentPlace) {
+        NSLog(@"segue through button tap");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        DetailsViewController *detailsVC = [storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
+        detailsVC.place = self.currentPlace;
+//        [self presentViewController:detailsVC animated:YES completion:nil];
+        [self.navigationController pushViewController:detailsVC animated:YES];
+    }
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"segue through here");
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+//    if ([[segue identifier] isEqualToString:@"detailsSegue"]) {
+//        if (self.)
+//    }
 }
-*/
 
 @end

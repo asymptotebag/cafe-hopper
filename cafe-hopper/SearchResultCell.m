@@ -16,15 +16,14 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
-//- (void)setCell:(GMSAutocompletePrediction *)result { // custom setter for reuse
-//    _result = result;
-//    NSLog(@"setting cell");
-//    self.placeNameLabel.attributedText = result.attributedPrimaryText;
-//    self.placeAddressLabel.attributedText = result.attributedSecondaryText;
-//}
+- (void)setResult:(GMSAutocompletePrediction *)result { // custom setter
+    _result = result;
+    NSLog(@"setting cell");
+    self.placeNameLabel.attributedText = result.attributedPrimaryText;
+    self.placeAddressLabel.attributedText = result.attributedSecondaryText;
+}
 
 @end

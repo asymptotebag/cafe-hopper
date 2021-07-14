@@ -26,6 +26,7 @@
 		7C175746269E03D800393B53 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175745269E03D800393B53 /* SearchViewController.m */; };
 		7C175749269E136E00393B53 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175748269E136E00393B53 /* SearchResultCell.m */; };
 		7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B4269E57A800D02758 /* MainTabBarController.m */; };
+		7CDB52B8269F299900D02758 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B7269F299900D02758 /* DetailsViewController.m */; };
 		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +85,8 @@
 		7C175748269E136E00393B53 /* SearchResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		7CDB52B3269E57A800D02758 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		7CDB52B4269E57A800D02758 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		7CDB52B6269F299900D02758 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		7CDB52B7269F299900D02758 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				7C175745269E03D800393B53 /* SearchViewController.m */,
 				7CDB52B3269E57A800D02758 /* MainTabBarController.h */,
 				7CDB52B4269E57A800D02758 /* MainTabBarController.m */,
+				7CDB52B6269F299900D02758 /* DetailsViewController.h */,
+				7CDB52B7269F299900D02758 /* DetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -516,6 +521,7 @@
 				7C175741269C903600393B53 /* User.m in Sources */,
 				7C175735269C797700393B53 /* LoginViewController.m in Sources */,
 				7C175749269E136E00393B53 /* SearchResultCell.m in Sources */,
+				7CDB52B8269F299900D02758 /* DetailsViewController.m in Sources */,
 				7C1756FD269C74A700393B53 /* AppDelegate.m in Sources */,
 				7C17570E269C74A800393B53 /* main.m in Sources */,
 				7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */,
