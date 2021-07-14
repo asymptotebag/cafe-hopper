@@ -11,9 +11,9 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 @import GooglePlaces;
 
-@interface MapViewController () <UISearchBarDelegate, GMSAutocompleteResultsViewControllerDelegate>
+@interface MapViewController () <UISearchBarDelegate, GMSMapViewDelegate>
 // public: @property (strong, nonatomic) NSString *placeId;
-@property (strong, nonatomic) GMSAutocompleteResultsViewController *resultsViewController;
+//@property (strong, nonatomic) GMSAutocompleteResultsViewController *resultsViewController;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *searchResults;
@@ -22,6 +22,7 @@
 
 @implementation MapViewController {
     GMSPlacesClient *_placesClient;
+    GMSMarker *infoMarker;
 }
 
 - (void)viewDidLoad {
@@ -86,6 +87,7 @@
     GMSMapView *mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
     mapView.myLocationEnabled = YES;
     [self.view insertSubview:mapView atIndex:0];
+    mapView.delegate = self;
     [MBProgressHUD hideHUDForView:self.view animated:true];
     
     // Create a marker
@@ -96,44 +98,28 @@
     marker.map = mapView;
 }
 
+//- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
+//
+//}
+
+- (void)mapView:(GMSMapView *)mapView didTapPOIWithPlaceID:(NSString *)placeID name:(NSString *)name location:(CLLocationCoordinate2D)location {
+    NSLog(@"You tapped %@: %@, %f/%f", name, placeID, location.latitude, location.longitude);
+    infoMarker = [GMSMarker markerWithPosition:location];
+    infoMarker.title = name;
+//    infoMarker.snippet = placeID;
+    infoMarker.opacity = 0;
+    CGPoint pos = infoMarker.infoWindowAnchor;
+    pos.y = 1;
+    infoMarker.infoWindowAnchor = pos;
+    infoMarker.map = mapView;
+    mapView.selectedMarker = infoMarker;
+}
+
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
     // segue into search (results) vc
     [self performSegueWithIdentifier:@"mapSearchSegue" sender:nil];
     [self.searchBar endEditing:true];
     [self.searchBar resignFirstResponder];
-}
-
-- (void)sampleSearch {
-//    UISearchController *searchController = [UISearchController ]
-    _resultsViewController = [[GMSAutocompleteResultsViewController alloc] init];
-    _resultsViewController.delegate = self;
-
-    _searchController = [[UISearchController alloc]
-                             initWithSearchResultsController:_resultsViewController];
-    _searchController.searchResultsUpdater = _resultsViewController;
-
-    UIView *subView = [[UIView alloc] initWithFrame:CGRectMake(0, 88.0, 250, 50)];
-
-    [subView addSubview:_searchController.searchBar];
-    [_searchController.searchBar sizeToFit];
-    [self.view addSubview:subView];
-
-    // When UISearchController presents the results view, present it in
-    // this view controller, not one further up the chain.
-    self.definesPresentationContext = YES;
-}
-
-- (void)resultsController:(nonnull GMSAutocompleteResultsViewController *)resultsController didAutocompleteWithPlace:(nonnull GMSPlace *)place {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    NSLog(@"Place name %@", place.name);
-    NSLog(@"Place address %@", place.formattedAddress);
-    NSLog(@"Place attributions %@", place.attributions.string);
-}
-
-- (void)resultsController:(nonnull GMSAutocompleteResultsViewController *)resultsController didFailAutocompleteWithError:(nonnull NSError *)error {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    // handle the error.
-    NSLog(@"Error: %@", error.localizedDescription);
 }
 
 /*

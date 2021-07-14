@@ -685,6 +685,18 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="51"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVC-K8-zM6">
+                                <rect key="frame" x="338" y="735" width="51" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="ZwY-da-Hi2"/>
+                                    <constraint firstAttribute="width" constant="51" id="lKM-OI-chM"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal">
+                                    <imageReference key="backgroundImage" image="ellipsis.circle" catalog="system" symbolScale="large"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZmQ-UM-Azr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -692,17 +704,20 @@
                             <constraint firstItem="Xyd-YX-gZZ" firstAttribute="trailing" secondItem="ZmQ-UM-Azr" secondAttribute="trailing" id="Q5q-1g-0gg"/>
                             <constraint firstItem="Xyd-YX-gZZ" firstAttribute="leading" secondItem="ZmQ-UM-Azr" secondAttribute="leading" id="cyO-ns-88T"/>
                             <constraint firstItem="Xyd-YX-gZZ" firstAttribute="top" secondItem="ZmQ-UM-Azr" secondAttribute="top" id="ecK-kd-r3R"/>
+                            <constraint firstItem="ZmQ-UM-Azr" firstAttribute="trailing" secondItem="SVC-K8-zM6" secondAttribute="trailing" constant="25" id="faq-Oi-IB1"/>
+                            <constraint firstItem="ZmQ-UM-Azr" firstAttribute="bottom" secondItem="SVC-K8-zM6" secondAttribute="bottom" constant="30" id="kRL-dw-iZw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="8jA-JJ-wSM"/>
                     <connections>
                         <outlet property="searchBar" destination="Xyd-YX-gZZ" id="ZC8-AK-SBB"/>
                         <segue destination="dTE-06-Ijb" kind="presentation" identifier="mapSearchSegue" modalTransitionStyle="crossDissolve" id="oxa-VL-9hG"/>
+                        <segue destination="zNh-1M-8HY" kind="show" identifier="detailsSegue" id="VsI-FK-8Q3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3aF-Iu-c7N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-584.05797101449275" y="2257.3660714285711"/>
+            <point key="canvasLocation" x="-584.05797101449275" y="2256.6964285714284"/>
         </scene>
         <!--Map-->
         <scene sceneID="dsf-hG-nUx">
@@ -743,10 +758,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="VsI-FK-8Q3"/>
         <segue reference="woe-wn-tSv"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="bookmark" catalog="system" width="112" height="128"/>
+        <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
         <image name="figure.walk" catalog="system" width="95" height="128"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
