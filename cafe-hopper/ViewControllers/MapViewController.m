@@ -47,8 +47,8 @@
 
 - (void)showPlaceFromId:(NSString *)placeID {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel);
-//    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldCoordinate | GMSPlaceFieldPhotos);
+    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating);
+//    GMSPlaceField fields = (GMSPlaceFieldPhotos | GMSPlaceFieldPriceLevel);
     [_placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error fetching place from ID: %@", error.localizedDescription);
@@ -129,7 +129,6 @@
 
 - (IBAction)onTapDetailsButton:(id)sender {
     if (self.currentPlace) {
-        NSLog(@"segue through button tap");
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DetailsViewController *detailsVC = [storyboard instantiateViewControllerWithIdentifier:@"DetailsViewController"];
         detailsVC.place = self.currentPlace;

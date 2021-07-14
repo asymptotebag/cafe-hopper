@@ -11,6 +11,8 @@
 
 @dynamic name;
 @dynamic pfp;
+@dynamic collections;
+@dynamic trips;
 
 + (void)changeNameForUser:(User *)user withName:(NSString *)name completion:(PFBooleanResultBlock)completion {
     user.name = name;

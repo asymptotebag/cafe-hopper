@@ -8,8 +8,10 @@
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
+#import "User.h"
 
 @interface DetailsViewController ()
+@property (strong, nonatomic) User *user;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -23,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.user = [User currentUser];
     [self setupView];
 }
 
@@ -35,14 +38,33 @@
     
     [self showStarRating];
     [self setupMenu];
+
+    if ([self.user.collections[@"All"] containsObject:self.place.placeID]) {
+        [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
+    } else { // user has not saved this place
+        [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark"]];
+    }
 }
 
 - (void)setupMenu {
     UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-        NSLog(@"Tapped save button");
+        [self addPlaceToCollection:@"All"];
     }];
     self.saveMenu = [UIMenu menuWithChildren:@[savePlace]];
     [self.saveBarButton setMenu:self.saveMenu];
+}
+
+- (void)addPlaceToCollection:(NSString *)collectionName {
+    [self.user.collections[collectionName] addObject:self.place.placeID];
+    self.user[@"collections"] = self.user.collections;
+    [self.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Saved place");
+        } else {
+            NSLog(@"Error saving place: %@", error.localizedDescription);
+        }
+    }];
+    [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
 }
 
 - (void)showStarRating {
