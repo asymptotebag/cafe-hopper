@@ -35,6 +35,7 @@
     self.nameLabel.text = self.place.name;
     self.addressLabel.text = self.place.formattedAddress;
     
+    [self.pictureView setImage:[UIImage imageNamed:@"3"]];
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
     self.pictureView.clipsToBounds = true;
     

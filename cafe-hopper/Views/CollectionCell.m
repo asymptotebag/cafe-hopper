@@ -14,6 +14,10 @@
     self.nameLabel.text = collection.collectionName;
     self.frameView.layer.cornerRadius = 15;
     self.frameView.clipsToBounds = YES;
+    [self.topLeftView setImage:[UIImage imageNamed:@"1"]];
+    [self.topRightView setImage:[UIImage imageNamed:@"2"]];
+    [self.bottomLeftView setImage:[UIImage imageNamed:@"3"]];
+    [self.bottomRightView setImage:[UIImage imageNamed:@"4"]];
 }
 
 @end

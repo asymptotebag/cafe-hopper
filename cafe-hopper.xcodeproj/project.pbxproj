@@ -30,6 +30,8 @@
 		7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52BA269F759400D02758 /* PlacesViewController.m */; };
 		7CDB52BE269F88A600D02758 /* CollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52BD269F88A600D02758 /* CollectionCell.m */; };
 		7CDB52C4269FA49100D02758 /* Collection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52C3269FA49100D02758 /* Collection.m */; };
+		7CDB52C726A0857B00D02758 /* PlaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52C626A0857B00D02758 /* PlaceCell.m */; };
+		7CDB52CA26A0954600D02758 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52C926A0954600D02758 /* CollectionViewController.m */; };
 		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,10 @@
 		7CDB52BD269F88A600D02758 /* CollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionCell.m; sourceTree = "<group>"; };
 		7CDB52C2269FA49100D02758 /* Collection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Collection.h; sourceTree = "<group>"; };
 		7CDB52C3269FA49100D02758 /* Collection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Collection.m; sourceTree = "<group>"; };
+		7CDB52C526A0857B00D02758 /* PlaceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaceCell.h; sourceTree = "<group>"; };
+		7CDB52C626A0857B00D02758 /* PlaceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaceCell.m; sourceTree = "<group>"; };
+		7CDB52C826A0954600D02758 /* CollectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		7CDB52C926A0954600D02758 /* CollectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -223,6 +229,8 @@
 				7CDB52B7269F299900D02758 /* DetailsViewController.m */,
 				7CDB52B9269F759400D02758 /* PlacesViewController.h */,
 				7CDB52BA269F759400D02758 /* PlacesViewController.m */,
+				7CDB52C826A0954600D02758 /* CollectionViewController.h */,
+				7CDB52C926A0954600D02758 /* CollectionViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -234,6 +242,8 @@
 				7C175748269E136E00393B53 /* SearchResultCell.m */,
 				7CDB52BC269F88A600D02758 /* CollectionCell.h */,
 				7CDB52BD269F88A600D02758 /* CollectionCell.m */,
+				7CDB52C526A0857B00D02758 /* PlaceCell.h */,
+				7CDB52C626A0857B00D02758 /* PlaceCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -544,6 +554,8 @@
 				7C175700269C74A700393B53 /* SceneDelegate.m in Sources */,
 				7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */,
 				7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */,
+				7CDB52C726A0857B00D02758 /* PlaceCell.m in Sources */,
+				7CDB52CA26A0954600D02758 /* CollectionViewController.m in Sources */,
 				7CDB52C4269FA49100D02758 /* Collection.m in Sources */,
 				7CDB52BE269F88A600D02758 /* CollectionCell.m in Sources */,
 				7C175738269C803C00393B53 /* SignupViewController.m in Sources */,

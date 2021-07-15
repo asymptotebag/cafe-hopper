@@ -6,6 +6,7 @@
 //
 
 #import "PlacesViewController.h"
+#import "CollectionViewController.h"
 #import "User.h"
 #import "CollectionCell.h"
 #import "Collection.h"
@@ -27,23 +28,6 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self fetchCollections];
-
-//    [[User getCurrentUserInBackground] continueWithBlock:^id _Nullable(BFTask<__kindof PFUser *> * _Nonnull t) {
-//        if (t.cancelled || t.error) {
-//            NSLog(@"Task cancelled");
-//            return nil;
-//        }
-//        if (t.error) {
-//            NSLog(@"Error performing task / cancelled task");
-//            return t.error;
-//        }
-//        NSLog(@"Got user successfully");
-//        self.user = t.result;
-//        NSLog(@"collections: %@", self.user.collections);
-//        [self.collectionView reloadData];
-//        return t.result;
-//    }];
-    
 }
 
 - (void)viewDidLayoutSubviews {
@@ -84,14 +68,21 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"viewCollectionSegue"]) {
+        UICollectionViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+        Collection *collection = self.collections[indexPath.item];
+        CollectionViewController *collectionVC = [segue destinationViewController];
+        collectionVC.collection = collection;
+    } else {
+        NSLog(@"segue not recognized");
+    }
 }
-*/
 
 @end
