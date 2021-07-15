@@ -7,6 +7,7 @@
 
 #import "SignupViewController.h"
 #import "User.h"
+#import "Collection.h"
 #import <Parse/Parse.h>
 
 @interface SignupViewController ()
@@ -55,18 +56,18 @@
         newUser.username = self.usernameField.text;
         newUser.password = self.passwordField.text;
 
-        NSMutableArray *all = [NSMutableArray new];
-        NSMutableArray *favorites = [NSMutableArray new];
-        NSMutableArray *wantToVisit = [NSMutableArray new];
-        
+//        NSMutableArray *all = [NSMutableArray new];
+//        NSMutableArray *favorites = [NSMutableArray new];
+//        NSMutableArray *wantToVisit = [NSMutableArray new];
 //        newUser.collections = [[NSMutableArray alloc] initWithObjects:all, favorites, wantToVisit, nil];
-        NSMutableDictionary *collections = @{
-            @"All":all,
-            @"Favorites":favorites,
-            @"Want to Visit":wantToVisit
-        }.mutableCopy;
-        newUser.collections = collections;
-        newUser.trips = [NSMutableDictionary new];
+//        NSMutableDictionary *collections = @{
+//            @"All":all,
+//            @"Favorites":favorites,
+//            @"Want to Visit":wantToVisit
+//        }.mutableCopy;
+//        newUser.collections = collections;
+        
+//        newUser.trips = [NSMutableArray new];
         
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
@@ -77,6 +78,9 @@
                 [self presentViewController:alert animated:YES completion:^{}];
             } else { // transition screen
                 NSLog(@"%@ registered successfully", newUser.username);
+                [Collection createCollectionWithName:@"All" completion:^(BOOL succeeded, NSError * _Nullable error){}];
+                [Collection createCollectionWithName:@"Favorites" completion:^(BOOL succeeded, NSError * _Nullable error){}];
+                [Collection createCollectionWithName:@"Want to Visit" completion:^(BOOL succeeded, NSError * _Nullable error){}];
                 [self performSegueWithIdentifier:@"signupSegue" sender:nil];
             }
         }];
