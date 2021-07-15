@@ -648,20 +648,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="270 Lafayette Street, New York, NY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5aV-rY-5rr">
-                                                    <rect key="frame" x="110" y="46" width="232" height="18"/>
+                                                    <rect key="frame" x="110" y="46" width="294" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTd-ee-Src">
-                                                    <rect key="frame" x="352" y="46" width="29" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="·" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rws-Ka-bXP">
-                                                    <rect key="frame" x="344" y="44" width="5" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -675,28 +663,23 @@
                                             <constraints>
                                                 <constraint firstItem="hWS-Us-g0c" firstAttribute="leading" secondItem="5aV-rY-5rr" secondAttribute="leading" id="9E0-UP-kPT"/>
                                                 <constraint firstItem="5aV-rY-5rr" firstAttribute="leading" secondItem="aum-ZE-352" secondAttribute="trailing" constant="15" id="G5x-n7-8El"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZTd-ee-Src" secondAttribute="trailing" constant="10" id="GQ7-kJ-Dfn"/>
                                                 <constraint firstItem="4XG-Ay-uNb" firstAttribute="leading" secondItem="hWS-Us-g0c" secondAttribute="trailing" constant="7" id="Hac-1A-9Hc"/>
-                                                <constraint firstItem="Rws-Ka-bXP" firstAttribute="centerY" secondItem="aum-ZE-352" secondAttribute="centerY" id="Igr-Io-eKu"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4XG-Ay-uNb" secondAttribute="trailing" constant="10" id="R8O-SI-YlL"/>
                                                 <constraint firstItem="aum-ZE-352" firstAttribute="leading" secondItem="UkG-hu-duj" secondAttribute="leading" constant="15" id="X8g-iL-Z7K"/>
                                                 <constraint firstItem="5aV-rY-5rr" firstAttribute="centerY" secondItem="aum-ZE-352" secondAttribute="centerY" id="a6I-76-AsG"/>
-                                                <constraint firstItem="ZTd-ee-Src" firstAttribute="centerY" secondItem="aum-ZE-352" secondAttribute="centerY" id="aFM-e7-kOb"/>
+                                                <constraint firstAttribute="trailing" secondItem="5aV-rY-5rr" secondAttribute="trailing" constant="10" id="d8N-Ti-fZF"/>
                                                 <constraint firstItem="aum-ZE-352" firstAttribute="top" secondItem="UkG-hu-duj" secondAttribute="top" constant="15" id="gkB-tT-RAS"/>
-                                                <constraint firstItem="Rws-Ka-bXP" firstAttribute="leading" secondItem="5aV-rY-5rr" secondAttribute="trailing" constant="2" id="h9A-ZH-qdO"/>
                                                 <constraint firstItem="4XG-Ay-uNb" firstAttribute="centerY" secondItem="hWS-Us-g0c" secondAttribute="centerY" id="iP3-5r-ZMz"/>
-                                                <constraint firstItem="ZTd-ee-Src" firstAttribute="leading" secondItem="Rws-Ka-bXP" secondAttribute="trailing" constant="3" id="s0j-Ba-zR5"/>
                                                 <constraint firstItem="5aV-rY-5rr" firstAttribute="top" secondItem="hWS-Us-g0c" secondAttribute="bottom" constant="4" id="sUE-Kl-AbH"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aum-ZE-352" secondAttribute="bottom" constant="15" id="wx5-rW-2K0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="addressLabel" destination="5aV-rY-5rr" id="fea-cm-9FY"/>
-                                            <outlet property="distanceLabel" destination="ZTd-ee-Src" id="D6y-8F-DQF"/>
                                             <outlet property="nameLabel" destination="hWS-Us-g0c" id="vIJ-Zy-IUo"/>
                                             <outlet property="pictureView" destination="aum-ZE-352" id="lnb-n7-xrI"/>
                                             <outlet property="priceLevelLabel" destination="4XG-Ay-uNb" id="4wZ-TN-dRh"/>
-                                            <segue destination="zNh-1M-8HY" kind="show" id="lB8-DL-9lk"/>
+                                            <segue destination="zNh-1M-8HY" kind="show" identifier="detailsSegue" id="lB8-DL-9lk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

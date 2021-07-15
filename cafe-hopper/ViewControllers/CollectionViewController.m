@@ -6,6 +6,7 @@
 //
 
 #import "CollectionViewController.h"
+#import "DetailsViewController.h"
 #import "PlaceCell.h"
 @import GooglePlaces;
 
@@ -27,6 +28,12 @@
     self.places = [NSMutableArray new];
     [self fetchPlacesinCollection];
     self.navigationItem.title = self.collection.collectionName;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
 }
 
 - (void)setupTableView {
@@ -57,14 +64,19 @@
     return cell;
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"detailsSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        GMSPlace *place = self.places[indexPath.row];
+        DetailsViewController *detailsVC = [segue destinationViewController];
+        detailsVC.place = place;
+    }
 }
-*/
 
 @end

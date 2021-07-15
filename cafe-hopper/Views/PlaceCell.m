@@ -37,6 +37,10 @@
     [self.pictureView setImage:[UIImage imageNamed:@"5"]];
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
     self.pictureView.clipsToBounds = true;
+    
+    UIView *bgView = [[UIView alloc] init];
+    bgView.backgroundColor = UIColor.systemGray6Color;
+    self.selectedBackgroundView = bgView;
 }
 
 - (void)showStarRating {
@@ -48,6 +52,7 @@
     starRatingView.accurateHalfStars = YES;
     starRatingView.value = self.place.rating;
     [starRatingView setUserInteractionEnabled:NO];
+    [starRatingView setBackgroundColor:[UIColor clearColor]];
     starRatingView.emptyStarImage = [[UIImage imageNamed:@"heart-empty"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     starRatingView.filledStarImage = [[UIImage imageNamed:@"heart-full"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.contentView addSubview:starRatingView];
@@ -59,7 +64,7 @@
                             relatedBy:NSLayoutRelationEqual
                             toItem:self.addressLabel
                             attribute:NSLayoutAttributeBottom
-                            multiplier:1.f constant:0.f] setActive:YES];
+                            multiplier:1.f constant:8.f] setActive:YES];
     [[NSLayoutConstraint constraintWithItem:starRatingView
                             attribute:NSLayoutAttributeLeading
                             relatedBy:NSLayoutRelationEqual
@@ -71,7 +76,12 @@
                             relatedBy:NSLayoutRelationEqual
                             toItem:self.contentView
                             attribute:NSLayoutAttributeWidth
-                            multiplier:0.2f constant:0.f] setActive:YES];
+                            multiplier:0.25f constant:0.f] setActive:YES];
+    [[NSLayoutConstraint constraintWithItem:starRatingView
+                            attribute:NSLayoutAttributeHeight
+                            relatedBy:NSLayoutRelationEqual toItem:nil
+                            attribute:NSLayoutAttributeHeight
+                            multiplier:1.f constant:20.f] setActive:YES];
 }
 
 @end
