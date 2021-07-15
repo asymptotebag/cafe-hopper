@@ -7,6 +7,7 @@
 
 #import "CollectionViewController.h"
 #import "DetailsViewController.h"
+#import "Collection.h"
 #import "PlaceCell.h"
 @import GooglePlaces;
 
@@ -62,6 +63,27 @@
     PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlaceCell"];
     cell.place = self.places[indexPath.row];
     return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // delete item from collection locally and update Parse
+        GMSPlace *place = self.places[indexPath.row];
+        [self.places removeObject:place];
+        NSString *placeId = place.placeID;
+        [Collection removePlaceId:placeId fromCollection:self.collection withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"Removed place successfully");
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error removing place: %@", error.localizedDescription);
+            }
+        }];
+    }
 }
 
 #pragma mark - Navigation

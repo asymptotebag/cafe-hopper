@@ -30,4 +30,10 @@
     [collection saveInBackgroundWithBlock:completion];
 }
 
++ (void)removePlaceId:(NSString *)placeId fromCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
+    [collection.places removeObject:placeId];
+    collection[@"places"] = collection.places;
+    [collection saveInBackgroundWithBlock:completion];
+}
+
 @end

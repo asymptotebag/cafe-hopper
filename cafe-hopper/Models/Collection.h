@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)addPlaceId:(NSString *)placeId toCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion;
 
++ (void)removePlaceId:(NSString *)placeId fromCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion;
+
 @end
 
 NS_ASSUME_NONNULL_END
