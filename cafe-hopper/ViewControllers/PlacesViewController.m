@@ -16,7 +16,8 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (strong, nonatomic) User *user;
-@property (strong, nonatomic) NSArray<Collection *> *collections;
+@property (strong, nonatomic) NSMutableArray<Collection *> *collections;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
 
@@ -25,9 +26,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.user = [User currentUser];
+    self.collections = [NSMutableArray new];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self fetchCollections];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchCollections) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -50,7 +56,8 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray<Collection *> * _Nullable collections, NSError * _Nullable error) {
         if (collections) {
-            self.collections = collections;
+            self.collections = collections.mutableCopy;
+            [self.refreshControl endRefreshing];
             [self.collectionView reloadData];
         } else {
             NSLog(@"Error fetching this user's colletions: %@", error.localizedDescription);
@@ -66,6 +73,44 @@
     CollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCell" forIndexPath:indexPath];
     cell.collection = self.collections[indexPath.item];
     return cell;
+}
+
+- (IBAction)onTapCreate:(id)sender {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Create New Collection" message:@"Enter a name for your new collection." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Collection Name";
+    }];
+    
+    UIAlertController *duplicateAlert = [UIAlertController alertControllerWithTitle:@"Cannot create collection" message:@"Collection names must be unique." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self presentViewController:alert animated:YES completion:^{}];
+    }];
+    [duplicateAlert addAction:dismissAction];
+    
+    UIAlertAction *createAction = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *name = alert.textFields.firstObject;
+        NSMutableArray *existingNames = [NSMutableArray new];
+        for (Collection *collection in self.collections) {
+            [existingNames addObject:collection.collectionName];
+        }
+        if ([existingNames containsObject:name.text]) {
+            // can't create duplicate collection name, show alert again
+            NSLog(@"User attempted to create duplicate collection.");
+            [self presentViewController:duplicateAlert animated:YES completion:^{}];
+        } else { // create new collection
+            [Collection createCollectionWithName:name.text completion:^(BOOL succeeded, NSError * _Nullable error) {
+                NSLog(@"Created new collection successfully.");
+//                [self.collections addObject:<#(nonnull Collection *)#>]
+                [self.collectionView reloadData];
+            }];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:createAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:^{}];
 }
 
 #pragma mark - Navigation

@@ -309,12 +309,12 @@
         <!--Saved Places-->
         <scene sceneID="vfB-wP-MuM">
             <objects>
-                <viewController storyboardIdentifier="PlacesViewController" id="B9c-ka-PZc" customClass="PlacesViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlacesViewController" definesPresentationContext="YES" id="B9c-ka-PZc" customClass="PlacesViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yV5-os-dZx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-7Q-nth">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GmG-7Q-nth">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Obm-pD-wlm">
@@ -410,7 +410,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Saved Places" id="ksc-RW-6VN">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="plus.app" catalog="system" id="RLs-zs-Dg9"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="plus.app" catalog="system" id="RLs-zs-Dg9">
+                            <connections>
+                                <action selector="onTapCreate:" destination="B9c-ka-PZc" id="u3c-cx-28J"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="wqA-sd-P6e"/>
                     </navigationItem>
                     <connections>
@@ -704,6 +708,42 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pne-7R-S9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="89.855072463768124" y="2933.7053571428569"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="P3F-cL-gkg">
+            <objects>
+                <viewController modalPresentationStyle="pageSheet" id="3vO-bI-lml" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OrF-jY-9Dp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create New Collection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEL-qS-aa7">
+                                <rect key="frame" x="89" y="108" width="243" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Collection Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K2e-mK-1zq">
+                                <rect key="frame" x="56" y="162" width="252" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfu-BA-9y4">
+                                <rect key="frame" x="316" y="163" width="49" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Create"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x5k-ce-Yjj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="79t-lf-ZJB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="776.81159420289862" y="2933.7053571428569"/>
         </scene>
         <!--Places-->
         <scene sceneID="8lU-I8-gIy">
