@@ -7,6 +7,8 @@
 
 #import "CollectionCell.h"
 #import "Collection.h"
+#define degreesToRadians(x) (M_PI * (x) / 180.0)
+#define kAnimationRotateDeg 1.0
 
 @implementation CollectionCell
 
@@ -28,13 +30,39 @@
     if (self.inEditingMode && ![self.collection.collectionName isEqualToString:@"All"]) {
         // you can't delete the All collection
         self.deleteButton.hidden = NO;
+        [self startJiggling];
     } else {
         self.deleteButton.hidden = YES; // hide X when not editing
+        [self stopJiggling];
     }
 }
 
 - (IBAction)tapDelete:(id)sender {
     [self.delegate didTapDelete:self]; // handle deletion in delegate method
+}
+
+// Jiggle animation code is from https://stackoverflow.com/a/7284435
+
+- (void)startJiggling {
+    NSInteger randomInt = arc4random_uniform(500);
+    float r = (randomInt/500.0)+0.5;
+
+    CGAffineTransform leftWobble = CGAffineTransformMakeRotation(degreesToRadians( (kAnimationRotateDeg * -1.0) - r ));
+    CGAffineTransform rightWobble = CGAffineTransformMakeRotation(degreesToRadians( kAnimationRotateDeg + r ));
+
+     self.transform = leftWobble;  // starting point
+
+     [[self layer] setAnchorPoint:CGPointMake(0.5, 0.5)];
+
+     [UIView animateWithDuration:0.15
+                delay:0
+                options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
+                animations:^{self.transform = rightWobble;}
+                completion:nil];
+}
+- (void)stopJiggling {
+    [self.layer removeAllAnimations];
+    self.transform = CGAffineTransformIdentity;
 }
 
 

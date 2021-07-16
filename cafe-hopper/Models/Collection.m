@@ -58,9 +58,11 @@
 }
 
 + (void)addPlaceId:(NSString *)placeId toCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
-    [collection.places addObject:placeId];
-    collection[@"places"] = collection.places;
-    [collection saveInBackgroundWithBlock:completion];
+    if (![collection.places containsObject:placeId]) { // only add if it isn't a duplicate
+        [collection.places addObject:placeId];
+        collection[@"places"] = collection.places;
+        [collection saveInBackgroundWithBlock:completion];
+    }
 }
 
 + (void)removePlaceId:(NSString *)placeId fromCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
