@@ -11,10 +11,12 @@
 #import <Parse/Parse.h>
 #import "User.h"
 #import "Collection.h"
+#import "CarouselCell.h"
 
-@interface DetailsViewController ()
+@interface DetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) User *user;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
@@ -32,6 +34,9 @@
 }
 
 - (void)setupView {
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    
     self.nameLabel.text = self.place.name;
     self.addressLabel.text = self.place.formattedAddress;
     
@@ -60,7 +65,7 @@
     }];
 }
 
-- (void)setupMenu {
+- (void)setupMenu { // TODO: add more menu items
     UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
         [self addPlaceToCollection:@"All"];
     }];
@@ -123,6 +128,29 @@
                             toItem:self.view
                             attribute:NSLayoutAttributeWidth
                             multiplier:.45f constant:0.f] setActive:YES];
+}
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.flowLayout.minimumLineSpacing = 0;
+    self.flowLayout.minimumInteritemSpacing = 0;
+    CGFloat height = self.collectionView.frame.size.height - 1;
+    CGFloat width = height;
+    self.flowLayout.itemSize = CGSizeMake(width, height);
+    self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 5; // 5 images for now
+}
+
+- (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CarouselCell" forIndexPath:indexPath];
+    cell.place = self.place;
+    return cell;
 }
 
 /*

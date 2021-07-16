@@ -26,7 +26,6 @@
     self.addressLabel.text = place.formattedAddress;
     NSInteger priceLevel = place.priceLevel;
     NSMutableString *priceString = @"".mutableCopy;
-    NSLog(@"Price level: %li", priceLevel);
     for(int i=0; i<priceLevel; i++) {
         [priceString appendString:@"$"];
     }

@@ -75,6 +75,10 @@
     return cell;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView canEditItemAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 - (IBAction)onTapCreate:(id)sender {
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Create New Collection" message:@"Enter a name for your new collection." preferredStyle:UIAlertControllerStyleAlert];
