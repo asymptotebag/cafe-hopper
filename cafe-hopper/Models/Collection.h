@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)createCollectionWithName:(NSString *)name completion:(PFBooleanResultBlock)completion;
 
++ (void)deleteCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion;
+
++ (void)deleteCollectionWithName:(NSString *)name completion:(PFBooleanResultBlock)completion;
+
 + (void)addPlaceId:(NSString *)placeId toCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion;
 
 + (void)removePlaceId:(NSString *)placeId fromCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion;

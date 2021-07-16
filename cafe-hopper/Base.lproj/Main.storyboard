@@ -347,7 +347,7 @@
                                                             <rect key="frame" x="84" y="84" width="84" height="84"/>
                                                         </imageView>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                    <color key="backgroundColor" systemColor="systemGray6Color"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="gWx-Pg-Yfc" secondAttribute="height" multiplier="1:1" id="2bR-Dg-Xtr"/>
                                                         <constraint firstAttribute="trailing" secondItem="eWR-dT-QY0" secondAttribute="trailing" id="4bb-iW-X8a"/>
@@ -374,15 +374,27 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button hidden="YES" opaque="NO" alpha="0.5" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jnc-Wa-CoA">
+                                                    <rect key="frame" x="4.5" y="5" width="25" height="24"/>
+                                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                                    <state key="normal">
+                                                        <imageReference key="image" image="xmark.circle.fill" catalog="system" symbolScale="large"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="tapDelete:" destination="fIy-jK-hyn" eventType="touchUpInside" id="PTK-XA-TE1"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="gWx-Pg-Yfc" secondAttribute="trailing" constant="15" id="08e-OD-vSZ"/>
+                                                <constraint firstItem="gWx-Pg-Yfc" firstAttribute="leading" secondItem="Jnc-Wa-CoA" secondAttribute="centerX" constant="-2" id="1IC-nu-v57"/>
                                                 <constraint firstItem="gWx-Pg-Yfc" firstAttribute="leading" secondItem="Fmb-wl-0Yh" secondAttribute="leading" constant="15" id="9Fa-T4-hdc"/>
                                                 <constraint firstAttribute="trailing" secondItem="NMa-2C-MdQ" secondAttribute="trailing" constant="15" id="GZ5-jL-gxI"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NMa-2C-MdQ" secondAttribute="bottom" constant="6" id="L1t-Ey-XHk"/>
                                                 <constraint firstItem="gWx-Pg-Yfc" firstAttribute="top" secondItem="Fmb-wl-0Yh" secondAttribute="top" constant="15" id="QjE-2u-zbw"/>
                                                 <constraint firstItem="NMa-2C-MdQ" firstAttribute="centerX" secondItem="Fmb-wl-0Yh" secondAttribute="centerX" id="ib3-Ma-wdY"/>
                                                 <constraint firstItem="NMa-2C-MdQ" firstAttribute="top" secondItem="gWx-Pg-Yfc" secondAttribute="bottom" constant="6" id="pue-8C-K5M"/>
+                                                <constraint firstItem="gWx-Pg-Yfc" firstAttribute="top" secondItem="Jnc-Wa-CoA" secondAttribute="centerY" constant="-2" id="qO8-tJ-LfF"/>
                                                 <constraint firstItem="NMa-2C-MdQ" firstAttribute="leading" secondItem="Fmb-wl-0Yh" secondAttribute="leading" constant="15" id="vaM-ae-QUu"/>
                                             </constraints>
                                         </collectionViewCellContentView>
@@ -390,11 +402,11 @@
                                         <connections>
                                             <outlet property="bottomLeftView" destination="vbx-Qa-9Me" id="yi3-Gn-ais"/>
                                             <outlet property="bottomRightView" destination="eWR-dT-QY0" id="1u1-vs-QsS"/>
+                                            <outlet property="deleteButton" destination="Jnc-Wa-CoA" id="ZL2-7P-X9a"/>
                                             <outlet property="frameView" destination="gWx-Pg-Yfc" id="8tY-Md-G3C"/>
                                             <outlet property="nameLabel" destination="NMa-2C-MdQ" id="dph-gc-DqK"/>
                                             <outlet property="topLeftView" destination="Omd-eG-B4z" id="wmB-Zp-GOx"/>
                                             <outlet property="topRightView" destination="ZP7-xD-u77" id="5fj-XH-SjJ"/>
-                                            <segue destination="5OJ-hu-hf4" kind="show" identifier="viewCollectionSegue" id="uGa-qf-b5x"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -415,11 +427,17 @@
                                 <action selector="onTapCreate:" destination="B9c-ka-PZc" id="u3c-cx-28J"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="wqA-sd-P6e"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="wqA-sd-P6e">
+                            <connections>
+                                <action selector="tapEdit:" destination="B9c-ka-PZc" id="j3Q-8p-z5q"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="GmG-7Q-nth" id="3ge-5I-8O6"/>
+                        <outlet property="editBarButton" destination="wqA-sd-P6e" id="qJH-zY-Dn5"/>
                         <outlet property="flowLayout" destination="Obm-pD-wlm" id="XWc-5C-hWY"/>
+                        <segue destination="5OJ-hu-hf4" kind="show" id="wrp-3F-OAU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uL0-2O-1Sa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -616,7 +634,7 @@
         <!--Collection Name-->
         <scene sceneID="R4o-Ds-1gZ">
             <objects>
-                <viewController id="5OJ-hu-hf4" customClass="CollectionViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CollectionViewController" id="5OJ-hu-hf4" customClass="CollectionViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ql3-yd-LfH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -938,6 +956,7 @@
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="plus.square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -950,11 +969,11 @@
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGray6Color">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

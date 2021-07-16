@@ -10,6 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol CollectionCellDelegate
+- (void)didTapDelete:(UICollectionViewCell *)cell;
+
+@end
+
 @interface CollectionCell : UICollectionViewCell
 @property (strong, nonatomic) Collection *collection;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -18,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *topRightView;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomLeftView;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomRightView;
+
+@property (nonatomic, weak) id<CollectionCellDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (nonatomic) BOOL inEditingMode;
 
 @end
 

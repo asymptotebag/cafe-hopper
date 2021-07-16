@@ -12,12 +12,15 @@
 #import "Collection.h"
 #import <Parse/Parse.h>
 
-@interface PlacesViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface PlacesViewController () <UICollectionViewDataSource, UICollectionViewDelegate, CollectionCellDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editBarButton;
+
 @property (strong, nonatomic) User *user;
 @property (strong, nonatomic) NSMutableArray<Collection *> *collections;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) BOOL inEditingMode;
 
 @end
 
@@ -26,9 +29,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.user = [User currentUser];
+    
     self.collections = [NSMutableArray new];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
+    self.inEditingMode = NO;
     [self fetchCollections];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -60,7 +65,7 @@
             [self.refreshControl endRefreshing];
             [self.collectionView reloadData];
         } else {
-            NSLog(@"Error fetching this user's colletions: %@", error.localizedDescription);
+            NSLog(@"Error fetching this user's collections: %@", error.localizedDescription);
         }
     }];
 }
@@ -71,6 +76,8 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CollectionCell" forIndexPath:indexPath];
+    cell.inEditingMode = self.inEditingMode;
+    cell.delegate = self;
     cell.collection = self.collections[indexPath.item];
     return cell;
 }
@@ -107,7 +114,7 @@
                 [User addCollectionNamed:name.text forUser:self.user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
                 NSLog(@"Created new collection successfully.");
 //                [self.collections addObject:<#(nonnull Collection *)#>]
-                [self.collectionView reloadData];
+                [self fetchCollections]; // should reload data
             }];
         }
     }];
@@ -118,13 +125,58 @@
     [self presentViewController:alert animated:YES completion:^{}];
 }
 
+- (IBAction)tapEdit:(id)sender {
+    if (self.inEditingMode) { // exit editing mode
+        self.inEditingMode = NO;
+        [self.editBarButton setImage:[UIImage systemImageNamed:@"square.and.pencil"]];
+    } else { // enter editing mode
+        self.inEditingMode = YES;
+        [self.editBarButton setImage:[UIImage systemImageNamed:@"xmark.square"]];
+    }
+    [self.collectionView reloadData];
+//    [self.collectionView layoutSubviews];
+//    [self fetchCollections];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    CollectionCell *selected = [self.collectionView cellForItemAtIndexPath:indexPath];
+    Collection *selectedCollection = selected.collection;
+    if (self.inEditingMode) {
+        NSLog(@"selected cell is in editing mode");
+    } else { // perform segue
+        NSLog(@"segue to details");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        CollectionViewController *collectionVC = [storyboard instantiateViewControllerWithIdentifier:@"CollectionViewController"];
+        collectionVC.collection = selectedCollection;
+        [self.navigationController pushViewController:collectionVC animated:YES];
+    }
+}
+
+- (void)didTapDelete:(UICollectionViewCell *)cell {
+    CollectionCell *selectedCell = (CollectionCell *)cell;
+    Collection *selectedCollection = selectedCell.collection;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:selectedCell];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Collection" message:@"Are you sure you want to delete this collection?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [Collection deleteCollection:selectedCollection withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+        [self.collections removeObject:selectedCollection];
+        [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    
+    [alert addAction:deleteAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:^{}];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    if ([[segue identifier] isEqualToString:@"viewCollectionSegue"]) {
+    if ([[segue identifier] isEqualToString:@"viewCollectionSegue"] && !self.inEditingMode) {
         UICollectionViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
         Collection *collection = self.collections[indexPath.item];

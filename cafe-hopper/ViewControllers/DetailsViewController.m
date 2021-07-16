@@ -91,9 +91,9 @@
     [query whereKey:@"owner" equalTo:self.user];
     [query whereKey:@"collectionName" equalTo:collectionName];
     
-    [query findObjectsInBackgroundWithBlock:^(NSArray<Collection *> * _Nullable objects, NSError * _Nullable error) {
-        if (objects) { // should only have one item
-            [Collection addPlaceId:self.place.placeID toCollection:objects[0] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) { // should only have one item
+            [Collection addPlaceId:self.place.placeID toCollection:object withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"Saved place to %@", collectionName);
                 } else {

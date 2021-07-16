@@ -6,6 +6,8 @@
 //
 
 #import "Collection.h"
+#import "User.h"
+#import <Parse/Parse.h>
 
 @implementation Collection
 @dynamic collectionName;
@@ -22,6 +24,37 @@
     collection.owner = [User currentUser];
     collection.places = [NSMutableArray new];
     [collection saveInBackgroundWithBlock:completion];
+}
+
++ (void)deleteCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
+    [Collection deleteAllInBackground:@[collection] block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"%@ collection deleted.", collection.collectionName);
+            [User removeCollectionNamed:collection.collectionName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+        } else {
+            NSLog(@"Error deleting collection: %@", error.localizedDescription);
+        }
+    }];
+}
+
++ (void)deleteCollectionWithName:(NSString *)name completion:(PFBooleanResultBlock)completion {
+    PFQuery *query = [Collection query];
+    [query whereKey:@"collectionName" equalTo:name];
+    [query whereKey:@"owner" equalTo:[User currentUser]];
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            [Collection deleteAllInBackground:@[object] block:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"%@ collection deleted.", name);
+                    [User removeCollectionNamed:name forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+                } else {
+                    NSLog(@"Error deleting collection: %@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"Couldn't find object.");
+        }
+    }];
 }
 
 + (void)addPlaceId:(NSString *)placeId toCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
