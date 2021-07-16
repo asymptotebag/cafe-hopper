@@ -12,8 +12,9 @@
 @dynamic name;
 @dynamic pfp;
 @dynamic collectionNames;
+@dynamic tripNames;
 
-+ (void) addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
++ (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
     [user.collectionNames addObject:collectionName];
     user[@"collectionNames"] = user.collectionNames;
     [user saveInBackgroundWithBlock:completion];
@@ -22,6 +23,18 @@
 + (void)removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
     [user.collectionNames removeObject:collectionName];
     user[@"collectionNames"] = user.collectionNames;
+    [user saveInBackgroundWithBlock:completion];
+}
+
++ (void)addTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
+    [user.tripNames addObject:tripName];
+    user[@"tripNames"] = user.tripNames;
+    [user saveInBackgroundWithBlock:completion];
+}
+
++ (void)removeTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
+    [user.tripNames removeObject:tripName];
+    user[@"tripNames"] = user.tripNames;
     [user saveInBackgroundWithBlock:completion];
 }
 

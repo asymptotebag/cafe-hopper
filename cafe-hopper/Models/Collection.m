@@ -23,7 +23,19 @@
     collection.collectionName = name;
     collection.owner = [User currentUser];
     collection.places = [NSMutableArray new];
-    [collection saveInBackgroundWithBlock:completion];
+//    [collection saveInBackgroundWithBlock:completion];
+    [collection saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Created new collection successfully.");
+            if (![name isEqualToString:@"All"]) {
+                [User addCollectionNamed:name forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            }
+            completion(true, nil);
+        } else {
+            NSLog(@"Error creating collection: %@", error.localizedDescription);
+            completion(false, error);
+        }
+    }];
 }
 
 + (void)deleteCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
@@ -31,8 +43,10 @@
         if (succeeded) {
             NSLog(@"%@ collection deleted.", collection.collectionName);
             [User removeCollectionNamed:collection.collectionName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            completion(true, nil);
         } else {
             NSLog(@"Error deleting collection: %@", error.localizedDescription);
+            completion(false, error);
         }
     }];
 }
@@ -47,12 +61,14 @@
                 if (succeeded) {
                     NSLog(@"%@ collection deleted.", name);
                     [User removeCollectionNamed:name forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+                    completion(true, nil);
                 } else {
                     NSLog(@"Error deleting collection: %@", error.localizedDescription);
                 }
             }];
         } else {
             NSLog(@"Couldn't find object.");
+            completion(false, error);
         }
     }];
 }

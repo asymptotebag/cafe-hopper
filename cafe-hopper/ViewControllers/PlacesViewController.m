@@ -111,9 +111,6 @@
             [self presentViewController:duplicateAlert animated:YES completion:^{}];
         } else { // create new collection
             [Collection createCollectionWithName:name.text completion:^(BOOL succeeded, NSError * _Nullable error) {
-                [User addCollectionNamed:name.text forUser:self.user withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
-                NSLog(@"Created new collection successfully.");
-//                [self.collections addObject:<#(nonnull Collection *)#>]
                 [self fetchCollections]; // should reload data
             }];
         }
@@ -134,8 +131,6 @@
         [self.editBarButton setImage:[UIImage systemImageNamed:@"xmark.square"]];
     }
     [self.collectionView reloadData];
-//    [self.collectionView layoutSubviews];
-//    [self fetchCollections];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

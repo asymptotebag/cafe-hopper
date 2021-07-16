@@ -14,12 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) PFFileObject *pfp;
 @property (nonatomic, strong) NSMutableArray *collectionNames;
-//@property (nonatomic, strong) NSMutableArray *collections;
-//@property (nonatomic, strong) NSMutableArray *trips;
+@property (nonatomic, strong) NSMutableArray *tripNames;
 
-+ (void) addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
++ (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void) removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
++ (void)removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+
++ (void)addTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+
++ (void)removeTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
 
 + (void)changeNameForUser: (User *)user withName:(NSString * _Nullable)name completion:(PFBooleanResultBlock _Nullable)completion;
 

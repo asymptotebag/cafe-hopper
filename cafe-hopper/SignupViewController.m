@@ -55,20 +55,6 @@
         newUser.email = self.emailField.text;
         newUser.username = self.usernameField.text;
         newUser.password = self.passwordField.text;
-        newUser.collectionNames = @[@"Favorites", @"Want to Visit"].mutableCopy;
-
-//        NSMutableArray *all = [NSMutableArray new];
-//        NSMutableArray *favorites = [NSMutableArray new];
-//        NSMutableArray *wantToVisit = [NSMutableArray new];
-//        newUser.collections = [[NSMutableArray alloc] initWithObjects:all, favorites, wantToVisit, nil];
-//        NSMutableDictionary *collections = @{
-//            @"All":all,
-//            @"Favorites":favorites,
-//            @"Want to Visit":wantToVisit
-//        }.mutableCopy;
-//        newUser.collections = collections;
-        
-//        newUser.trips = [NSMutableArray new];
         
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
