@@ -21,7 +21,16 @@
 
 - (void)setResult:(GMSAutocompletePrediction *)result { // custom setter
     _result = result;
-    self.placeNameLabel.attributedText = result.attributedPrimaryText;
+    
+    UIFont *regFont = [UIFont systemFontOfSize:[UIFont labelFontSize]];
+    UIFont *boldFont = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+    NSMutableAttributedString *bolded = [result.attributedPrimaryText mutableCopy];
+    [bolded enumerateAttribute:kGMSAutocompleteMatchAttribute inRange:NSMakeRange(0, bolded.length) options:0 usingBlock:^(id  _Nullable value, NSRange range, BOOL * _Nonnull stop) {
+        UIFont *font = (value == nil) ? regFont : boldFont;
+        [bolded addAttribute:NSFontAttributeName value:font range:range];
+    }];
+
+    self.placeNameLabel.attributedText = bolded;
     self.placeAddressLabel.attributedText = result.attributedSecondaryText;
 }
 

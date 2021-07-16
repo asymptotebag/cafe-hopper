@@ -41,13 +41,14 @@
     if (self.placeId) {
         [self showPlaceFromId:self.placeId];
     } else { // show user's location on first load
-        [self displayUserLocation];
+//        [self displayUserLocation];
+        [self showSampleMap];
     }
 }
 
 - (void)showPlaceFromId:(NSString *)placeID {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating);
+    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel);
 //    GMSPlaceField fields = (GMSPlaceFieldPhotos | GMSPlaceFieldPriceLevel);
     [_placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (error) {
@@ -83,7 +84,6 @@
         NSLog(@"Place: %@", place.name);
         NSLog(@"Address: %@", place.formattedAddress);
         [self showLocationAtPlace:place];
-//        [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
 
@@ -106,6 +106,22 @@
 //- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
 //
 //}
+
+- (void)showSampleMap {
+    // Sample code to create a GMSCameraPosition that tells the map to display the
+    // coordinate -33.86,151.20 at zoom level 6.
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.64542 longitude:-74.0851 zoom:15];
+    GMSMapView *mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
+    mapView.myLocationEnabled = YES;
+    [self.view insertSubview:mapView atIndex:0];
+    
+    // Create a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(40.64542, -74.0851);
+    marker.title = @"Brooklyn";
+    marker.snippet = @"New York City";
+    marker.map = mapView;
+}
 
 - (void)mapView:(GMSMapView *)mapView didTapPOIWithPlaceID:(NSString *)placeID name:(NSString *)name location:(CLLocationCoordinate2D)location {
     NSLog(@"You tapped %@: %@, %f/%f", name, placeID, location.latitude, location.longitude);
