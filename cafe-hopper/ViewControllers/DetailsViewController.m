@@ -65,11 +65,24 @@
     }];
 }
 
-- (void)setupMenu { // TODO: add more menu items
+- (void)setupMenu {
+    NSMutableArray *menuItems = [NSMutableArray new];
     UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
         [self addPlaceToCollection:@"All"];
     }];
-    self.saveMenu = [UIMenu menuWithChildren:@[savePlace]];
+    [menuItems addObject:savePlace];
+    
+    for (NSString *collectionName in self.user.collectionNames) {
+        NSString *actionName = [@"Save to " stringByAppendingString:collectionName];
+        UIAction *saveToCollection = [UIAction actionWithTitle:actionName image:[UIImage systemImageNamed:@"bookmark"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            // these are not the All collections, so save to both collection and All
+            [self addPlaceToCollection:@"All"];
+            [self addPlaceToCollection:collectionName];
+        }];
+        [menuItems addObject:saveToCollection];
+    }
+    
+    self.saveMenu = [UIMenu menuWithChildren:menuItems];
     [self.saveBarButton setMenu:self.saveMenu];
 }
 
@@ -82,7 +95,7 @@
         if (objects) { // should only have one item
             [Collection addPlaceId:self.place.placeID toCollection:objects[0] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
-                    NSLog(@"Saved place");
+                    NSLog(@"Saved place to %@", collectionName);
                 } else {
                     NSLog(@"Error saving place: %@", error.localizedDescription);
                 }

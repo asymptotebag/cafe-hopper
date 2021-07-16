@@ -55,6 +55,7 @@
         newUser.email = self.emailField.text;
         newUser.username = self.usernameField.text;
         newUser.password = self.passwordField.text;
+        newUser.collectionNames = @[@"Favorites", @"Want to Visit"].mutableCopy;
 
 //        NSMutableArray *all = [NSMutableArray new];
 //        NSMutableArray *favorites = [NSMutableArray new];

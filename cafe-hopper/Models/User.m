@@ -11,6 +11,19 @@
 
 @dynamic name;
 @dynamic pfp;
+@dynamic collectionNames;
+
++ (void) addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
+    [user.collectionNames addObject:collectionName];
+    user[@"collectionNames"] = user.collectionNames;
+    [user saveInBackgroundWithBlock:completion];
+}
+
++ (void)removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
+    [user.collectionNames removeObject:collectionName];
+    user[@"collectionNames"] = user.collectionNames;
+    [user saveInBackgroundWithBlock:completion];
+}
 
 + (void)changeNameForUser:(User *)user withName:(NSString *)name completion:(PFBooleanResultBlock)completion {
     user.name = name;

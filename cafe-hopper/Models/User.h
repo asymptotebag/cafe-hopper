@@ -13,8 +13,13 @@ NS_ASSUME_NONNULL_BEGIN
 // already has fields email, username, password
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) PFFileObject *pfp;
+@property (nonatomic, strong) NSMutableArray *collectionNames;
 //@property (nonatomic, strong) NSMutableArray *collections;
 //@property (nonatomic, strong) NSMutableArray *trips;
+
++ (void) addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+
++ (void) removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
 
 + (void)changeNameForUser: (User *)user withName:(NSString * _Nullable)name completion:(PFBooleanResultBlock _Nullable)completion;
 
