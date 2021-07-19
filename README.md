@@ -1,6 +1,3 @@
-Original App Design Project - Emily Jiang
-===
-
 # Cafe Hopper
 
 ## Table of Contents
@@ -14,41 +11,43 @@ Original App Design Project - Emily Jiang
 Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee shops and similar casual informal drinking and dining options around town.
 
 ### App Evaluation
-- **Category:** Lifestyle or Travel
-- **Mobile:** Portability would be key to making a concept like this work, since it is unlikely that people will tote a laptop from cafe to cafe. Thus, Cafe Hopper would make for a uniquely mobile experience that could not easily be replaced by a website. The app would definitely incorporate maps and location, and possibly camera (if there is a feature to save your own photos to cafes that you've visited). Push notifications would also be relatively natural to incorporate, since the app could remind you of your scheduled plan.
+- **Category:** Lifestyle, Travel
+- **Mobile:** Portability would be key to making a concept like this work, since it is unlikely that people will tote a laptop from cafe to cafe. Thus, Cafe Hopper would make for a uniquely mobile experience that could not easily be replaced by a website. The app would incorporate maps and location, and possibly camera (if there is a feature to save your own photos to cafes that you've visited). Push notifications would also be relatively natural to incorporate, since the app could remind you of your scheduled plans.
 - **Story:** Cafe Hopper allows users to fully experience the vibrant casual dining culture of anywhere, from an unfamiliar city to their own hometown.
-- **Market:** The market for this app is not universal, but is still quite broad, appealing mostly to relatively young city-dwellers or those living near downtown / urban regions with clusters of casual dining options.
-- **Habit:** This app would be most-used in the days leading up to the actual cafe-hopping trip. Truthfully, it is unlikely that this app would be as addictive as a social media app, for example, but it could definitely be a frequently-visited place for those who enjoy planning out the future or have it on their bucket list to try out various eateries. The average user would do a fair amount of both consuming and creating on the app: they consume when they check out cafe listings and information, and create when they add cafes to personal lists or plan and save cafe-hopping routes.
-- **Scope:** Incorporating the Google Maps SDK/API would be the primary backend task for this app. I believe that the core features of the app are of reasonable technical difficulty (see below for anticipated challenges). I believe that even with just the core features, Cafe Hopper will still be an interesting app both to build and use.
-
-- Note on anticipated technical challenges: I anticipate that it may be difficult to filter out irrelevant locations from Google Maps; e.g. where does one draw the line between casual (i.e. suitable for hopping) and formal (i.e. sit down and eat a full meal) eateries? Will it even be possible to make a clear distinction? I imagine I will have to make this decision more holistically, using information such as how long the average person spends there (which is information available on Google Maps, but I don't know if it will be available in the API). In addition, it would be great to be able to "tag" cafes with descriptors such as "historic," "newly-opened," "vegan-friendly," etc. to allow users to discover cafes better within the app. I anticipate that this tagging feature will also not be straightforward, and may involve searching the reviews for key words or performing sentiment analysis.
+- **Market:** The market for this app is broad, appealing mostly to relatively young city-dwellers or those living near downtown / urban regions with clusters of casual dining options.
+- **Habit:** The average user would do a fair amount of both consuming and creating on the app: they consume when they check out cafe listings and information, and create when they add cafes to personal lists or plan and save cafe-hopping routes.
+- **Scope:** Incorporating the Google Maps SDK would be the primary backend task. I believe that the core features of the app are of reasonable technical difficulty.  It would be great to be able to "tag" cafes with descriptors such as "historic," "newly-opened," "vegan-friendly," etc. to allow users to discover cafes better within the app. I anticipate that this tagging feature might not be straightforward, and may involve searching the reviews for key words or performing sentiment analysis. However, I believe that even with just the core features, Cafe Hopper will still be an interesting app both to build and use.
 
 ## Product Spec
 
-### 1. User Stories (Required and Optional)
+### 1. User Stories
 
 **Required Must-have Stories**
-
-* User can view cafes / eateries based on current location / zipcode
-* User can search for & filter cafes based on keyword, price point, etc.
-* User can create a new account, preferably with multiple options e.g. email, Google, Facebook, etc.
-* User can login and logout
-* User can see reviews and photos of the restaurant (perhaps posted to either Google, Yelp, or similar rating sites)
-* User can save eateries to lists / favorites -> possibly using double-tap feature
-    * User can view lists of saved eateries
-* User can plan trips between multiple cafes (using Google Maps API to determine walking/biking/driving distance between them), specifying how long they'd like to spend at each one
+- [x] User can create a new account
+- [x] User can login and logout
+- [x] User can search for eateries
+- [x] User can view the location of eateries on a map powered by Google Maps SDK
+- [x] User can save (and unsave) eateries to custom collections (e.g. Favorites, Want to Visit)
+- [x] User can create (and delete) collections of eateries
+- [ ] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
+- [ ] User can see photos of an eatery
+- [ ] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
+- [ ] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
 
 **Optional Nice-to-have Stories**
-
-* User can see tags for cafes, and filter places based on tags
-* Ability to adjust settings (specific settings TBD)
-* User can choose to be emailed/texted an itinerary for their trip
-* User receives push notifications for cafe recommendations or reminders about a route they've planned
-* User can navigate between cafes using the app (rather than redirecting to Google Maps for actual navigation, for example)
-    * I know this would make for a more cohesive/integrated user eperience, but I know simply wrapping Google Maps navigation into my app (if that's possible) would definitely be slower for the user.
-* User can attach their own notes and photos to a cafe, such as their favorite menu items and pictures of food / atmosphere
-* User can save *routes* / trips between cafes to favorites
-* Social-media-adjacent features such as profiles, adding friends and sharing routes with friends / making collaborative cafe lists with friends
+- [ ] User has multiple options to create a new account (e.g. with email, Google, Facebook)
+  - [ ] User can login with either username or email
+- [ ] User can apply search filters (e.g. price level, rating)
+- [ ] User can see tags for cafes
+  - [ ] User can filter places based on tags
+- [ ] User can be redirected to an eatery's website and call their phone number through the app
+- [ ] User can read reviews, or review keywords, of an eatery
+- [ ] User can double-tap as a shortcut to save an eatery
+- [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
+- [ ] User can see the walking/biking/driving distance between eateries using Google Maps API, specifying how long they'd like to spend at each location
+- [ ] User can adjust account settings (e.g. email, username, profile pic, notifications)
+- [ ] User can choose to be emailed/texted an itinerary for their trip
+- [ ] User receives push notifications for cafe recommendations or reminders about a route they've planned
 
 ### 2. Screen Archetypes
 
