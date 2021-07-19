@@ -9,6 +9,7 @@
 #import "UIImageView+AFNetworking.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
 #import "User.h"
 #import "Collection.h"
 #import "CarouselCell.h"
@@ -20,6 +21,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *buttonBorder1;
+@property (weak, nonatomic) IBOutlet UIView *buttonBorder2;
+@property (weak, nonatomic) IBOutlet UIView *buttonBorder3;
+@property (weak, nonatomic) IBOutlet UIButton *telephoneButton;
+@property (weak, nonatomic) IBOutlet UIButton *websiteButton;
+@property (weak, nonatomic) IBOutlet UIButton *directionsButton;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
 @property (strong, nonatomic) UIMenu *saveMenu;
 
@@ -45,6 +54,24 @@
     self.pictureView.clipsToBounds = true;
     
     [self showStarRating];
+    
+    CGFloat buttonRadius = 10;
+    UIColor *borderColor = [UIColor systemGray5Color];
+    CGFloat borderWidth = 1.f;
+    UIColor *backgroundColor = [UIColor clearColor];
+    self.buttonBorder1.layer.cornerRadius = buttonRadius;
+    self.buttonBorder1.layer.borderColor = borderColor.CGColor;
+    self.buttonBorder1.layer.borderWidth = borderWidth;
+    self.buttonBorder1.layer.backgroundColor = backgroundColor.CGColor;
+    self.buttonBorder2.layer.cornerRadius = buttonRadius;
+    self.buttonBorder2.layer.borderColor = borderColor.CGColor;
+    self.buttonBorder2.layer.borderWidth = borderWidth;
+    self.buttonBorder2.layer.backgroundColor = backgroundColor.CGColor;
+    self.buttonBorder3.layer.cornerRadius = buttonRadius;
+    self.buttonBorder3.layer.borderColor = borderColor.CGColor;
+    self.buttonBorder3.layer.borderWidth = borderWidth;
+    self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
+    
     [self setupMenu];
     
     PFQuery *query = [Collection query];
@@ -63,6 +90,21 @@
             NSLog(@"Error fetching user's saved locations: %@", error.localizedDescription);
         }
     }];
+}
+
+- (IBAction)onTapTelephone:(id)sender {
+    NSString *phoneNumber = @"6507880661"; // my phone number for now
+//    NSString *phoneNumber = self.place.phoneNumber;
+    NSString *urlString = [@"tel://" stringByAppendingString:phoneNumber];
+    NSURL *phoneURL = [NSURL URLWithString:urlString];
+    [[UIApplication sharedApplication] openURL:phoneURL options:@{} completionHandler:^(BOOL success) {}];
+}
+
+- (IBAction)onTapWebsite:(id)sender {
+    [[UIApplication sharedApplication] openURL:self.place.website options:@{} completionHandler:^(BOOL success) {}];
+}
+
+- (IBAction)onTapDirections:(id)sender {
 }
 
 - (void)setupMenu {
@@ -117,6 +159,7 @@
     starRatingView.accurateHalfStars = YES;
     starRatingView.value = self.place.rating;
     [starRatingView setUserInteractionEnabled:NO];
+    [starRatingView setBackgroundColor:[UIColor clearColor]];
     starRatingView.emptyStarImage = [[UIImage imageNamed:@"heart-empty"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     starRatingView.filledStarImage = [[UIImage imageNamed:@"heart-full"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.view addSubview:starRatingView];
@@ -140,7 +183,7 @@
                             relatedBy:NSLayoutRelationLessThanOrEqual
                             toItem:self.view
                             attribute:NSLayoutAttributeWidth
-                            multiplier:.45f constant:0.f] setActive:YES];
+                            multiplier:.4f constant:0.f] setActive:YES];
 }
 
 - (void)viewDidLayoutSubviews {

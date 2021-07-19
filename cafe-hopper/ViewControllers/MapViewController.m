@@ -48,7 +48,7 @@
 
 - (void)showPlaceFromId:(NSString *)placeID {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel);
+    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel | GMSPlaceFieldPhoneNumber | GMSPlaceFieldWebsite);
 //    GMSPlaceField fields = (GMSPlaceFieldPhotos | GMSPlaceFieldPriceLevel);
     [_placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (error) {

@@ -511,35 +511,134 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFc-Fy-bDg">
+                                <rect key="frame" x="112" y="502" width="50" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-aC-WnP">
+                                        <rect key="frame" x="4" y="3.5" width="42" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="Ne3-YW-2Xa"/>
+                                            <constraint firstAttribute="height" constant="33" id="vsU-UC-KkG"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="backgroundImage" image="phone.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTapTelephone:" destination="zNh-1M-8HY" eventType="touchUpInside" id="qzm-Xb-JWk"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="4LY-aC-WnP" firstAttribute="centerX" secondItem="OFc-Fy-bDg" secondAttribute="centerX" id="5da-oQ-A8i"/>
+                                    <constraint firstAttribute="height" constant="42" id="Jtb-j8-BOi"/>
+                                    <constraint firstAttribute="width" constant="50" id="kCx-tD-Qk2"/>
+                                    <constraint firstItem="4LY-aC-WnP" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="lek-Kl-lTM"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rM-Wd-gwh">
+                                <rect key="frame" x="182" y="502" width="50" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-aC-zhs">
+                                        <rect key="frame" x="4" y="3.5" width="42" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="2ki-0i-yLb"/>
+                                            <constraint firstAttribute="height" constant="33" id="apS-oR-RwQ"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="backgroundImage" image="macwindow" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTapWebsite:" destination="zNh-1M-8HY" eventType="touchUpInside" id="7OM-r0-MeG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="NDh-vO-ZkU"/>
+                                    <constraint firstItem="Wc7-aC-zhs" firstAttribute="centerY" secondItem="7rM-Wd-gwh" secondAttribute="centerY" id="skj-Of-cTH"/>
+                                    <constraint firstItem="Wc7-aC-zhs" firstAttribute="centerX" secondItem="7rM-Wd-gwh" secondAttribute="centerX" id="zez-dy-Yhb"/>
+                                    <constraint firstAttribute="height" constant="42" id="zo7-eT-kII"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDe-pe-0qv">
+                                <rect key="frame" x="252" y="502" width="50" height="42"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWe-xz-mZS">
+                                        <rect key="frame" x="6" y="4.5" width="38" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="31.5" id="W4J-6A-Lpo"/>
+                                            <constraint firstAttribute="width" constant="38" id="vxw-78-UQd"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <imageReference key="backgroundImage" image="location.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onTapDirections:" destination="zNh-1M-8HY" eventType="touchUpInside" id="mIK-dL-AG0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstItem="QWe-xz-mZS" firstAttribute="centerY" secondItem="kDe-pe-0qv" secondAttribute="centerY" id="5eH-Id-DXO"/>
+                                    <constraint firstItem="QWe-xz-mZS" firstAttribute="centerX" secondItem="kDe-pe-0qv" secondAttribute="centerX" id="9is-Jh-Set"/>
+                                    <constraint firstAttribute="width" constant="50" id="DeL-03-0jX"/>
+                                    <constraint firstAttribute="height" constant="42" id="DkG-eo-wu6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Tu-xR-pnv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="BQB-7K-sdk" secondAttribute="trailing" constant="15" id="1c9-Dc-0Ue"/>
+                            <constraint firstItem="kDe-pe-0qv" firstAttribute="leading" secondItem="7rM-Wd-gwh" secondAttribute="trailing" constant="20" id="4rB-Ew-Iai"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="9HC-WZ-HiV"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="CxJ-0G-OtR"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="top" secondItem="BQB-7K-sdk" secondAttribute="bottom" constant="10" id="KUP-nm-11s"/>
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Khp-o1-WGs"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Nto-46-VRD"/>
+                            <constraint firstItem="kDe-pe-0qv" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="Q0P-ma-q0A"/>
+                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="leading" secondItem="OFc-Fy-bDg" secondAttribute="trailing" constant="20" id="Syn-nk-21N"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="top" secondItem="gMK-NB-evC" secondAttribute="bottom" constant="18" id="TaN-Wg-XIN"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="trailing" secondItem="9Tu-xR-pnv" secondAttribute="trailing" id="Up7-Dh-ANn"/>
+                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="a87-qJ-O4R"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="top" secondItem="muf-YL-3dy" secondAttribute="top" id="bjh-53-45M"/>
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerY" secondItem="sAP-sE-Ayi" secondAttribute="bottom" id="iaD-oX-1XL"/>
+                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="inG-ap-cFa"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="keo-nB-4GX"/>
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="zvu-a3-dZB" secondAttribute="trailing" constant="15" id="qGA-N7-UaA"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" id="sgI-Na-iaf"/>
+                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="top" secondItem="zvu-a3-dZB" secondAttribute="bottom" constant="80" id="uVf-PX-05I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Place Details" id="awj-Lk-Gh6">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="bookmark" catalog="system" id="94G-ok-nrZ"/>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="bookmark" catalog="system" id="94G-ok-nrZ"/>
+                            <barButtonItem title="Item" image="location" catalog="system" id="IDj-uw-YRa"/>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="zvu-a3-dZB" id="txr-iB-R64"/>
+                        <outlet property="buttonBorder1" destination="OFc-Fy-bDg" id="5eN-RW-x5r"/>
+                        <outlet property="buttonBorder2" destination="7rM-Wd-gwh" id="2ju-hT-VZJ"/>
+                        <outlet property="buttonBorder3" destination="kDe-pe-0qv" id="Tb4-Q9-d9O"/>
                         <outlet property="collectionView" destination="sAP-sE-Ayi" id="cVF-yz-cEn"/>
+                        <outlet property="directionsButton" destination="QWe-xz-mZS" id="ORW-rU-Oti"/>
                         <outlet property="flowLayout" destination="RYY-lI-5bx" id="sBV-eC-i1z"/>
                         <outlet property="nameLabel" destination="BQB-7K-sdk" id="RJE-RH-JrS"/>
                         <outlet property="pictureView" destination="gMK-NB-evC" id="c8z-HP-fFm"/>
                         <outlet property="saveBarButton" destination="94G-ok-nrZ" id="7l0-ll-95V"/>
+                        <outlet property="telephoneButton" destination="4LY-aC-WnP" id="X9g-WI-WjZ"/>
+                        <outlet property="websiteButton" destination="Wc7-aC-zhs" id="30N-l9-GCJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCv-JF-gFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -949,10 +1048,14 @@
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="figure.walk" catalog="system" width="95" height="128"/>
+        <image name="location" catalog="system" width="128" height="121"/>
+        <image name="location.fill" catalog="system" width="128" height="121"/>
+        <image name="macwindow" catalog="system" width="128" height="93"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
         <image name="plus.square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
