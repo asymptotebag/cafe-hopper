@@ -105,6 +105,13 @@
 }
 
 - (IBAction)onTapDirections:(id)sender {
+    NSString *baseURLString = @"https://www.google.com/maps/dir/?api=1";
+    NSString *destination = [self.place.name stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSString *destinationParameter = [@"&destination=" stringByAppendingString:destination];
+    NSString *destinationPlaceIdParameter = [@"&destination_place_id=" stringByAppendingString:self.place.placeID];
+    NSString *URLString = [[baseURLString stringByAppendingString:destinationParameter] stringByAppendingString:destinationPlaceIdParameter];
+    NSLog(@"URL to open: %@", URLString);
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:^(BOOL success) {}];
 }
 
 - (void)setupMenu {
