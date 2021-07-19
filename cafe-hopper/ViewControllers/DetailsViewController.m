@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "User.h"
 #import "Collection.h"
+#import "Trip.h"
 #import "CarouselCell.h"
 
 @interface DetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -31,6 +32,8 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
 @property (strong, nonatomic) UIMenu *saveMenu;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *tripBarButton;
+@property (strong, nonatomic) UIMenu *tripMenu;
 
 @end
 
@@ -72,7 +75,7 @@
     self.buttonBorder3.layer.borderWidth = borderWidth;
     self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
     
-    [self setupMenu];
+    [self setupMenus];
     
     PFQuery *query = [Collection query];
     [query whereKey:@"owner" equalTo:self.user];
@@ -114,7 +117,12 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:^(BOOL success) {}];
 }
 
-- (void)setupMenu {
+- (void)setupMenus {
+    [self setupSaveMenu];
+    [self setupTripMenu]; // check if user has any trips yet?
+}
+
+- (void)setupSaveMenu {
     NSMutableArray *menuItems = [NSMutableArray new];
     UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
         [self addPlaceToCollection:@"All"];
@@ -131,8 +139,23 @@
         [menuItems addObject:saveToCollection];
     }
     
-    self.saveMenu = [UIMenu menuWithChildren:menuItems];
+    self.saveMenu = [UIMenu menuWithTitle:@"Add to collection:" children:menuItems];
     [self.saveBarButton setMenu:self.saveMenu];
+}
+
+- (void)setupTripMenu {
+    NSMutableArray *menuItems = [NSMutableArray new];
+    
+    for (NSString *tripName in self.user.tripNames) {
+        NSString *actionName = [@"Add to " stringByAppendingString:tripName];
+        UIAction *saveToTrip = [UIAction actionWithTitle:actionName image:[UIImage systemImageNamed:@"location"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+            [self addPlaceToTrip:tripName];
+        }];
+        [menuItems addObject:saveToTrip];
+    }
+    
+    self.tripMenu = [UIMenu menuWithTitle:@"Add to trip:" children:menuItems];
+    [self.tripBarButton setMenu:self.tripMenu];
 }
 
 - (void)addPlaceToCollection:(NSString *)collectionName {
@@ -155,6 +178,26 @@
     }];
     
     [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
+}
+
+- (void)addPlaceToTrip:(NSString *)tripName {
+    PFQuery *query = [Trip query];
+    [query whereKey:@"owner" equalTo:self.user];
+    [query whereKey:@"tripName" equalTo:tripName];
+    
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (object) {
+            [Trip addStopWithPlaceId:self.place.placeID toTrip:object completion:^(BOOL succeeded, NSError * _Nullable error) {
+                if (succeeded) {
+                    NSLog(@"Saved place to %@", tripName);
+                } else {
+                    NSLog(@"Error saving place: %@", error.localizedDescription);
+                }
+            }];
+        } else {
+            NSLog(@"Error finding a trip with that name");
+        }
+    }];
 }
 
 - (void)showStarRating {
