@@ -40,9 +40,9 @@ Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee 
 - [ ] User can apply search filters (e.g. price level, rating)
 - [ ] User can see tags for cafes
   - [ ] User can filter places based on tags
-- [ ] User can be redirected to an eatery's website and call their phone number through the app
+- [x] User can be redirected to an eatery's website and call their phone number through the app
 - [ ] User can read reviews, or review keywords, of an eatery
-- [ ] User can double-tap as a shortcut to save an eatery
+- [x] User can double-tap as a shortcut to save an eatery
 - [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
 - [ ] User can see the walking/biking/driving distance between eateries using Google Maps API, specifying how long they'd like to spend at each location
 - [ ] User can adjust account settings (e.g. email, username, profile pic, notifications)

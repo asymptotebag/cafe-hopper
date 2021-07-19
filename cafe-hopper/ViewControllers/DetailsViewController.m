@@ -35,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tripBarButton;
 @property (strong, nonatomic) UIMenu *tripMenu;
 
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *doubleTapGesture;
+@property (weak, nonatomic) IBOutlet UIImageView *bigHeart;
+
 @end
 
 @implementation DetailsViewController
@@ -55,6 +58,9 @@
     [self.pictureView setImage:[UIImage imageNamed:@"5"]];
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
     self.pictureView.clipsToBounds = true;
+    [self.pictureView setUserInteractionEnabled:YES];
+    [self.pictureView addGestureRecognizer:self.doubleTapGesture];
+    self.bigHeart.hidden = YES;
     
     [self showStarRating];
     
@@ -197,6 +203,30 @@
         } else {
             NSLog(@"Error finding a trip with that name");
         }
+    }];
+}
+
+- (IBAction)onDoubleTap:(id)sender {
+    NSLog(@"double tap detected");
+    [self addPlaceToCollection:@"All"];
+    [self animateHeart];
+}
+
+- (void)animateHeart {
+    self.bigHeart.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    self.bigHeart.alpha = 0;
+    self.bigHeart.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.bigHeart.transform = CGAffineTransformMakeScale(1, 1);
+        self.bigHeart.alpha = 0.9;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.15 delay:0.4 options:UIViewAnimationOptionPreferredFramesPerSecondDefault
+         animations:^{
+            self.bigHeart.transform = CGAffineTransformMakeScale(0.7, 0.7);
+            self.bigHeart.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.bigHeart.hidden = YES;
+        }];
     }];
 }
 

@@ -358,6 +358,7 @@
                                             <outlet property="originNameLabel" destination="IFP-Yc-dmL" id="5xs-YA-Z8Z"/>
                                             <outlet property="stopsLabel" destination="Ygk-eX-OI8" id="XTg-kr-jpG"/>
                                             <outlet property="tripNameLabel" destination="Rld-jC-Slf" id="iJY-ib-dCV"/>
+                                            <segue destination="u8C-Lj-5JG" kind="show" id="goU-EZ-bhf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -594,11 +595,15 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="5" translatesAutoresizingMaskIntoConstraints="NO" id="gMK-NB-evC">
                                 <rect key="frame" x="119.5" y="162.5" width="175" height="175"/>
                                 <color key="tintColor" systemColor="systemGray2Color"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="Jdk-2D-xfV"/>
                                     <constraint firstAttribute="height" constant="175" id="x8i-NG-eYQ"/>
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="ultraLight"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="iI4-rw-Zj3" appends="YES" id="o1T-8n-JfS"/>
+                                </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="La Colombe Coffee Roasters" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQB-7K-sdk">
                                 <rect key="frame" x="15" y="355.5" width="384" height="36"/>
@@ -696,6 +701,14 @@
                                     <constraint firstAttribute="height" constant="42" id="DkG-eo-wu6"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="19P-3d-ZEu">
+                                <rect key="frame" x="169.5" y="214" width="75" height="72.5"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="X1t-mu-wwQ"/>
+                                    <constraint firstAttribute="height" constant="75" id="tOl-ye-iYe"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9Tu-xR-pnv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -704,6 +717,7 @@
                             <constraint firstItem="kDe-pe-0qv" firstAttribute="leading" secondItem="7rM-Wd-gwh" secondAttribute="trailing" constant="20" id="4rB-Ew-Iai"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="9HC-WZ-HiV"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="CxJ-0G-OtR"/>
+                            <constraint firstItem="19P-3d-ZEu" firstAttribute="centerX" secondItem="gMK-NB-evC" secondAttribute="centerX" id="G0m-Um-J5N"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="top" secondItem="BQB-7K-sdk" secondAttribute="bottom" constant="10" id="KUP-nm-11s"/>
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Khp-o1-WGs"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="Nto-46-VRD"/>
@@ -716,6 +730,7 @@
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerY" secondItem="sAP-sE-Ayi" secondAttribute="bottom" id="iaD-oX-1XL"/>
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="inG-ap-cFa"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="keo-nB-4GX"/>
+                            <constraint firstItem="19P-3d-ZEu" firstAttribute="centerY" secondItem="gMK-NB-evC" secondAttribute="centerY" id="q82-10-dFj"/>
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="zvu-a3-dZB" secondAttribute="trailing" constant="15" id="qGA-N7-UaA"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" id="sgI-Na-iaf"/>
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="top" secondItem="zvu-a3-dZB" secondAttribute="bottom" constant="80" id="uVf-PX-05I"/>
@@ -729,11 +744,13 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="zvu-a3-dZB" id="txr-iB-R64"/>
+                        <outlet property="bigHeart" destination="19P-3d-ZEu" id="k0z-JZ-RLz"/>
                         <outlet property="buttonBorder1" destination="OFc-Fy-bDg" id="5eN-RW-x5r"/>
                         <outlet property="buttonBorder2" destination="7rM-Wd-gwh" id="2ju-hT-VZJ"/>
                         <outlet property="buttonBorder3" destination="kDe-pe-0qv" id="Tb4-Q9-d9O"/>
                         <outlet property="collectionView" destination="sAP-sE-Ayi" id="cVF-yz-cEn"/>
                         <outlet property="directionsButton" destination="QWe-xz-mZS" id="ORW-rU-Oti"/>
+                        <outlet property="doubleTapGesture" destination="iI4-rw-Zj3" id="YDy-zP-goe"/>
                         <outlet property="flowLayout" destination="RYY-lI-5bx" id="sBV-eC-i1z"/>
                         <outlet property="nameLabel" destination="BQB-7K-sdk" id="RJE-RH-JrS"/>
                         <outlet property="pictureView" destination="gMK-NB-evC" id="c8z-HP-fFm"/>
@@ -744,6 +761,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCv-JF-gFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="iI4-rw-Zj3">
+                    <connections>
+                        <action selector="onDoubleTap:" destination="zNh-1M-8HY" id="Jyw-34-LTy"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="89.855072463768124" y="3612.7232142857142"/>
         </scene>
@@ -1247,6 +1269,52 @@
             </objects>
             <point key="canvasLocation" x="777" y="2934"/>
         </scene>
+        <!--Trip Details-->
+        <scene sceneID="3LU-wT-I5a">
+            <objects>
+                <viewController id="u8C-Lj-5JG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XjI-TI-d46">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="480-k3-2Jk">
+                                <rect key="frame" x="207" y="178" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="6" translatesAutoresizingMaskIntoConstraints="NO" id="lkF-ah-xlr">
+                                <rect key="frame" x="145" y="178" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lvc-hE-1Gj">
+                                <rect key="frame" x="83" y="178" width="125" height="125"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Manhattan Chinatown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BiG-e0-NEP">
+                                <rect key="frame" x="96" y="325" width="228" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d89-Bv-oop">
+                                <rect key="frame" x="57" y="324" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <imageReference key="backgroundImage" image="mappin.circle" catalog="system" symbolScale="large"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mzB-hh-eCl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Trip Details" id="CNL-RG-xFq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GxH-1R-EDv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1441" y="2934"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="woe-wn-tSv"/>
@@ -1257,16 +1325,19 @@
         <image name="3" width="900" height="600"/>
         <image name="4" width="1200" height="800"/>
         <image name="5" width="499" height="307"/>
+        <image name="6" width="960" height="540"/>
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="figure.walk" catalog="system" width="95" height="128"/>
+        <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="location" catalog="system" width="128" height="121"/>
         <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="macwindow" catalog="system" width="128" height="93"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="mappin" catalog="system" width="105" height="128"/>
         <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
+        <image name="mappin.circle" catalog="system" width="128" height="121"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
