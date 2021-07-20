@@ -30,7 +30,7 @@ Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee 
 - [x] User can save (and unsave) eateries to custom collections (e.g. Favorites, Want to Visit)
 - [x] User can create (and delete) collections of eateries
 - [ ] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
-- [ ] User can see photos of an eatery
+- [x] User can see photos of an eatery
 - [ ] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
 - [ ] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
 

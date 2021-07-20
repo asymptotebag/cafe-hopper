@@ -38,6 +38,8 @@
 		7CDB52D926A5DF6C00D02758 /* TripCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52D826A5DF6C00D02758 /* TripCell.m */; };
 		7CDB52DC26A5FAC600D02758 /* NewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52DB26A5FAC600D02758 /* NewTripViewController.m */; };
 		7CDB52DF26A5FF4700D02758 /* NewStopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52DE26A5FF4700D02758 /* NewStopCell.m */; };
+		7CDB52E226A65C6400D02758 /* TripDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52E126A65C6400D02758 /* TripDetailsViewController.m */; };
+		7CDB52E526A7226A00D02758 /* StopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52E426A7226A00D02758 /* StopCell.m */; };
 		FDC9B9BA85AB64119FA603DA /* Pods_cafe_hopper_cafe_hopperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -120,6 +122,10 @@
 		7CDB52DB26A5FAC600D02758 /* NewTripViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewTripViewController.m; sourceTree = "<group>"; };
 		7CDB52DD26A5FF4700D02758 /* NewStopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewStopCell.h; sourceTree = "<group>"; };
 		7CDB52DE26A5FF4700D02758 /* NewStopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewStopCell.m; sourceTree = "<group>"; };
+		7CDB52E026A65C6400D02758 /* TripDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripDetailsViewController.h; sourceTree = "<group>"; };
+		7CDB52E126A65C6400D02758 /* TripDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripDetailsViewController.m; sourceTree = "<group>"; };
+		7CDB52E326A7226A00D02758 /* StopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StopCell.h; sourceTree = "<group>"; };
+		7CDB52E426A7226A00D02758 /* StopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StopCell.m; sourceTree = "<group>"; };
 		8A74B37B893E6ADC8993745D /* Pods-cafe-hopperTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.debug.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BD529C7763281849DEB3F927 /* Pods_cafe_hopper_cafe_hopperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cafe_hopper_cafe_hopperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3216F70215F141FFF9C6E44 /* Pods-cafe-hopperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafe-hopperTests.release.xcconfig"; path = "Target Support Files/Pods-cafe-hopperTests/Pods-cafe-hopperTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +259,8 @@
 				7CDB52D526A5D75A00D02758 /* TripsListViewController.m */,
 				7CDB52DA26A5FAC600D02758 /* NewTripViewController.h */,
 				7CDB52DB26A5FAC600D02758 /* NewTripViewController.m */,
+				7CDB52E026A65C6400D02758 /* TripDetailsViewController.h */,
+				7CDB52E126A65C6400D02758 /* TripDetailsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -272,6 +280,8 @@
 				7CDB52D826A5DF6C00D02758 /* TripCell.m */,
 				7CDB52DD26A5FF4700D02758 /* NewStopCell.h */,
 				7CDB52DE26A5FF4700D02758 /* NewStopCell.m */,
+				7CDB52E326A7226A00D02758 /* StopCell.h */,
+				7CDB52E426A7226A00D02758 /* StopCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -580,9 +590,11 @@
 				7CDB52B8269F299900D02758 /* DetailsViewController.m in Sources */,
 				7CDB52D626A5D75A00D02758 /* TripsListViewController.m in Sources */,
 				7C1756FD269C74A700393B53 /* AppDelegate.m in Sources */,
+				7CDB52E526A7226A00D02758 /* StopCell.m in Sources */,
 				7C17570E269C74A800393B53 /* main.m in Sources */,
 				7CDB52DC26A5FAC600D02758 /* NewTripViewController.m in Sources */,
 				7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */,
+				7CDB52E226A65C6400D02758 /* TripDetailsViewController.m in Sources */,
 				7C175746269E03D800393B53 /* SearchViewController.m in Sources */,
 				7C175700269C74A700393B53 /* SceneDelegate.m in Sources */,
 				7CDB52D926A5DF6C00D02758 /* TripCell.m in Sources */,

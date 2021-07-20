@@ -6,6 +6,7 @@
 //
 
 #import "TripsListViewController.h"
+#import "TripDetailsViewController.h"
 #import "Trip.h"
 #import "User.h"
 #import "TripCell.h"
@@ -27,6 +28,12 @@
     [super viewDidLoad];
     self.user = [User currentUser];
     [self setupTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
 }
 
 - (void)setupTableView {
@@ -89,14 +96,19 @@
     }
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"tripDetailsSegue"]) {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Trip *trip = self.trips[indexPath.row];
+        TripDetailsViewController *detailsVC = [segue destinationViewController];
+        detailsVC.trip = trip;
+    }
 }
-*/
 
 @end

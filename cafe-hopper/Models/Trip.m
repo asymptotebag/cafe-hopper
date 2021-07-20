@@ -18,7 +18,7 @@
     return @"Trip";
 }
 
-+ (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSString *> *)stops completion:(PFBooleanResultBlock)completion {
++ (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSMutableDictionary *> *)stops completion:(PFBooleanResultBlock)completion {
     Trip *trip = [Trip new];
     trip.tripName = tripName;
     trip.owner = [User currentUser];
@@ -58,13 +58,17 @@
 
 + (void)addStopWithPlaceId:(NSString *)placeId toTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion {
     // duplicates are okay here
-    [trip.stops addObject:placeId];
+    NSMutableDictionary *newStop = [NSMutableDictionary new];
+    [newStop setValue:placeId forKey:@"placeId"];
+    [newStop setValue:@20 forKey:@"minSpent"]; // default 20 min per cafe
+    
+    [trip.stops addObject:newStop];
     trip[@"stops"] = trip.stops;
     [trip saveInBackgroundWithBlock:completion];
 }
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
-    NSString *stopToRemove = trip.stops[index];
+    NSMutableDictionary *stopToRemove = trip.stops[index];
     [trip.stops removeObject:stopToRemove];
     trip[@"stops"] = trip.stops;
     [trip saveInBackgroundWithBlock:completion];
