@@ -40,11 +40,17 @@
 
 @end
 
-@implementation DetailsViewController
+@implementation DetailsViewController {
+    GMSPlacesClient *_placesClient;
+    BOOL usingRealImages;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.user = [User currentUser];
+    _placesClient = [GMSPlacesClient sharedClient];
+    usingRealImages = YES;
+    
     [self setupView];
 }
 
@@ -55,7 +61,20 @@
     self.nameLabel.text = self.place.name;
     self.addressLabel.text = self.place.formattedAddress;
     
-    [self.pictureView setImage:[UIImage imageNamed:@"5"]];
+    if (usingRealImages) {
+        GMSPlacePhotoMetadata *photoMetadata = self.place.photos[0];
+//        CGSize photoSize = CGSizeMake(175, 175);
+        [_placesClient loadPlacePhoto:photoMetadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+            if (photo) {
+                [self.pictureView setImage:photo]; // display attribution?
+            } else {
+                NSLog(@"Error getting place photo: %@", error.localizedDescription);
+            }
+        }];
+    } else {
+        [self.pictureView setImage:[UIImage imageNamed:@"5"]];
+    }
+    
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
     self.pictureView.clipsToBounds = true;
     [self.pictureView setUserInteractionEnabled:YES];

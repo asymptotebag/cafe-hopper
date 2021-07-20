@@ -7,6 +7,7 @@
 
 #import "CollectionCell.h"
 #import "Collection.h"
+@import GooglePlaces;
 #define degreesToRadians(x) (M_PI * (x) / 180.0)
 #define kAnimationRotateDeg 1.0
 
@@ -22,11 +23,21 @@
     self.nameLabel.text = collection.collectionName;
     self.frameView.layer.cornerRadius = 15;
     self.frameView.clipsToBounds = YES;
+    
+    // images are 84 x 84
     [self.topLeftView setImage:[UIImage imageNamed:@"1"]];
     [self.topRightView setImage:[UIImage imageNamed:@"2"]];
     [self.bottomLeftView setImage:[UIImage imageNamed:@"3"]];
     [self.bottomRightView setImage:[UIImage imageNamed:@"4"]];
     
+//    for (int i=0; i<4; i++) {
+//        if (collection.places.count > i) {
+////            GMSPlacePhotoMetadata *photoMetadata = collection.places[i]
+//        } else { // not enough places in collection yet
+//
+//        }
+//    }
+//    
     if (self.inEditingMode && ![self.collection.collectionName isEqualToString:@"All"]) {
         // you can't delete the All collection
         self.deleteButton.hidden = NO;

@@ -48,8 +48,8 @@
 
 - (void)showPlaceFromId:(NSString *)placeID {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
-    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel | GMSPlaceFieldPhoneNumber | GMSPlaceFieldWebsite);
-//    GMSPlaceField fields = (GMSPlaceFieldPhotos | GMSPlaceFieldPriceLevel);
+    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel | GMSPlaceFieldPhoneNumber | GMSPlaceFieldWebsite | GMSPlaceFieldPhotos);
+
     [_placesClient fetchPlaceFromPlaceID:placeID placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error fetching place from ID: %@", error.localizedDescription);
