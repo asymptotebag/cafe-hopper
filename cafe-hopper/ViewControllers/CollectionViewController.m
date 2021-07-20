@@ -49,8 +49,12 @@
     
     for (NSString *placeId in self.collection.places) {
         [_placesClient fetchPlaceFromPlaceID:placeId placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
-            [self.places addObject:place];
-            [self.tableView reloadData];
+            if (place) {
+                [self.places addObject:place];
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error fetching places in collection: %@", error.localizedDescription);
+            }
         }];
     }
 }
@@ -62,10 +66,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlaceCell"];
     GMSPlace *place = self.places[indexPath.row];
-    GMSPlacePhotoMetadata *metadata = place.photos[0];
-    [_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-        [cell.pictureView setImage:photo];
-    }];
+//    GMSPlacePhotoMetadata *metadata = place.photos[0];
+//    [_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+//        [cell.pictureView setImage:photo];
+//    }];
     cell.place = place;
     return cell;
 }

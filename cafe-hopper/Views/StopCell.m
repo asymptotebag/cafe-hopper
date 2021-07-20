@@ -25,7 +25,7 @@
     
     self.placeNameLabel.text = place.name;
     self.addressLabel.text = place.formattedAddress;
-    self.timeSpentField.text = [NSString stringWithFormat:@"%li", self.minSpent];
+    self.timeSpentField.text = [NSString stringWithFormat:@"%ld", [self.minSpent integerValue]];
     self.stopIndexLabel.text = [NSString stringWithFormat:@"%li", self.index+1];
     
     self.indexBorder.layer.cornerRadius = self.indexBorder.layer.frame.size.height/2;

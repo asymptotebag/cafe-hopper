@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface StopCell : UITableViewCell
 @property (strong, nonatomic) GMSPlace *place;
-@property (nonatomic) NSInteger minSpent;
+@property (strong, nonatomic) NSNumber *minSpent;
 @property (nonatomic) NSInteger index;
 
 @property (weak, nonatomic) IBOutlet UIView *indexBorder;

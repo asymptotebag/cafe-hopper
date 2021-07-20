@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) NSMutableArray<NSMutableDictionary *> *stops;
-// stops: [{place: GMSPlace, minSpent:20}]
+// stops: [{place: GMSPlace, minSpent:20, }]
 
 @end
 
@@ -59,9 +59,15 @@
     GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress);
     for (NSMutableDictionary *stop in self.trip.stops) {
         [_placesClient fetchPlaceFromPlaceID:stop[@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
-            NSMutableDictionary *newStop = @{@"place":place, @"minSpent":stop[@"minSpent"]}.mutableCopy;
-            [self.stops addObject:newStop];
-            [self.tableView reloadData];
+            if (place) {
+                NSMutableDictionary *newStop = @{@"place":place, @"minSpent":stop[@"minSpent"]}.mutableCopy;
+                
+                // TODO: get walking distance between stops
+                [self.stops addObject:newStop];
+                [self.tableView reloadData];
+            } else {
+                NSLog(@"Error fetching place: %@", error.localizedDescription);
+            }
         }];
     }
 }
@@ -74,7 +80,7 @@
     StopCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StopCell" forIndexPath:indexPath];
     NSMutableDictionary *stop = self.stops[indexPath.row];
     cell.index = indexPath.row;
-    cell.minSpent = (NSInteger)stop[@"minSpent"];
+    cell.minSpent = (NSNumber *)stop[@"minSpent"];
     cell.place = stop[@"place"];
     return cell;
 }
@@ -84,9 +90,9 @@
 }
 
 - (IBAction)onTapNavigate:(id)sender {
-    // TODO: handle having 1, 2, and 3+ stops in trip
-    NSMutableString *URLString = @"https://www.google.com/maps/dir/?api=1".mutableCopy;
     if (self.stops.count >= 2) {
+        NSMutableString *URLString = @"https://www.google.com/maps/dir/?api=1".mutableCopy;
+        
         GMSPlace *origin = self.stops[0][@"place"];
         NSString *originParameter = [@"&origin=" stringByAppendingString:[self URLEncodeString:origin.name]];
         NSString *originIdParameter = [@"&origin_place_id=" stringByAppendingString:origin.placeID];
@@ -116,8 +122,14 @@
             [URLString appendString:waypointsParameter];
             [URLString appendString:waypointsIdsParameter];
         }
+        
         NSLog(@"URL to open: %@", URLString);
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:^(BOOL success) {}];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Navigation unavailable" message:@"A trip must have at least 2 stops to enable navigation." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:dismissAction];
+        [self presentViewController:alert animated:YES completion:^{}];
     }
 }
 
