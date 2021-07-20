@@ -60,7 +60,8 @@
     // duplicates are okay here
     NSMutableDictionary *newStop = [NSMutableDictionary new];
     [newStop setValue:placeId forKey:@"placeId"];
-    [newStop setValue:@20 forKey:@"minSpent"]; // default 20 min per cafe
+//    [newStop setValue:[NSInteger numberWithInteger:20] forKey:@"minSpent"]; // default 20 min per cafe
+    [newStop setObject:@20 forKey:@"minSpent"];
     
     [trip.stops addObject:newStop];
     trip[@"stops"] = trip.stops;

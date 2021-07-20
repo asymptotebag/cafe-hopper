@@ -79,6 +79,48 @@
     return cell;
 }
 
+- (NSString *)URLEncodeString:(NSString *)string {
+    return [string stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+}
+
+- (IBAction)onTapNavigate:(id)sender {
+    // TODO: handle having 1, 2, and 3+ stops in trip
+    NSMutableString *URLString = @"https://www.google.com/maps/dir/?api=1".mutableCopy;
+    if (self.stops.count >= 2) {
+        GMSPlace *origin = self.stops[0][@"place"];
+        NSString *originParameter = [@"&origin=" stringByAppendingString:[self URLEncodeString:origin.name]];
+        NSString *originIdParameter = [@"&origin_place_id=" stringByAppendingString:origin.placeID];
+        [URLString appendString:originParameter];
+        [URLString appendString:originIdParameter];
+        
+        GMSPlace *destination = self.stops[self.stops.count-1][@"place"];
+        NSString *destinationParameter = [@"&destination=" stringByAppendingString:[self URLEncodeString:destination.name]];
+        NSString *destinationIdParameter = [@"&destination_place_id=" stringByAppendingString:destination.placeID];
+        [URLString appendString:destinationParameter];
+        [URLString appendString:destinationIdParameter];
+        
+        NSInteger numWaypoints = self.stops.count - 2;
+        if (numWaypoints > 0) {
+            NSMutableString *waypointsParameter = @"&waypoints=".mutableCopy;
+            NSMutableString *waypointsIdsParameter = @"&waypoint_place_ids=".mutableCopy;
+            for (int i=0; i<numWaypoints; i++) {
+                // url encode waypoints (pipe character is %7C)
+                GMSPlace *waypoint = self.stops[i+1][@"place"];
+                [waypointsParameter appendString:[self URLEncodeString:waypoint.name]];
+                [waypointsIdsParameter appendString:[self URLEncodeString:waypoint.placeID]];
+                if (i < numWaypoints - 1) { // add pipe for all except last one
+                    [waypointsParameter appendString:@"%7C"];
+                    [waypointsIdsParameter appendString:@"%7C"];
+                }
+            }
+            [URLString appendString:waypointsParameter];
+            [URLString appendString:waypointsIdsParameter];
+        }
+        NSLog(@"URL to open: %@", URLString);
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:^(BOOL success) {}];
+    }
+}
+
 /*
 #pragma mark - Navigation
 

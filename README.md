@@ -32,7 +32,7 @@ Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee 
 - [ ] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
 - [x] User can see photos of an eatery
 - [ ] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
-- [ ] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
+- [x] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
 
 **Optional Nice-to-have Stories**
 - [ ] User has multiple options to create a new account (e.g. with email, Google, Facebook)

@@ -1486,7 +1486,13 @@
                         <viewLayoutGuide key="safeArea" id="mzB-hh-eCl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Trip Details" id="CNL-RG-xFq"/>
+                    <navigationItem key="navigationItem" title="Trip Details" id="CNL-RG-xFq">
+                        <barButtonItem key="rightBarButtonItem" title="Navigate" id="nxT-L4-NtX">
+                            <connections>
+                                <action selector="onTapNavigate:" destination="u8C-Lj-5JG" id="cb6-mC-353"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="headerView" destination="xP3-Xh-huO" id="TrJ-KN-Z6I"/>
                         <outlet property="imageView1" destination="Lvc-hE-1Gj" id="MHh-Bb-ob7"/>
