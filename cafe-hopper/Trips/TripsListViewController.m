@@ -53,7 +53,7 @@
 - (void)fetchTrips {
     PFQuery *query = [Trip query];
     [query whereKey:@"owner" equalTo:self.user];
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:@"updatedAt"];
     
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable trips, NSError * _Nullable error) {
         if (trips) {

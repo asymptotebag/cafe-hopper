@@ -63,6 +63,7 @@
     NSMutableDictionary *newStop = [NSMutableDictionary new];
     [newStop setValue:placeId forKey:@"placeId"];
     [newStop setObject:@20 forKey:@"minSpent"]; // default 20 min per cafe
+    [newStop setObject:[NSNumber numberWithUnsignedLong:trip.stops.count] forKey:@"index"];
     NSLog(@"newStop = %@", newStop);
     [trip.stops addObject:newStop];
     
@@ -116,10 +117,13 @@
 }
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
+    // TODO: fix deletion (this is going to be hard lol)
     NSMutableDictionary *stopToRemove = trip.stops[index];
     [trip.stops removeObject:stopToRemove];
     trip[@"stops"] = trip.stops;
     [trip saveInBackgroundWithBlock:completion];
 }
+
+// TODO: method to change duration of stay at each cafe
 
 @end
