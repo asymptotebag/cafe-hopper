@@ -97,6 +97,36 @@
 }
 
 - (IBAction)onTapCreate:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Create New Trip" message:@"Enter a name for your new trip." preferredStyle:UIAlertControllerStyleAlert];
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"Trip Name";
+    }];
+    
+    UIAlertController *duplicateAlert = [UIAlertController alertControllerWithTitle:@"Cannot create trip" message:@"Trip names must be unique." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self presentViewController:alert animated:YES completion:^{}];
+    }];
+    [duplicateAlert addAction:dismissAction];
+    
+    UIAlertAction *createAction = [UIAlertAction actionWithTitle:@"Create" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UITextField *name = alert.textFields.firstObject;
+        NSMutableArray *existingNames = [NSMutableArray new];
+        for (Trip *trip in self.trips) {
+            [existingNames addObject:trip.tripName];
+        }
+        if ([existingNames containsObject:name.text]) {
+            [self presentViewController:duplicateAlert animated:YES completion:^{}];
+        } else {
+            [Trip createTripWithName:name.text stops:@[].mutableCopy completion:^(BOOL succeeded, NSError * _Nullable error) {
+                [self fetchTrips];
+            }];
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:createAction];
+    [alert addAction:cancelAction];
+    
+    [self presentViewController:alert animated:YES completion:^{}];
 }
 
 #pragma mark - Navigation

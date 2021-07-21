@@ -16,29 +16,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="launching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsh-x5-Erd">
-                                <rect key="frame" x="115.5" y="424" width="183" height="48"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
-                                <nil key="textColor"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Gyd-VC-4fk">
+                                <rect key="frame" x="107" y="211" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="U5K-Nf-NxP"/>
+                                    <constraint firstAttribute="height" constant="200" id="Web-C5-UBj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="croissavant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4Q-09-m5P">
+                                <rect key="frame" x="98" y="419" width="218" height="58"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brewing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdq-iY-law">
+                                <rect key="frame" x="153.5" y="487" width="107" height="28"/>
+                                <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="24"/>
+                                <color key="textColor" systemColor="systemGray2Color"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="gsh-x5-Erd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fq0-th-Z2v"/>
-                            <constraint firstItem="gsh-x5-Erd" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="lHB-PZ-JY9"/>
+                            <constraint firstItem="q4Q-09-m5P" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7xt-08-2UO"/>
+                            <constraint firstItem="wdq-iY-law" firstAttribute="top" secondItem="q4Q-09-m5P" secondAttribute="bottom" constant="10" id="F4x-yD-jcr"/>
+                            <constraint firstItem="q4Q-09-m5P" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kjt-Np-Jes"/>
+                            <constraint firstItem="q4Q-09-m5P" firstAttribute="top" secondItem="Gyd-VC-4fk" secondAttribute="bottom" constant="8" id="XO8-yb-vgU"/>
+                            <constraint firstItem="Gyd-VC-4fk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mTz-ry-Fgj"/>
+                            <constraint firstItem="wdq-iY-law" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vgJ-7V-tEq"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="236" y="388"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icon" width="1108" height="1108"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
