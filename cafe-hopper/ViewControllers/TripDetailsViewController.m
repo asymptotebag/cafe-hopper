@@ -61,8 +61,10 @@
         [_placesClient fetchPlaceFromPlaceID:stop[@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
             if (place) {
                 NSMutableDictionary *newStop = @{@"place":place, @"minSpent":stop[@"minSpent"]}.mutableCopy;
+                if (stop[@"timeToNext"]) { // nil if key doesn't exist
+                    [newStop setObject:stop[@"timeToNext"] forKey:@"timeToNext"];
+                }
                 
-                // TODO: get walking distance between stops
                 [self.stops addObject:newStop];
                 [self.tableView reloadData];
             } else {
@@ -82,6 +84,11 @@
     cell.index = indexPath.row;
     cell.isLastStop = indexPath.row == self.trip.stops.count-1;
     cell.minSpent = (NSNumber *)stop[@"minSpent"];
+    if (stop[@"timeToNext"]) {
+        cell.timeToNext = stop[@"timeToNext"];
+    } else {
+        cell.timeToNext = nil;
+    }
     cell.place = stop[@"place"];
     return cell;
 }
