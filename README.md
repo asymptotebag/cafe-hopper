@@ -1,7 +1,7 @@
 # Croissavant
 
-<p align="center">
-    <img src="https://https://github.com/asymptotebag/cafe-hopper/blob/main/cafe-hopper/Assets.xcassets/icon.imageset/IMG_0035.jpg" height="250" width="250" />
+<p align="left">
+    <img src="/cafe-hopper/Assets.xcassets/icon.imageset/IMG_0035.jpg" height="200" width="200" />
 </p>
 
 ## Table of Contents
