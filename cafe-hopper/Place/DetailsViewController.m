@@ -7,13 +7,14 @@
 
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
-#import <HCSStarRatingView/HCSStarRatingView.h>
-#import <Parse/Parse.h>
-#import <QuartzCore/QuartzCore.h>
 #import "User.h"
 #import "Collection.h"
 #import "Trip.h"
 #import "CarouselCell.h"
+#import <HCSStarRatingView/HCSStarRatingView.h>
+#import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
+#import <AudioToolbox/AudioServices.h>
 
 @interface DetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) User *user;
@@ -193,6 +194,7 @@
             [Collection addPlaceId:self.place.placeID toCollection:object withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"Saved place to %@", collectionName);
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
                 } else {
                     NSLog(@"Error saving place: %@", error.localizedDescription);
                 }
@@ -215,6 +217,7 @@
             [Trip addStopWithPlaceId:self.place.placeID toTrip:object completion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"Saved place to %@", tripName);
+                    AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
                 } else {
                     NSLog(@"Error saving place: %@", error.localizedDescription);
                 }

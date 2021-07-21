@@ -376,7 +376,7 @@
                     <navigationItem key="navigationItem" title="My Trips" id="fn9-J6-DiE">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="plus.square" catalog="system" id="dzz-V9-mzd">
                             <connections>
-                                <segue destination="5Mz-4z-6g3" kind="presentation" id="inR-mT-Mno"/>
+                                <action selector="onTapCreate:" destination="KNI-vT-fov" id="frR-V8-FyA"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="LyM-nk-3uc"/>
@@ -949,7 +949,7 @@
             <objects>
                 <viewController title="New Trip" id="NEV-Fc-lXq" customClass="NewTripViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yXv-bS-I1F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GyS-hl-zVt">
@@ -1257,7 +1257,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Mz-4z-6g3" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oBx-8K-r2g">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
