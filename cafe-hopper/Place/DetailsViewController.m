@@ -50,7 +50,7 @@
     [super viewDidLoad];
     self.user = [User currentUser];
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = YES;
+    usingRealImages = NO;
     
     [self setupView];
 }
@@ -102,23 +102,6 @@
     self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
     
     [self setupMenus];
-    
-    PFQuery *query = [Collection query];
-    [query whereKey:@"owner" equalTo:self.user];
-    [query whereKey:@"collectionName" equalTo:@"All"];
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray<Collection *> * _Nullable objects, NSError * _Nullable error) {
-        if (objects) {
-            // there should be only one Collection in objects
-            if ([objects[0].places containsObject:self.place.placeID]) {
-                [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
-            } else { // user has not saved this place
-                [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark"]];
-            }
-        } else {
-            NSLog(@"Error fetching user's saved locations: %@", error.localizedDescription);
-        }
-    }];
 }
 
 - (IBAction)onTapTelephone:(id)sender {
@@ -144,6 +127,50 @@
 }
 
 - (void)setupMenus {
+    // see if collections bar button should be filled
+    PFQuery *query = [Collection query];
+    [query whereKey:@"owner" equalTo:self.user];
+    [query whereKey:@"collectionName" equalTo:@"All"];
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray<Collection *> * _Nullable objects, NSError * _Nullable error) {
+        if (objects) {
+            // there should be only one Collection in objects
+            if ([objects[0].places containsObject:self.place.placeID]) {
+                [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
+            } else { // user has not saved this place
+                [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark"]];
+            }
+        } else {
+            NSLog(@"Error fetching user's saved locations: %@", error.localizedDescription);
+        }
+    }];
+    
+    // see if trips bar button should be filled
+    PFQuery *tripQuery = [Trip query];
+    [tripQuery whereKey:@"owner" equalTo:self.user];
+    [tripQuery findObjectsInBackgroundWithBlock:^(NSArray<Trip *> * _Nullable trips, NSError * _Nullable error) {
+        if (trips) {
+            BOOL isSaved = NO;
+            for (Trip *trip in trips) {
+                NSMutableArray *placeIds = [NSMutableArray new]; // list of this stop's places
+                for (NSMutableDictionary *stop in trip.stops) {
+                    [placeIds addObject:stop[@"placeId"]];
+                }
+                if ([placeIds containsObject:self.place.placeID]) {
+                    isSaved = YES;
+                    break;
+                }
+            }
+            if (isSaved) {
+                [self.tripBarButton setImage:[UIImage systemImageNamed:@"location.fill"]];
+            } else {
+                [self.tripBarButton setImage:[UIImage systemImageNamed:@"location"]];
+            }
+        } else {
+            NSLog(@"Error fetching user's trips: %@", error.localizedDescription);
+        }
+    }];
+    
     [self setupSaveMenu];
     [self setupTripMenu]; // check if user has any trips yet?
 }
@@ -152,6 +179,7 @@
     NSMutableArray *menuItems = [NSMutableArray new];
     UIAction *savePlace = [UIAction actionWithTitle:@"Save" image:[UIImage systemImageNamed:@"heart"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
         [self addPlaceToCollection:@"All"];
+//        [savePlace setImage:[UIImage systemImageNamed:@"heart.fill"]];
     }];
     [menuItems addObject:savePlace];
     

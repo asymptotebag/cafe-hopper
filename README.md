@@ -1,4 +1,8 @@
-# Cafe Hopper
+# Croissavant
+
+<p align="center">
+    <img src="https://https://github.com/asymptotebag/cafe-hopper/blob/main/cafe-hopper/Assets.xcassets/icon.imageset/IMG_0035.jpg" height="250" width="250" />
+</p>
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -8,30 +12,31 @@
 
 ## Overview
 ### Description
-Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee shops and similar casual informal drinking and dining options around town.
+Croissavant is a cafe-hopping app that helps you plan routes to coffee shops and similar casual informal drinking and dining options around town.
 
 ### App Evaluation
 - **Category:** Lifestyle, Travel
-- **Mobile:** Portability would be key to making a concept like this work, since it is unlikely that people will tote a laptop from cafe to cafe. Thus, Cafe Hopper would make for a uniquely mobile experience that could not easily be replaced by a website. The app would incorporate maps and location, and possibly camera (if there is a feature to save your own photos to cafes that you've visited). Push notifications would also be relatively natural to incorporate, since the app could remind you of your scheduled plans.
-- **Story:** Cafe Hopper allows users to fully experience the vibrant casual dining culture of anywhere, from an unfamiliar city to their own hometown.
+- **Mobile:** Portability would be key to making a concept like this work, since it is unlikely that people will tote a laptop from cafe to cafe. Thus, Croissavant would make for a uniquely mobile experience that could not easily be replaced by a website. The app would incorporate maps and location, and possibly camera (if there is a feature to save your own photos to cafes that you've visited). Push notifications would also be relatively natural to incorporate, since the app could remind you of your scheduled plans.
+- **Story:** Croissavant allows users to fully experience the vibrant casual dining culture of anywhere, from an unfamiliar city to their own hometown.
 - **Market:** The market for this app is broad, appealing mostly to relatively young city-dwellers or those living near downtown / urban regions with clusters of casual dining options.
 - **Habit:** The average user would do a fair amount of both consuming and creating on the app: they consume when they check out cafe listings and information, and create when they add cafes to personal lists or plan and save cafe-hopping routes.
-- **Scope:** Incorporating the Google Maps SDK would be the primary backend task. I believe that the core features of the app are of reasonable technical difficulty.  It would be great to be able to "tag" cafes with descriptors such as "historic," "newly-opened," "vegan-friendly," etc. to allow users to discover cafes better within the app. I anticipate that this tagging feature might not be straightforward, and may involve searching the reviews for key words or performing sentiment analysis. However, I believe that even with just the core features, Cafe Hopper will still be an interesting app both to build and use.
+- **Scope:** Incorporating the Google Maps SDK would be the primary backend task. I believe that the core features of the app are of reasonable technical difficulty.  It would be great to be able to "tag" cafes with descriptors such as "historic," "newly-opened," "vegan-friendly," etc. to allow users to discover cafes better within the app. I anticipate that this tagging feature might not be straightforward, and may involve searching the reviews for key words or performing sentiment analysis. However, I believe that even with just the core features, it will still be an interesting app both to build and use.
 
 ## Product Spec
 
 ### 1. User Stories
 
 **Required Must-have Stories**
+- [x] User sees an app logo on their home screen and a styled launch screen
 - [x] User can create a new account
 - [x] User can login and logout
 - [x] User can search for eateries
 - [x] User can view the location of eateries on a map powered by Google Maps SDK
 - [x] User can save (and unsave) eateries to custom collections (e.g. Favorites, Want to Visit)
 - [x] User can create (and delete) collections of eateries
-- [ ] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
+- [x] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
 - [x] User can see photos of an eatery
-- [ ] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
+- [x] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
 - [x] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
 
 **Optional Nice-to-have Stories**
@@ -44,7 +49,8 @@ Cafe Hopper (app name undecided) is an app that helps you plan routes to coffee 
 - [ ] User can read reviews, or review keywords, of an eatery
 - [x] User can double-tap as a shortcut to save an eatery
 - [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
-- [ ] User can see the walking/biking/driving distance between eateries using Google Maps API, specifying how long they'd like to spend at each location
+- [x] User can see the driving duration between eateries using Google Distance Matrix API
+- [ ] User can specify how long they'd like to spend at each location on a trip
 - [ ] User can adjust account settings (e.g. email, username, profile pic, notifications)
 - [ ] User can choose to be emailed/texted an itinerary for their trip
 - [ ] User receives push notifications for cafe recommendations or reminders about a route they've planned
