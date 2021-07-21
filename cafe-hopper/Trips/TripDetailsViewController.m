@@ -64,7 +64,6 @@
                 if (stop[@"timeToNext"]) { // nil if key doesn't exist
                     [newStop setObject:stop[@"timeToNext"] forKey:@"timeToNext"];
                 }
-                
                 [self.stops addObject:newStop];
                 [self.tableView reloadData];
             } else {
@@ -94,6 +93,8 @@
 }
 
 - (NSString *)URLEncodeString:(NSString *)string {
+    string = [string stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
+    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@""];
     return [string stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 }
 
