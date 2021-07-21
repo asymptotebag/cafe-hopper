@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) NSMutableArray<NSMutableDictionary *> *stops;
-// stops: [{place: GMSPlace, minSpent:20, }]
+// stops: [{place: GMSPlace, minSpent:20, timeToNext:14}]
 
 @end
 

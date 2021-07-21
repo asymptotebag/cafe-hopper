@@ -83,8 +83,8 @@
 		7C175724269C74A800393B53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C175733269C797700393B53 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		7C175734269C797700393B53 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		7C175736269C803C00393B53 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = "cafe-hopper/SignupViewController.h"; sourceTree = SOURCE_ROOT; };
-		7C175737269C803C00393B53 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = "cafe-hopper/SignupViewController.m"; sourceTree = SOURCE_ROOT; };
+		7C175736269C803C00393B53 /* SignupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SignupViewController.h; path = "cafe-hopper/User/SignupViewController.h"; sourceTree = SOURCE_ROOT; };
+		7C175737269C803C00393B53 /* SignupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = SignupViewController.m; path = "cafe-hopper/User/SignupViewController.m"; sourceTree = SOURCE_ROOT; };
 		7C175739269C8A9200393B53 /* AccountViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		7C17573A269C8A9200393B53 /* AccountViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
 		7C17573C269C8C8E00393B53 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -199,9 +199,10 @@
 		7C1756FA269C74A700393B53 /* cafe-hopper */ = {
 			isa = PBXGroup;
 			children = (
-				7C175732269C796700393B53 /* Models */,
-				7C175731269C796100393B53 /* Views */,
-				7C175730269C795600393B53 /* ViewControllers */,
+				7CDB52E826A8676800D02758 /* User */,
+				7CDB52E926A867CE00D02758 /* Place */,
+				7CDB52E626A8661D00D02758 /* Collections */,
+				7CDB52E726A8662700D02758 /* Trips */,
 				7C1756FB269C74A700393B53 /* AppDelegate.h */,
 				7C1756FC269C74A700393B53 /* AppDelegate.m */,
 				7C1756FE269C74A700393B53 /* SceneDelegate.h */,
@@ -234,27 +235,34 @@
 			path = "cafe-hopperUITests";
 			sourceTree = "<group>";
 		};
-		7C175730269C795600393B53 /* ViewControllers */ = {
+		7CDB52E626A8661D00D02758 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				7C175736269C803C00393B53 /* SignupViewController.h */,
-				7C175737269C803C00393B53 /* SignupViewController.m */,
-				7C175733269C797700393B53 /* LoginViewController.h */,
-				7C175734269C797700393B53 /* LoginViewController.m */,
-				7C175739269C8A9200393B53 /* AccountViewController.h */,
-				7C17573A269C8A9200393B53 /* AccountViewController.m */,
-				7C17573C269C8C8E00393B53 /* MapViewController.h */,
-				7C17573D269C8C8E00393B53 /* MapViewController.m */,
-				7C175744269E03D800393B53 /* SearchViewController.h */,
-				7C175745269E03D800393B53 /* SearchViewController.m */,
-				7CDB52B3269E57A800D02758 /* MainTabBarController.h */,
-				7CDB52B4269E57A800D02758 /* MainTabBarController.m */,
-				7CDB52B6269F299900D02758 /* DetailsViewController.h */,
-				7CDB52B7269F299900D02758 /* DetailsViewController.m */,
+				7CDB52C2269FA49100D02758 /* Collection.h */,
+				7CDB52C3269FA49100D02758 /* Collection.m */,
+				7CDB52BC269F88A600D02758 /* CollectionCell.h */,
+				7CDB52BD269F88A600D02758 /* CollectionCell.m */,
+				7CDB52C526A0857B00D02758 /* PlaceCell.h */,
+				7CDB52C626A0857B00D02758 /* PlaceCell.m */,
 				7CDB52B9269F759400D02758 /* PlacesViewController.h */,
 				7CDB52BA269F759400D02758 /* PlacesViewController.m */,
 				7CDB52C826A0954600D02758 /* CollectionViewController.h */,
 				7CDB52C926A0954600D02758 /* CollectionViewController.m */,
+			);
+			path = Collections;
+			sourceTree = "<group>";
+		};
+		7CDB52E726A8662700D02758 /* Trips */ = {
+			isa = PBXGroup;
+			children = (
+				7CDB52D126A220B300D02758 /* Trip.h */,
+				7CDB52D226A220B300D02758 /* Trip.m */,
+				7CDB52D726A5DF6C00D02758 /* TripCell.h */,
+				7CDB52D826A5DF6C00D02758 /* TripCell.m */,
+				7CDB52DD26A5FF4700D02758 /* NewStopCell.h */,
+				7CDB52DE26A5FF4700D02758 /* NewStopCell.m */,
+				7CDB52E326A7226A00D02758 /* StopCell.h */,
+				7CDB52E426A7226A00D02758 /* StopCell.m */,
 				7CDB52D426A5D75A00D02758 /* TripsListViewController.h */,
 				7CDB52D526A5D75A00D02758 /* TripsListViewController.m */,
 				7CDB52DA26A5FAC600D02758 /* NewTripViewController.h */,
@@ -262,41 +270,41 @@
 				7CDB52E026A65C6400D02758 /* TripDetailsViewController.h */,
 				7CDB52E126A65C6400D02758 /* TripDetailsViewController.m */,
 			);
-			path = ViewControllers;
+			path = Trips;
 			sourceTree = "<group>";
 		};
-		7C175731269C796100393B53 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				7C175747269E136E00393B53 /* SearchResultCell.h */,
-				7C175748269E136E00393B53 /* SearchResultCell.m */,
-				7CDB52BC269F88A600D02758 /* CollectionCell.h */,
-				7CDB52BD269F88A600D02758 /* CollectionCell.m */,
-				7CDB52C526A0857B00D02758 /* PlaceCell.h */,
-				7CDB52C626A0857B00D02758 /* PlaceCell.m */,
-				7CDB52CE26A0E5B300D02758 /* CarouselCell.h */,
-				7CDB52CF26A0E5B300D02758 /* CarouselCell.m */,
-				7CDB52D726A5DF6C00D02758 /* TripCell.h */,
-				7CDB52D826A5DF6C00D02758 /* TripCell.m */,
-				7CDB52DD26A5FF4700D02758 /* NewStopCell.h */,
-				7CDB52DE26A5FF4700D02758 /* NewStopCell.m */,
-				7CDB52E326A7226A00D02758 /* StopCell.h */,
-				7CDB52E426A7226A00D02758 /* StopCell.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		7C175732269C796700393B53 /* Models */ = {
+		7CDB52E826A8676800D02758 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				7C17573F269C903600393B53 /* User.h */,
 				7C175740269C903600393B53 /* User.m */,
-				7CDB52C2269FA49100D02758 /* Collection.h */,
-				7CDB52C3269FA49100D02758 /* Collection.m */,
-				7CDB52D126A220B300D02758 /* Trip.h */,
-				7CDB52D226A220B300D02758 /* Trip.m */,
+				7C175736269C803C00393B53 /* SignupViewController.h */,
+				7C175737269C803C00393B53 /* SignupViewController.m */,
+				7C175733269C797700393B53 /* LoginViewController.h */,
+				7C175734269C797700393B53 /* LoginViewController.m */,
+				7C175739269C8A9200393B53 /* AccountViewController.h */,
+				7C17573A269C8A9200393B53 /* AccountViewController.m */,
 			);
-			path = Models;
+			path = User;
+			sourceTree = "<group>";
+		};
+		7CDB52E926A867CE00D02758 /* Place */ = {
+			isa = PBXGroup;
+			children = (
+				7C17573C269C8C8E00393B53 /* MapViewController.h */,
+				7C17573D269C8C8E00393B53 /* MapViewController.m */,
+				7C175744269E03D800393B53 /* SearchViewController.h */,
+				7C175745269E03D800393B53 /* SearchViewController.m */,
+				7C175747269E136E00393B53 /* SearchResultCell.h */,
+				7C175748269E136E00393B53 /* SearchResultCell.m */,
+				7CDB52B3269E57A800D02758 /* MainTabBarController.h */,
+				7CDB52B4269E57A800D02758 /* MainTabBarController.m */,
+				7CDB52B6269F299900D02758 /* DetailsViewController.h */,
+				7CDB52B7269F299900D02758 /* DetailsViewController.m */,
+				7CDB52CE26A0E5B300D02758 /* CarouselCell.h */,
+				7CDB52CF26A0E5B300D02758 /* CarouselCell.m */,
+			);
+			path = Place;
 			sourceTree = "<group>";
 		};
 		CDC742317639D40D7564AFEB /* Frameworks */ = {
