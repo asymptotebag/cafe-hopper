@@ -126,7 +126,7 @@
 
 - (NSString *)URLEncodeString:(NSString *)string {
     string = [string stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
-    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@""];
+    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@"Percent"];
     return [string stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 }
 

@@ -6,12 +6,16 @@
 //
 
 #import "TripCell.h"
+@import GooglePlaces;
 
-@implementation TripCell
+@implementation TripCell {
+    GMSPlacesClient *_placesClient;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    _placesClient = [GMSPlacesClient sharedClient];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -26,14 +30,45 @@
     [self.layer removeFromSuperlayer];
 }
 
+- (NSString *)timestampFromMinutes:(NSInteger)minutes {
+    NSInteger hours = minutes/60;
+    if (hours == 0) {
+        return [[NSString stringWithFormat:@"%li", minutes] stringByAppendingString:@" min"];
+    }
+    NSInteger minutesLeft = minutes - hours * 60;
+    return [[[NSString stringWithFormat:@"%li", hours] stringByAppendingString:@"h "] stringByAppendingString:[[NSString stringWithFormat:@"%li", minutesLeft] stringByAppendingString:@"m"]];
+}
+
 - (void)setTrip:(Trip *)trip { // custom setter
     _trip = trip;
     self.tripNameLabel.text = trip.tripName;
     
     NSString *numStops = [NSString stringWithFormat:@"%lu", trip.stops.count];
-    self.stopsLabel.text = [numStops stringByAppendingString:@" stops"];
+    // handle 1 stop separately
+    if (trip.stops.count == 1) {
+        self.stopsLabel.text = [numStops stringByAppendingString:@" stop"];
+    } else {
+        self.stopsLabel.text = [numStops stringByAppendingString:@" stops"];
+    }
+    self.durationLabel.text = [self timestampFromMinutes:[trip.duration integerValue]];
     
-    [self drawDottedLine];
+    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
+    [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+        if (place) {
+            self.originNameLabel.text = place.name;
+        } else {
+            NSLog(@"Error getting origin name: %@", error.localizedDescription);
+        }
+    }];
+    [_placesClient fetchPlaceFromPlaceID:trip.stops[trip.stops.count-1][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+        if (place) {
+            self.destinationNameLabel.text = place.name;
+        } else {
+            NSLog(@"Error getting destination name: %@", error.localizedDescription);
+        }
+    }];
+    
+//    [self drawDottedLine];
     
     self.originImageView.layer.cornerRadius = self.originImageView.frame.size.height/2;
     self.originImageView.clipsToBounds = true;
