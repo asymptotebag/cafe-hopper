@@ -6,11 +6,13 @@
 //
 
 #import "StopCell.h"
+#import "Trip.h"
 
 @implementation StopCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.timeSpentField.delegate = self;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -22,6 +24,8 @@
     
     self.placeNameLabel.text = place.name;
     self.addressLabel.text = place.formattedAddress;
+    [self.timeSpentButton setBackgroundImage:[UIImage systemImageNamed:@"clock"] forState:UIControlStateNormal];
+    [self.timeSpentButton setTintColor:UIColor.systemGrayColor];
     self.timeSpentField.text = [NSString stringWithFormat:@"%ld", [self.minSpent integerValue]];
     self.stopIndexLabel.text = [NSString stringWithFormat:@"%li", self.index+1];
 //    self.stopIndexLabel.textColor = UIColor.labelColor;
@@ -43,6 +47,31 @@
         self.dot4.clipsToBounds = true;
     } else {
         self.betweenStopsView.hidden = YES;
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    NSLog(@"Text field began editing");
+    [self.timeSpentButton setBackgroundImage:[UIImage systemImageNamed:@"checkmark.circle"] forState:UIControlStateNormal];
+    [self.timeSpentButton setTintColor:UIColor.systemGreenColor];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    NSLog(@"Text field ended editing");
+    [Trip changeDurationOfStopAtIndex:self.index toDuration:[textField.text integerValue] forTrip:self.trip withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"Successfully changed duration");
+        } else {
+            NSLog(@"Error changing duration: %@", error.localizedDescription);
+        }
+    }];
+    [self.timeSpentButton setBackgroundImage:[UIImage systemImageNamed:@"clock"] forState:UIControlStateNormal];
+    [self.timeSpentButton setTintColor:UIColor.systemGrayColor];
+}
+
+- (IBAction)onTapClock:(id)sender {
+    if (self.timeSpentField.isEditing) { // only end editing if it's editing now
+        [self.contentView endEditing:true];
     }
 }
 

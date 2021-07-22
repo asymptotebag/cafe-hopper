@@ -93,6 +93,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     StopCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StopCell" forIndexPath:indexPath];
     NSMutableDictionary *stop = self.stops[indexPath.row];
+    cell.trip = self.trip;
     cell.index = indexPath.row;
     cell.isLastStop = indexPath.row == self.trip.stops.count-1;
     cell.minSpent = (NSNumber *)stop[@"minSpent"];

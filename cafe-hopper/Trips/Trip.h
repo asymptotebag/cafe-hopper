@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
 
-// TODO: method to change duration of stay at each cafe
++ (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration forTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
 
 @end
 

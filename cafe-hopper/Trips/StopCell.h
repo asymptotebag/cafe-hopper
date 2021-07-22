@@ -6,11 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Trip.h"
 @import GooglePlaces;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface StopCell : UITableViewCell
+@interface StopCell : UITableViewCell <UITextFieldDelegate>
+@property (strong, nonatomic) Trip *trip;
 @property (strong, nonatomic) GMSPlace *place;
 @property (strong, nonatomic) NSNumber *minSpent;
 @property (nonatomic) NSInteger index;
@@ -22,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UITextField *timeSpentField;
+@property (weak, nonatomic) IBOutlet UIButton *timeSpentButton;
 
 @property (weak, nonatomic) IBOutlet UIView *betweenStopsView; // hide this for last stop
 @property (weak, nonatomic) IBOutlet UIView *dot1;

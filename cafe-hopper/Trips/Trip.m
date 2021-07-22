@@ -54,7 +54,13 @@
     }];
 }
 
-// TODO: method to change duration of stay at each cafe
++ (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration forTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
+    NSMutableDictionary *stopToChange = trip.stops[index];
+    trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToChange[@"minSpent"] integerValue] + newDuration];
+    stopToChange[@"minSpent"] = [NSNumber numberWithLong:newDuration];
+    trip[@"stops"] = trip.stops;
+    [trip saveInBackgroundWithBlock:completion];
+}
 
 + (void)addStopWithPlaceId:(NSString *)placeId toTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion {
     // duplicates are okay here
@@ -65,7 +71,7 @@
     NSLog(@"newStop = %@", newStop);
     [trip.stops addObject:newStop];
     
-    trip.duration = [NSNumber numberWithUnsignedLong:[trip.duration intValue]+20];
+    trip.duration = [NSNumber numberWithUnsignedLong:[trip.duration integerValue]+20];
     
     if (trip.stops.count < 2) {
         trip[@"stops"] = trip.stops;
