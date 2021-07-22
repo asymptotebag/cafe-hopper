@@ -23,7 +23,6 @@
     collection.collectionName = name;
     collection.owner = [User currentUser];
     collection.places = [NSMutableArray new];
-//    [collection saveInBackgroundWithBlock:completion];
     [collection saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Created new collection successfully.");

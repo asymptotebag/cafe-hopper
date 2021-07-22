@@ -30,10 +30,9 @@
         [priceString appendString:@"$"];
     }
     self.priceLevelLabel.text = priceString;
-    // TODO: set distance label
+
     [self showStarRating];
     
-//    [self.pictureView setImage:[UIImage imageNamed:@"5"]];
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
     self.pictureView.clipsToBounds = true;
     

@@ -53,7 +53,7 @@ Croissavant is a cafe-hopping app that helps you plan routes to coffee shops and
 - [x] User can double-tap as a shortcut to save an eatery
 - [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
 - [x] User can see the driving duration between eateries using Google Distance Matrix API
-- [ ] User can specify how long they'd like to spend at each location on a trip
+- [x] User can specify and change how long they'd like to spend at each location on a trip
 - [ ] User can adjust account settings (e.g. email, username, profile pic, notifications)
 - [ ] User can choose to be emailed/texted an itinerary for their trip
 - [ ] User receives push notifications for cafe recommendations or reminders about a route they've planned

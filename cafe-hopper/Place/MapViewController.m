@@ -14,7 +14,6 @@
 
 @interface MapViewController () <UISearchBarDelegate, GMSMapViewDelegate>
 // public: @property (strong, nonatomic) NSString *placeId;
-//@property (strong, nonatomic) GMSAutocompleteResultsViewController *resultsViewController;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *searchResults;
@@ -150,18 +149,6 @@
         detailsVC.place = self.currentPlace;
         [self.navigationController pushViewController:detailsVC animated:YES];
     }
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSLog(@"segue through here");
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-//    if ([[segue identifier] isEqualToString:@"detailsSegue"]) {
-//        if (self.)
-//    }
 }
 
 @end
