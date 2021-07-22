@@ -22,6 +22,9 @@ Croissavant is a cafe-hopping app that helps you plan routes to coffee shops and
 - **Habit:** The average user would do a fair amount of both consuming and creating on the app: they consume when they check out cafe listings and information, and create when they add cafes to personal lists or plan and save cafe-hopping routes.
 - **Scope:** Incorporating the Google Maps SDK would be the primary backend task. I believe that the core features of the app are of reasonable technical difficulty.  It would be great to be able to "tag" cafes with descriptors such as "historic," "newly-opened," "vegan-friendly," etc. to allow users to discover cafes better within the app. I anticipate that this tagging feature might not be straightforward, and may involve searching the reviews for key words or performing sentiment analysis. However, I believe that even with just the core features, it will still be an interesting app both to build and use.
 
+### Challenges Encountered
+[Noteworthy challenges, complexities, and issues](https://docs.google.com/document/d/195XGly5gwrbprS8YwWKYAs6ATSI2Fg8HU30Azu0Fo7M/edit?usp=sharing)
+
 ## Product Spec
 
 ### 1. User Stories
@@ -125,18 +128,7 @@ From left to right:
 | name        | NSString |
 | pfp         | PFFileObject |
 
-**Cafe**
-(properties TBD, based on Google Places SDK for iOS [GMSPlace](https://developers.google.com/maps/documentation/places/ios-sdk/reference/interface_g_m_s_place?authuser=0#a126c0feb110b9687c45dfb05ceb2731b) object)
-| Property       | Type     | Description  |
-| -------------- | -------- | ------------ |
-| name           | NSString | name of cafe |
-| placeId        | NSString | Google Maps SDK place ID |
-| coordinates    | NSArray  | latitude-longitude location of cafe |
-| address        | NSString | human-readable address of cafe |
-| rating         | float    | average user rating from 1.0 to 5.0, 0.0 if no ratings |
-| priceLevel     | NSInteger | price level, from 0 (free) to 4 (expensive) |
-
-**Place Collection**
+**Collection (of Places)**
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
 | name        | NSString | user-defined name of collection |
