@@ -105,6 +105,25 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // delete item from trip locally and update Parse
+        NSMutableDictionary *stop = self.stops[indexPath.row];
+        [Trip removeStopAtIndex:[stop[@"index"] integerValue] fromTrip:self.trip withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (succeeded) {
+                NSLog(@"Deleted stop successfully");
+                [self fetchStops];
+            } else {
+                NSLog(@"Error deleting stop: %@", error.localizedDescription);
+            }
+        }];
+    }
+}
+
 - (NSString *)URLEncodeString:(NSString *)string {
     string = [string stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
     string = [string stringByReplacingOccurrencesOfString:@"%" withString:@""];

@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSMutableDictionary *> * _Nullable)stops completion:(PFBooleanResultBlock)completion;
 
-+ (void)deleteTripWithName:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion;
-
 + (void)deleteTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
 
 + (void)addStopWithPlaceId:(NSString *)placeId toTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion;
@@ -28,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 //+ (void)removeStopWithPlaceId:(NSString *)placeId fromTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion;
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
+
+// TODO: method to change duration of stay at each cafe
 
 @end
 

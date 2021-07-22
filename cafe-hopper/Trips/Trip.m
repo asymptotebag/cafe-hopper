@@ -41,10 +41,6 @@
     }];
 }
 
-+ (void)deleteTripWithName:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion {
-    
-}
-
 + (void)deleteTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
     [Trip deleteAllInBackground:@[trip] block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -57,6 +53,8 @@
         }
     }];
 }
+
+// TODO: method to change duration of stay at each cafe
 
 + (void)addStopWithPlaceId:(NSString *)placeId toTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion {
     // duplicates are okay here
@@ -75,7 +73,7 @@
         return;
     }
     
-    // TODO: get walking distance between stops
+    // get driving distance between stops
     // example: https://maps.googleapis.com/maps/api/distancematrix/json?origins=Seattle&destinations=San+Francisco&key=YOUR_API_KEY
     NSString *path = [[NSBundle mainBundle] pathForResource:@"Keys" ofType:@"plist"];
     NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
@@ -95,7 +93,6 @@
     
     // make actual network request:
     NSURL *url = [NSURL URLWithString:URLString];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error == nil) {
@@ -118,12 +115,84 @@
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
     // TODO: fix deletion (this is going to be hard lol)
+    
+    // if first element, don't need to change anything, new duration = prev duration - minSpent[index] - timeToNext[index]
+    // if last element, delete timeToNext of previous, new duration = prev duration - minSpent[index] - timeToNext[index-1]
+    // otherwise:
+    // recalculate timeToNext from index-1 to index+1, set to prev stop's timeToNext
+    // duration: prev duration - minSpent[index] - timetoNext[index] - timetoNext[index-1] + new timeToNext[index-1 to index+1]
+    
     NSMutableDictionary *stopToRemove = trip.stops[index];
-    [trip.stops removeObject:stopToRemove];
-    trip[@"stops"] = trip.stops;
-    [trip saveInBackgroundWithBlock:completion];
-}
+    
+    if (index == 0) { // first stop
+        trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue]];
+        if (stopToRemove[@"timeToNext"]) {
+            trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"timeToNext"] integerValue]];
+        }
+        // decrement index of all future stops
+        for (int i=1; i<trip.stops.count; i++) {
+            NSMutableDictionary *currentStop = trip.stops[i];
+            currentStop[@"index"] = [NSNumber numberWithLong:[currentStop[@"index"] integerValue]-1];
+        }
+        [trip.stops removeObject:stopToRemove];
+        trip[@"stops"] = trip.stops;
+        [trip saveInBackgroundWithBlock:completion];
+        return;
+    } else if (index == trip.stops.count - 1) { // last stop, trip necessarily has >1 stop
+        NSMutableDictionary *prevStop = trip.stops[index - 1];
+        trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue] - [prevStop[@"timeToNext"] integerValue]];
+        [prevStop removeObjectForKey:@"timeToNext"];
+        
+        [trip.stops removeObject:stopToRemove];
+        trip[@"stops"] = trip.stops;
+        [trip saveInBackgroundWithBlock:completion];
+        return;
+    } else {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"Keys" ofType:@"plist"];
+        NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+        NSString *googleAPIKey = [dict objectForKey:@"googleMapsAPIKey"];
+        
+        NSMutableString *URLString = @"https://maps.googleapis.com/maps/api/distancematrix/json?".mutableCopy;
+        
+        NSMutableDictionary *prevStop = trip.stops[index - 1];
+        NSMutableDictionary *nextStop = trip.stops[index + 1];
+        
+        NSString *originsParameter = [@"origins=place_id:" stringByAppendingString:prevStop[@"placeId"]];
+        NSString *destinationsParameter = [@"&destinations=place_id:" stringByAppendingString:nextStop[@"placeId"]];
+        NSString *keyParameter = [@"&key=" stringByAppendingString:googleAPIKey];
+        [URLString appendString:originsParameter];
+        [URLString appendString:destinationsParameter];
+        [URLString appendString:keyParameter];
+        NSLog(@"Full API request URL: %@", URLString);
+        
+        NSURL *url = [NSURL URLWithString:URLString];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error == nil) {
+                NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+                NSArray *distanceMatrix = jsonDict[@"rows"];
+                NSArray *elements = distanceMatrix[0][@"elements"];
+                NSInteger durationSecs = [elements[0][@"duration"][@"value"] integerValue]; // value is in seconds, so convert to minutes
+                NSInteger duration = durationSecs/60; // this truncates, doesn't round
+                NSLog(@"new duration = %li", duration);
+                
+                trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue] - [stopToRemove[@"timeToNext"] integerValue] - [prevStop[@"timeToNext"] integerValue] + duration];
 
-// TODO: method to change duration of stay at each cafe
+                prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
+                // decrement index of all future stops
+                for (int i=index+1; i<trip.stops.count; i++) {
+                    NSMutableDictionary *currentStop = trip.stops[i];
+                    currentStop[@"index"] = [NSNumber numberWithLong:[currentStop[@"index"] integerValue]-1];
+                }
+                [trip.stops removeObject:stopToRemove];
+            } else {
+                NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
+            }
+            trip[@"stops"] = trip.stops;
+            [trip saveInBackgroundWithBlock:completion];
+        }];
+        [task resume];
+    }
+}
 
 @end
