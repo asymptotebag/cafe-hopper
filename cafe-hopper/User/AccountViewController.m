@@ -11,12 +11,22 @@
 #import "User.h"
 #import <Parse/Parse.h>
 
-@interface AccountViewController ()
+@interface AccountViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) User *user;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *pfpView;
+@property (weak, nonatomic) IBOutlet UIButton *changePfpButton;
+@property (strong, nonatomic) UIImagePickerController *imagePicker;
+@property (strong, nonatomic) UIMenu *sourcePicker;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *minPerStopField;
+
+@property (weak, nonatomic) IBOutlet UISwitch *notifSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *signoutButton;
 
 @end
@@ -25,17 +35,163 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self configButton];
     [self configView];
+    [self setupSourcePicker];
 }
 
 - (void)configView {
     self.user = [User currentUser];
     self.nameLabel.text = self.user.name;
-    self.usernameLabel.text = self.user.username;
+    self.usernameLabel.text = [@"@" stringByAppendingString:self.user.username];
+
+    self.pfpView.layer.cornerRadius = self.pfpView.frame.size.height/2;
+    if (self.user.pfp) {
+        PFFileObject *pfp = self.user.pfp;
+        [pfp getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+            if (data) {
+                UIImage *pfpImg = [UIImage imageWithData:data];
+                [self.pfpView setImage:pfpImg];
+            } else {
+                NSLog(@"Error getting pfp: %@", error.localizedDescription);
+                [self.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
+            }
+        }];
+    } else {
+        [self.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
+    }
+    
+    self.changePfpButton.hidden = YES;
+    self.changePfpButton.showsMenuAsPrimaryAction = YES;
+    
+    // lock text fields
+    [self.nameField setUserInteractionEnabled:NO];
+    [self.usernameField setUserInteractionEnabled:NO];
+    [self.emailField setUserInteractionEnabled:NO];
+    [self.minPerStopField setUserInteractionEnabled:NO];
+    
+    self.nameField.text = self.user.name;
+    self.usernameField.text = self.user.username;
     self.emailField.text = self.user.email;
+    self.minPerStopField.text = [NSString stringWithFormat:@"%@", self.user.timePerStop];
+
+    self.nameField.textColor = UIColor.lightGrayColor;
+    self.usernameField.textColor = UIColor.lightGrayColor;
+    self.emailField.textColor = UIColor.lightGrayColor;
+    self.minPerStopField.textColor = UIColor.lightGrayColor;
+
+//    [self.notifSwitch setOn:self.user.notifsOn];
+    [self.notifSwitch setOn:NO]; // default no for now
     
     self.signoutButton.layer.cornerRadius = 5;
     self.signoutButton.clipsToBounds = true;
+}
+
+- (void)configButton {
+    self.editButton.layer.cornerRadius = 5;
+    self.editButton.clipsToBounds = true;
+    self.editButton.layer.backgroundColor = UIColor.clearColor.CGColor;
+    self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
+    self.editButton.layer.borderWidth = 0.5f;
+    
+    // set up regular view
+    [self.editButton setTitle:@"Edit Profile" forState:UIControlStateNormal];
+    [self.editButton setTitleColor:UIColor.darkGrayColor forState:UIControlStateNormal];
+    
+    // set up view while editing
+    [self.editButton setTitle:@"Save Changes" forState:UIControlStateSelected];
+    [self.editButton setTitleColor:UIColor.systemGreenColor forState:UIControlStateSelected];
+}
+
+- (IBAction)onTapEditProfile:(id)sender {
+    if (self.editButton.isSelected) { // done with editing, save info
+        [self.editButton setSelected:NO];
+        self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
+        self.changePfpButton.hidden = YES;
+        
+        // lock text fields
+        [self.nameField setUserInteractionEnabled:NO];
+        [self.usernameField setUserInteractionEnabled:NO];
+        [self.emailField setUserInteractionEnabled:NO];
+        [self.minPerStopField setUserInteractionEnabled:NO];
+        self.nameField.textColor = UIColor.lightGrayColor;
+        self.usernameField.textColor = UIColor.lightGrayColor;
+        self.emailField.textColor = UIColor.lightGrayColor;
+        self.minPerStopField.textColor = UIColor.lightGrayColor;
+        
+        // TODO: check for duplicate username (& valid email?)
+//        [User changeInfoForUser:self.user withName:self.nameField.text username:self.usernameField.text email:self.emailField.text completion:^(BOOL succeeded, NSError * _Nullable error) {
+//            if (succeeded) {
+//                NSLog(@"Successfully saved user info.");
+//            } else {
+//                NSLog(@"Could not save info: %@", error.localizedDescription);
+//            }
+//        }];
+    } else { // begin editing
+        [self.editButton setSelected:YES];
+        self.editButton.layer.borderColor = UIColor.systemGreenColor.CGColor;
+        self.changePfpButton.hidden = NO;
+        
+        // unlock text fields
+        [self.nameField setUserInteractionEnabled:YES];
+        [self.usernameField setUserInteractionEnabled:YES];
+        [self.emailField setUserInteractionEnabled:YES];
+        [self.minPerStopField setUserInteractionEnabled:YES];
+        self.nameField.textColor = UIColor.labelColor;
+        self.usernameField.textColor = UIColor.labelColor;
+        self.emailField.textColor = UIColor.labelColor;
+        self.minPerStopField.textColor = UIColor.labelColor;
+    }
+}
+
+- (void)setupSourcePicker {
+    self.imagePicker = [UIImagePickerController new];
+    self.imagePicker.delegate = self;
+    self.imagePicker.allowsEditing = true;
+    
+    UIAction *pickCamera = [UIAction actionWithTitle:@"Take picture" image:[UIImage systemImageNamed:@"camera"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }];
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        NSLog(@"Camera unavailable; option disabled");
+        [pickCamera setAttributes:UIMenuElementAttributesDisabled];
+    }
+    UIAction *pickLibrary = [UIAction actionWithTitle:@"Select picture" image:[UIImage systemImageNamed:@"photo.on.rectangle"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        [self presentViewController:self.imagePicker animated:YES completion:nil];
+    }];
+    UIAction *deletePhoto = [UIAction actionWithTitle:@"Remove picture" image:[UIImage systemImageNamed:@"trash"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
+        [self.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
+    }];
+    [deletePhoto setAttributes:UIMenuElementAttributesDestructive];
+    
+    self.sourcePicker = [UIMenu menuWithTitle:@"Choose a source:" children:@[pickCamera, pickLibrary, deletePhoto]];
+    [self.changePfpButton setMenu:self.sourcePicker];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    CGSize size = CGSizeMake(300, 300);
+    UIImage *pfp = [self resizeImage:editedImage withSize:size];
+    [self.pfpView setImage:pfp];
+    [User changePfpForUser:self.user withPfp:pfp completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (IBAction)onLogout:(id)sender {
@@ -63,5 +219,4 @@
     [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:^{}];
 }
-
 @end

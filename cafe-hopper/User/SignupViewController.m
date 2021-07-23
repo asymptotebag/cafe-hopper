@@ -55,6 +55,9 @@
         newUser.email = self.emailField.text;
         newUser.username = self.usernameField.text;
         newUser.password = self.passwordField.text;
+        newUser.pfp = nil;
+        newUser.timePerStop = @20;
+        newUser.notifsOn = [NSNumber numberWithBool:NO];
         
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {

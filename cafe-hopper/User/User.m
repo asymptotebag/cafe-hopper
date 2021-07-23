@@ -13,6 +13,8 @@
 @dynamic pfp;
 @dynamic collectionNames;
 @dynamic tripNames;
+@dynamic timePerStop;
+@dynamic notifsOn;
 
 + (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
     [user.collectionNames addObject:collectionName];
@@ -38,13 +40,16 @@
     [user saveInBackgroundWithBlock:completion];
 }
 
-+ (void)changeNameForUser:(User *)user withName:(NSString *)name completion:(PFBooleanResultBlock)completion {
++ (void)changeInfoForUser:(User *)user withName:(NSString *)name username:(NSString *)username email:(NSString *)email completion:(PFBooleanResultBlock)completion {
     user.name = name;
+    user.username = username;
+    user.email = email;
     [user saveInBackgroundWithBlock:completion];
 }
 
 + (void)changePfpForUser:(User *)user withPfp:(UIImage *)pfp completion:(PFBooleanResultBlock)completion {
-    // TODO: change pfp for user
+    user.pfp = [self getPFFileFromImage:pfp];
+    [user saveInBackgroundWithBlock:completion];
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
