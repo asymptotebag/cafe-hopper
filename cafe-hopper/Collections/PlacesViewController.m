@@ -133,8 +133,14 @@
     [self.collectionView reloadData];
 }
 
+- (IBAction)onLongPress:(id)sender {
+    self.inEditingMode = YES;
+    [self.editBarButton setImage:[UIImage systemImageNamed:@"xmark.square"]];
+    [self.collectionView reloadData];
+}
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    CollectionCell *selected = [self.collectionView cellForItemAtIndexPath:indexPath];
+    CollectionCell *selected = (CollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     Collection *selectedCollection = selected.collection;
     if (self.inEditingMode) {
         NSLog(@"selected cell is in editing mode");
