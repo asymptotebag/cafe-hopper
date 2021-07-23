@@ -70,9 +70,6 @@
     [_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(250,250) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
         [cell.pictureView setImage:photo];
     }];
-//    [_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-//        [cell.pictureView setImage:photo];
-//    }];
     cell.place = place;
     return cell;
 }

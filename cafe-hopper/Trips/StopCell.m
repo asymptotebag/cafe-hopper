@@ -28,8 +28,10 @@
     [self.timeSpentButton setTintColor:UIColor.systemGrayColor];
     self.timeSpentField.text = [NSString stringWithFormat:@"%ld", [self.minSpent integerValue]];
     self.stopIndexLabel.text = [NSString stringWithFormat:@"%li", self.index+1];
-//    self.stopIndexLabel.textColor = UIColor.labelColor;
     self.indexBorder.layer.cornerRadius = self.indexBorder.layer.frame.size.height/2;
+
+    // Below 4 lines toggle a different look for the circle with the stop's index
+//    self.stopIndexLabel.textColor = UIColor.labelColor;
 //    self.indexBorder.layer.borderColor = UIColor.lightGrayColor.CGColor;
 //    self.indexBorder.layer.borderWidth = 1.f;
 //    self.indexBorder.layer.backgroundColor = UIColor.clearColor.CGColor;

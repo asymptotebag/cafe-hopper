@@ -31,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
 @property (weak, nonatomic) IBOutlet UIButton *directionsButton;
 
+@property (strong, nonatomic) NSArray<NSDictionary *> *reviews;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
 @property (strong, nonatomic) UIMenu *saveMenu;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *tripBarButton;
@@ -64,7 +66,6 @@
     
     if (usingRealImages) {
         GMSPlacePhotoMetadata *photoMetadata = self.place.photos[0];
-//        CGSize photoSize = CGSizeMake(175, 175);
         [_placesClient loadPlacePhoto:photoMetadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
             if (photo) {
                 [self.pictureView setImage:photo]; // display attribution?
@@ -101,6 +102,7 @@
     self.buttonBorder3.layer.borderWidth = borderWidth;
     self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
     
+//    [self fetchReviews];
     [self setupMenus];
 }
 
@@ -124,6 +126,35 @@
     NSString *URLString = [[baseURLString stringByAppendingString:destinationParameter] stringByAppendingString:destinationPlaceIdParameter];
     NSLog(@"URL to open: %@", URLString);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:URLString] options:@{} completionHandler:^(BOOL success) {}];
+}
+
+- (void)fetchReviews {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Keys" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *googleAPIKey = [dict objectForKey:@"googleMapsAPIKey"];
+    
+    NSMutableString *URLString = @"https://maps.googleapis.com/maps/api/place/details/json?".mutableCopy;
+    NSString *placeIdParam = [@"place_id=" stringByAppendingString:self.place.placeID];
+    NSString *fieldsParam = @"&fields=reviews";
+    NSString *keyParameter = [@"&key=" stringByAppendingString:googleAPIKey];
+    [URLString appendString:placeIdParam];
+    [URLString appendString:fieldsParam];
+    [URLString appendString:keyParameter];
+    NSLog(@"Full Places Details API request URL: %@", URLString);
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:URLString] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error == nil) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = jsonDict[@"result"];
+            self.reviews = result[@"reviews"];
+            NSLog(@"%li reviews fetched", self.reviews.count);
+            // TODO: reload whatever is displaying these reviews
+        } else {
+            NSLog(@"Error calling Places Details API: %@", error.localizedDescription);
+        }
+    }];
+    [task resume];
 }
 
 - (void)setupMenus {
