@@ -11,7 +11,14 @@
 #define degreesToRadians(x) (M_PI * (x) / 180.0)
 #define kAnimationRotateDeg 1.0
 
-@implementation CollectionCell
+@implementation CollectionCell {
+    GMSPlacesClient *_placesClient;
+}
+
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _placesClient = [GMSPlacesClient sharedClient];
+}
 
 - (void)setSelected:(BOOL)selected {
     [super setSelected:selected];
@@ -25,19 +32,34 @@
     self.frameView.clipsToBounds = YES;
     
     // images are 84 x 84
-    [self.topLeftView setImage:[UIImage imageNamed:@"1"]];
-    [self.topRightView setImage:[UIImage imageNamed:@"2"]];
-    [self.bottomLeftView setImage:[UIImage imageNamed:@"3"]];
-    [self.bottomRightView setImage:[UIImage imageNamed:@"4"]];
+    GMSPlaceField fields = (GMSPlaceFieldPhotos);
     
-//    for (int i=0; i<4; i++) {
-//        if (collection.places.count > i) {
-////            GMSPlacePhotoMetadata *photoMetadata = collection.places[i]
-//        } else { // not enough places in collection yet
-//
-//        }
-//    }
-//    
+    NSArray *grid = @[self.topLeftView, self.topRightView, self.bottomLeftView, self.bottomRightView];
+    
+    for (int i=0; i<4; i++) {
+        if (collection.places.count > i) {
+            [_placesClient fetchPlaceFromPlaceID:collection.places[i] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+                if (place) {
+                    GMSPlacePhotoMetadata *metadata = place.photos[0];
+                    [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(200,200) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                        if (photo) {
+                            [grid[i] setImage:photo];
+                        } else {
+                            NSLog(@"Error loading photo: %@", error.localizedDescription);
+                            [grid[i] setImage:nil];
+                            [grid[i] setBackgroundColor:UIColor.systemGray6Color];
+                        }
+                    }];
+                } else {
+                    NSLog(@"Couldn't fetch place photos from ID: %@", error.localizedDescription);
+                }
+            }];
+        } else { // not enough places in collection yet
+            [grid[i] setImage:nil];
+            [grid[i] setBackgroundColor:UIColor.systemGray6Color];
+        }
+    }
+
     if (self.inEditingMode && ![self.collection.collectionName isEqualToString:@"All"]) {
         // you can't delete the All collection
         self.deleteButton.hidden = NO;

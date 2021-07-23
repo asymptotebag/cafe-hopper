@@ -66,7 +66,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlaceCell"];
     GMSPlace *place = self.places[indexPath.row];
-//    GMSPlacePhotoMetadata *metadata = place.photos[0];
+    GMSPlacePhotoMetadata *metadata = place.photos[0];
+    [_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(250,250) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+        [cell.pictureView setImage:photo];
+    }];
 //    [_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
 //        [cell.pictureView setImage:photo];
 //    }];
