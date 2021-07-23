@@ -39,6 +39,9 @@
     for (int i=0; i<4; i++) {
         if (collection.places.count > i) {
             [_placesClient fetchPlaceFromPlaceID:collection.places[i] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+                if (error) {
+                    NSLog(@"Couldn't fetch place photos from ID: %@", error.localizedDescription);
+                }
                 if (place) {
                     GMSPlacePhotoMetadata *metadata = place.photos[0];
                     [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(200,200) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
@@ -50,8 +53,6 @@
                             [grid[i] setBackgroundColor:UIColor.systemGray6Color];
                         }
                     }];
-                } else {
-                    NSLog(@"Couldn't fetch place photos from ID: %@", error.localizedDescription);
                 }
             }];
         } else { // not enough places in collection yet

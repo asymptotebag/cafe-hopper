@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) NSMutableArray *stops;
-// stops: [{place: GMSPlace, minSpent:20, timeToNext:14}]
+// stops: [{place: GMSPlace, minSpent:20, timeToNext:14, index:0}]
 
 @property (nonatomic) NSInteger stopsLoaded;
 
@@ -70,7 +70,6 @@
                 if (stop[@"timeToNext"]) { // nil if key doesn't exist
                     newStop[@"timeToNext"] = stop[@"timeToNext"];
                 }
-//                [self.stops addObject:newStop];
                 NSLog(@"Setting index %@", stop[@"index"]);
                 [self.stops setObject:newStop atIndexedSubscript:[stop[@"index"] integerValue]];
                 self.stopsLoaded++;
@@ -86,7 +85,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return self.stops.count;
     return self.stopsLoaded;
 }
 

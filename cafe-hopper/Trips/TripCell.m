@@ -54,13 +54,29 @@
     [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (place) {
             self.originNameLabel.text = place.name;
+            GMSPlacePhotoMetadata *metadata = place.photos[0];
+            [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                if (photo) {
+                    [self.originImageView setImage:photo];
+                } else {
+                    NSLog(@"Error loading photo: %@", error.localizedDescription);
+                }
+            }];
         } else {
-            NSLog(@"Error getting origin name: %@", error.localizedDescription);
+            NSLog(@"Error getting origin details: %@", error.localizedDescription);
         }
     }];
     [_placesClient fetchPlaceFromPlaceID:trip.stops[trip.stops.count-1][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
         if (place) {
             self.destinationNameLabel.text = place.name;
+            GMSPlacePhotoMetadata *metadata = place.photos[0];
+            [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                if (photo) {
+                    [self.destinationImageView setImage:photo];
+                } else {
+                    NSLog(@"Error loading photo: %@", error.localizedDescription);
+                }
+            }];
         } else {
             NSLog(@"Error getting destination name: %@", error.localizedDescription);
         }

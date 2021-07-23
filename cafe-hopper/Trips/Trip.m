@@ -120,8 +120,6 @@
 }
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
-    // TODO: fix deletion (this is going to be hard lol)
-    
     // if first element, don't need to change anything, new duration = prev duration - minSpent[index] - timeToNext[index]
     // if last element, delete timeToNext of previous, new duration = prev duration - minSpent[index] - timeToNext[index-1]
     // otherwise:
