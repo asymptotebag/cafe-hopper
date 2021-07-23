@@ -27,9 +27,23 @@
     [self configView];
 }
 
-- (BOOL)fieldsFilled { // TODO: need to check for duplicate usernames
+- (BOOL)fieldsFilled {
     if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Entry" message:@"Username and password field cannot be blank." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:dismissAction];
+        [self presentViewController:alert animated:YES completion:^{}];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)uniqueUsername { // check for duplicate usernames
+    PFQuery *userQuery = [User query];
+    [userQuery whereKey:@"username" equalTo:self.usernameField.text];
+    NSArray *matchingUsers = [userQuery findObjects];
+    if (matchingUsers.count > 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Create Account" message:@"The username you entered is already taken." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:dismissAction];
         [self presentViewController:alert animated:YES completion:^{}];
@@ -48,7 +62,7 @@
 }
 
 - (IBAction)tapSignup:(id)sender {
-    if ([self fieldsFilled]) {
+    if ([self fieldsFilled] && [self uniqueUsername]) {
         // initialize user object
         User *newUser = [User user];
         newUser.name = self.nameField.text;
