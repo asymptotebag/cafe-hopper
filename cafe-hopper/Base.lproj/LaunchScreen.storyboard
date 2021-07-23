@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Gyd-VC-4fk">
-                                <rect key="frame" x="107" y="211" width="200" height="200"/>
+                                <rect key="frame" x="102" y="211" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="U5K-Nf-NxP"/>
                                     <constraint firstAttribute="height" constant="200" id="Web-C5-UBj"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="croissavant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4Q-09-m5P">
-                                <rect key="frame" x="98" y="419" width="218" height="58"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Croissavant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4Q-09-m5P">
+                                <rect key="frame" x="94" y="419" width="226" height="58"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -43,7 +43,7 @@
                             <constraint firstItem="wdq-iY-law" firstAttribute="top" secondItem="q4Q-09-m5P" secondAttribute="bottom" constant="10" id="F4x-yD-jcr"/>
                             <constraint firstItem="q4Q-09-m5P" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Kjt-Np-Jes"/>
                             <constraint firstItem="q4Q-09-m5P" firstAttribute="top" secondItem="Gyd-VC-4fk" secondAttribute="bottom" constant="8" id="XO8-yb-vgU"/>
-                            <constraint firstItem="Gyd-VC-4fk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="mTz-ry-Fgj"/>
+                            <constraint firstItem="Gyd-VC-4fk" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" constant="-5" id="mTz-ry-Fgj"/>
                             <constraint firstItem="wdq-iY-law" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vgJ-7V-tEq"/>
                         </constraints>
                     </view>
