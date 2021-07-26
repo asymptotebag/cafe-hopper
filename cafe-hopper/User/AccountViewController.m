@@ -106,7 +106,7 @@
 - (IBAction)onTapEditProfile:(id)sender {
     if (self.editButton.isSelected) { // done with editing, save info
         // check for valid/duplicate username (& valid email?)
-        if ([self fieldsFilled] && [self uniqueUsername]) {
+        if ([self fieldsFilled] && [self isUniqueUsername]) {
             [self.editButton setSelected:NO];
             self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
             self.changePfpButton.hidden = YES;
@@ -159,7 +159,7 @@
     return YES;
 }
 
-- (BOOL)uniqueUsername { // check for duplicate usernames
+- (BOOL)isUniqueUsername {
     if ([self.usernameField.text isEqualToString:self.user.username]) {
         return YES; // username wasn't changed
     }
@@ -229,8 +229,6 @@
 - (IBAction)onLogout:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Confirmation" message:@"Are you sure you want to log out?" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//        [self dismissViewControllerAnimated:YES completion:^{}];
-        
         [User logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
             if (error) {
                 NSLog(@"Error: %@", error.localizedDescription);

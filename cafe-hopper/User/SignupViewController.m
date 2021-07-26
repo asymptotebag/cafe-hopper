@@ -38,7 +38,7 @@
     return YES;
 }
 
-- (BOOL)uniqueUsername { // check for duplicate usernames
+- (BOOL)isUniqueUsername {
     PFQuery *userQuery = [User query];
     [userQuery whereKey:@"username" equalTo:self.usernameField.text];
     NSArray *matchingUsers = [userQuery findObjects];
@@ -62,7 +62,7 @@
 }
 
 - (IBAction)tapSignup:(id)sender {
-    if ([self fieldsFilled] && [self uniqueUsername]) {
+    if ([self fieldsFilled] && [self isUniqueUsername]) {
         // initialize user object
         User *newUser = [User user];
         newUser.name = self.nameField.text;
