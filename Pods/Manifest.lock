@@ -23,6 +23,7 @@ PODS:
   - GooglePlaces (5.0.0)
   - HCSStarRatingView (1.5)
   - MBProgressHUD (1.2.0)
+  - NSString-UrlEncode (2.1.0)
   - Parse (1.19.2):
     - Parse/Core (= 1.19.2)
   - Parse/Core (1.19.2):
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - GooglePlaces (= 5.0.0)
   - HCSStarRatingView (~> 1.5)
   - MBProgressHUD
+  - NSString-UrlEncode (~> 2.1)
   - Parse
 
 SPEC REPOS:
@@ -44,6 +46,7 @@ SPEC REPOS:
     - GooglePlaces
     - HCSStarRatingView
     - MBProgressHUD
+    - NSString-UrlEncode
     - Parse
 
 SPEC CHECKSUMS:
@@ -53,8 +56,9 @@ SPEC CHECKSUMS:
   GooglePlaces: 5d87ca13ed98b7a937e0d8bc7026f718c7263271
   HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  NSString-UrlEncode: 92dcb01cac33ef036cda76baf0e4378b18779e47
   Parse: 081fb8755c3000fd11df817eec235def233d0af3
 
-PODFILE CHECKSUM: 3aa68f5380c92767625447c4c469d6f871632a29
+PODFILE CHECKSUM: c20aeb7b761f9460a58e57e6e3bcb54706c790ee
 
 COCOAPODS: 1.10.1

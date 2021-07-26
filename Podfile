@@ -13,6 +13,7 @@ target 'cafe-hopper' do
   pod 'GooglePlaces', '5.0.0'
   pod 'MBProgressHUD'
   pod 'HCSStarRatingView', '~> 1.5'
+  pod 'NSString-UrlEncode', '~> 2.1'
 
   target 'cafe-hopperTests' do
     inherit! :search_paths

@@ -12,8 +12,9 @@
 #import "Trip.h"
 #import "CarouselCell.h"
 #import "ReviewCell.h"
-#import <HCSStarRatingView/HCSStarRatingView.h>
 #import <Parse/Parse.h>
+#import <HCSStarRatingView/HCSStarRatingView.h>
+#import <NSString_UrlEncode/NSString+URLEncode.h>
 #import <QuartzCore/QuartzCore.h>
 #import <AudioToolbox/AudioServices.h>
 
@@ -130,7 +131,7 @@
 
 - (IBAction)onTapDirections:(id)sender {
     NSString *baseURLString = @"https://www.google.com/maps/dir/?api=1";
-    NSString *destination = [self.place.name stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    NSString *destination = [self.place.name URLEncode];
     NSString *destinationParameter = [@"&destination=" stringByAppendingString:destination];
     NSString *destinationPlaceIdParameter = [@"&destination_place_id=" stringByAppendingString:self.place.placeID];
     NSString *URLString = [[baseURLString stringByAppendingString:destinationParameter] stringByAppendingString:destinationPlaceIdParameter];
@@ -398,7 +399,6 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (collectionView == self.carouselCollectionView) {
-        NSLog(@"carousel collection view");
         CarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CarouselCell" forIndexPath:indexPath];
         if (usingRealImages) {
             GMSPlacePhotoMetadata *photoMetadata = self.place.photos[indexPath.item+1];
@@ -416,7 +416,6 @@
         }
         return cell;
     }
-    NSLog(@"reviews collection view");
     ReviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ReviewCell" forIndexPath:indexPath];
     NSDictionary *review = self.reviews[indexPath.item];
     cell.review = review;

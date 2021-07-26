@@ -7,6 +7,7 @@
 
 #import "TripDetailsViewController.h"
 #import "StopCell.h"
+#import <NSString_UrlEncode/NSString+URLEncode.h>
 @import GooglePlaces;
 
 @interface TripDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -123,24 +124,18 @@
     }
 }
 
-- (NSString *)URLEncodeString:(NSString *)string {
-    string = [string stringByReplacingOccurrencesOfString:@"&" withString:@"and"];
-    string = [string stringByReplacingOccurrencesOfString:@"%" withString:@"Percent"];
-    return [string stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-}
-
 - (IBAction)onTapNavigate:(id)sender {
     if (self.stops.count >= 2) {
         NSMutableString *URLString = @"https://www.google.com/maps/dir/?api=1".mutableCopy;
         
         GMSPlace *origin = self.stops[0][@"place"];
-        NSString *originParameter = [@"&origin=" stringByAppendingString:[self URLEncodeString:origin.name]];
+        NSString *originParameter = [@"&origin=" stringByAppendingString:[origin.name URLEncode]];
         NSString *originIdParameter = [@"&origin_place_id=" stringByAppendingString:origin.placeID];
         [URLString appendString:originParameter];
         [URLString appendString:originIdParameter];
         
         GMSPlace *destination = self.stops[self.stops.count-1][@"place"];
-        NSString *destinationParameter = [@"&destination=" stringByAppendingString:[self URLEncodeString:destination.name]];
+        NSString *destinationParameter = [@"&destination=" stringByAppendingString:[destination.name URLEncode]];
         NSString *destinationIdParameter = [@"&destination_place_id=" stringByAppendingString:destination.placeID];
         [URLString appendString:destinationParameter];
         [URLString appendString:destinationIdParameter];
@@ -152,8 +147,8 @@
             for (int i=0; i<numWaypoints; i++) {
                 // url encode waypoints (pipe character is %7C)
                 GMSPlace *waypoint = self.stops[i+1][@"place"];
-                [waypointsParameter appendString:[self URLEncodeString:waypoint.name]];
-                [waypointsIdsParameter appendString:[self URLEncodeString:waypoint.placeID]];
+                [waypointsParameter appendString:[waypoint.name URLEncode]];
+                [waypointsIdsParameter appendString:waypoint.placeID];
                 if (i < numWaypoints - 1) { // add pipe for all except last one
                     [waypointsParameter appendString:@"%7C"];
                     [waypointsIdsParameter appendString:@"%7C"];
