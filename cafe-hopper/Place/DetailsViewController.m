@@ -327,7 +327,7 @@
     HCSStarRatingView *starRatingView = [HCSStarRatingView new];
     starRatingView.maximumValue = 5;
     starRatingView.minimumValue = 0;
-    starRatingView.tintColor = [UIColor yellowColor];
+    starRatingView.tintColor = [UIColor colorNamed:@"MaizeCrayola"];
     starRatingView.allowsHalfStars = YES;
     starRatingView.accurateHalfStars = YES;
     starRatingView.value = self.place.rating;
