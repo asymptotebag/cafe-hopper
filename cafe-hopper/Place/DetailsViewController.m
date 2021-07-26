@@ -419,23 +419,7 @@
     NSLog(@"reviews collection view");
     ReviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ReviewCell" forIndexPath:indexPath];
     NSDictionary *review = self.reviews[indexPath.item];
-    
-    cell.backdropView.layer.cornerRadius = 10;
-    cell.backdropView.layer.masksToBounds = true;
-    cell.shadowView.layer.cornerRadius = 10;
-    cell.shadowView.layer.masksToBounds = true;
-    
-    cell.nameLabel.text = review[@"author_name"];
-    cell.ratingLabel.text = [[NSString stringWithFormat:@"%@", review[@"rating"]] stringByAppendingString:@"/5"];
-    
-    cell.timestampLabel.text = review[@"relative_time_description"];
-    [cell.reviewTextView setTextContainerInset:UIEdgeInsetsZero];
-    cell.reviewTextView.textContainer.lineFragmentPadding = 0;
-    cell.reviewTextView.text = review[@"text"];
-//    [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUTF8StringEncoding]
-//                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-//                                               NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
-//                          documentAttributes:nil error:nil];
+    cell.review = review;
     return cell;
 }
 

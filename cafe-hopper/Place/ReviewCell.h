@@ -10,6 +10,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReviewCell : UICollectionViewCell
+@property (strong, nonatomic) NSDictionary *review;
+
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UIView *backdropView;
 

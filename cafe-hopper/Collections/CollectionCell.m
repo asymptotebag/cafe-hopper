@@ -39,7 +39,7 @@
     for (int i=0; i<4; i++) {
         [grid[i] setImage:nil];
         [grid[i] setBackgroundColor:UIColor.systemGray6Color];
-        
+
         // TODO: bring back more code when you want to make actual API calls
         /*
         if (collection.places.count > i) {
