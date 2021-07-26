@@ -13,7 +13,6 @@
 @dynamic tripName;
 @dynamic stops;
 @dynamic owner;
-@dynamic duration;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";
@@ -28,7 +27,6 @@
     } else {
         trip.stops = [NSMutableArray new];
     }
-    trip.duration = [NSNumber numberWithUnsignedLong:20*stops.count];
 
     [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -56,7 +54,6 @@
 
 + (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration forTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
     NSMutableDictionary *stopToChange = trip.stops[index];
-    trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToChange[@"minSpent"] integerValue] + newDuration];
     stopToChange[@"minSpent"] = [NSNumber numberWithLong:newDuration];
     trip[@"stops"] = trip.stops;
     [trip saveInBackgroundWithBlock:completion];
@@ -70,8 +67,6 @@
     [newStop setObject:[NSNumber numberWithUnsignedLong:trip.stops.count] forKey:@"index"];
     NSLog(@"newStop = %@", newStop);
     [trip.stops addObject:newStop];
-    
-    trip.duration = [NSNumber numberWithUnsignedLong:[trip.duration integerValue]+20];
     
     if (trip.stops.count < 2) {
         trip[@"stops"] = trip.stops;
@@ -109,7 +104,6 @@
             NSInteger duration = durationSecs/60; // this truncates, doesn't round
             NSLog(@"duration = %li", duration);
             prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
-            trip.duration = [NSNumber numberWithUnsignedLong:[trip.duration intValue]+duration];
         } else {
             NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
         }
@@ -120,19 +114,13 @@
 }
 
 + (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
-    // if first element, don't need to change anything, new duration = prev duration - minSpent[index] - timeToNext[index]
-    // if last element, delete timeToNext of previous, new duration = prev duration - minSpent[index] - timeToNext[index-1]
-    // otherwise:
-    // recalculate timeToNext from index-1 to index+1, set to prev stop's timeToNext
-    // duration: prev duration - minSpent[index] - timetoNext[index] - timetoNext[index-1] + new timeToNext[index-1 to index+1]
+    // if first element, don't need to change anything
+    // if last element, delete timeToNext of previous
+    // otherwise, recalculate timeToNext from index-1 to index+1, set to prev stop's timeToNext
     
     NSMutableDictionary *stopToRemove = trip.stops[index];
     
     if (index == 0) { // first stop
-        trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue]];
-        if (stopToRemove[@"timeToNext"]) {
-            trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"timeToNext"] integerValue]];
-        }
         // decrement index of all future stops
         for (int i=1; i<trip.stops.count; i++) {
             NSMutableDictionary *currentStop = trip.stops[i];
@@ -144,9 +132,7 @@
         return;
     } else if (index == trip.stops.count - 1) { // last stop, trip necessarily has >1 stop
         NSMutableDictionary *prevStop = trip.stops[index - 1];
-        trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue] - [prevStop[@"timeToNext"] integerValue]];
         [prevStop removeObjectForKey:@"timeToNext"];
-        
         [trip.stops removeObject:stopToRemove];
         trip[@"stops"] = trip.stops;
         [trip saveInBackgroundWithBlock:completion];
@@ -179,10 +165,8 @@
                 NSInteger durationSecs = [elements[0][@"duration"][@"value"] integerValue]; // value is in seconds, so convert to minutes
                 NSInteger duration = durationSecs/60; // this truncates, doesn't round
                 NSLog(@"new duration = %li", duration);
-                
-                trip.duration = [NSNumber numberWithLong:[trip.duration integerValue] - [stopToRemove[@"minSpent"] integerValue] - [stopToRemove[@"timeToNext"] integerValue] - [prevStop[@"timeToNext"] integerValue] + duration];
-
                 prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
+                
                 // decrement index of all future stops
                 for (int i=index+1; i<trip.stops.count; i++) {
                     NSMutableDictionary *currentStop = trip.stops[i];

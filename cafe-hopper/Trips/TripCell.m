@@ -48,7 +48,15 @@
     } else {
         self.stopsLabel.text = [numStops stringByAppendingString:@" stops"];
     }
-    self.durationLabel.text = [self timestampFromMinutes:[trip.duration integerValue]];
+    // calculate duration of trip
+    NSInteger duration = 0;
+    for (NSMutableDictionary *stop in trip.stops) {
+        duration += [stop[@"minSpent"] integerValue];
+        if (stop[@"timeToNext"]) {
+            duration += [stop[@"timeToNext"] integerValue];
+        }
+    }
+    self.durationLabel.text = [self timestampFromMinutes:duration];
     
     GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
     [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
