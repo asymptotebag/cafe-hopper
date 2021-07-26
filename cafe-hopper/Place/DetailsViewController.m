@@ -11,6 +11,7 @@
 #import "Collection.h"
 #import "Trip.h"
 #import "CarouselCell.h"
+#import "ReviewCell.h"
 #import <HCSStarRatingView/HCSStarRatingView.h>
 #import <Parse/Parse.h>
 #import <QuartzCore/QuartzCore.h>
@@ -18,9 +19,20 @@
 
 @interface DetailsViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (strong, nonatomic) User *user;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *flowLayout;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
+@property (strong, nonatomic) UIMenu *saveMenu;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *tripBarButton;
+@property (strong, nonatomic) UIMenu *tripMenu;
+
+@property (weak, nonatomic) IBOutlet UICollectionView *carouselCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *carouselFlowLayout;
+// TODO: set array of photos property to populate carousel with real photos
+@property (strong, nonatomic) NSArray<GMSPlacePhotoMetadata *> *placePhotos;
+
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *doubleTapGesture;
+@property (weak, nonatomic) IBOutlet UIImageView *bigHeart;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
@@ -31,15 +43,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
 @property (weak, nonatomic) IBOutlet UIButton *directionsButton;
 
+@property (weak, nonatomic) IBOutlet UICollectionView *reviewsCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *reviewsFlowLayout;
 @property (strong, nonatomic) NSArray<NSDictionary *> *reviews;
-
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBarButton;
-@property (strong, nonatomic) UIMenu *saveMenu;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *tripBarButton;
-@property (strong, nonatomic) UIMenu *tripMenu;
-
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *doubleTapGesture;
-@property (weak, nonatomic) IBOutlet UIImageView *bigHeart;
 
 @end
 
@@ -53,13 +59,17 @@
     self.user = [User currentUser];
     _placesClient = [GMSPlacesClient sharedClient];
     usingRealImages = NO;
+    self.reviews = @[];
+    self.placePhotos = @[];
     
     [self setupView];
 }
 
 - (void)setupView {
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
+    self.carouselCollectionView.dataSource = self;
+    self.carouselCollectionView.delegate = self;
+    self.reviewsCollectionView.dataSource = self;
+    self.reviewsCollectionView.delegate = self;
     
     self.nameLabel.text = self.place.name;
     self.addressLabel.text = self.place.formattedAddress;
@@ -86,7 +96,7 @@
     [self showStarRating];
     
     CGFloat buttonRadius = 10;
-    UIColor *borderColor = [UIColor systemGray5Color];
+    UIColor *borderColor = [UIColor systemGray4Color]; // TODO: test diff gray colors
     CGFloat borderWidth = 1.f;
     UIColor *backgroundColor = [UIColor clearColor];
     self.buttonBorder1.layer.cornerRadius = buttonRadius;
@@ -102,7 +112,7 @@
     self.buttonBorder3.layer.borderWidth = borderWidth;
     self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
     
-//    [self fetchReviews];
+    [self fetchReviews];
     [self setupMenus];
 }
 
@@ -150,6 +160,7 @@
             self.reviews = result[@"reviews"];
             NSLog(@"%li reviews fetched", self.reviews.count);
             // TODO: reload whatever is displaying these reviews
+            [self.reviewsCollectionView reloadData];
         } else {
             NSLog(@"Error calling Places Details API: %@", error.localizedDescription);
         }
@@ -350,23 +361,81 @@
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
-    self.flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    self.flowLayout.minimumLineSpacing = 0;
-    self.flowLayout.minimumInteritemSpacing = 0;
-    CGFloat height = self.collectionView.frame.size.height - 1;
+    self.carouselFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.carouselFlowLayout.minimumLineSpacing = 0;
+    self.carouselFlowLayout.minimumInteritemSpacing = 0;
+    CGFloat height = self.carouselCollectionView.frame.size.height;
     CGFloat width = height;
-    self.flowLayout.itemSize = CGSizeMake(width, height);
-    self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    [self.collectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    self.carouselFlowLayout.itemSize = CGSizeMake(width, height);
+    self.carouselFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [self.carouselCollectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    
+    self.reviewsFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    self.reviewsFlowLayout.minimumLineSpacing = 0;
+    self.reviewsFlowLayout.minimumInteritemSpacing = 0;
+    CGFloat reviewHeight = self.reviewsCollectionView.frame.size.height;
+    CGFloat reviewWidth = self.reviewsCollectionView.frame.size.width;
+    self.reviewsFlowLayout.itemSize = CGSizeMake(reviewWidth, reviewHeight);
+    self.reviewsFlowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [self.reviewsCollectionView setContentInset:UIEdgeInsetsMake(0, 0, 0, 0)];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 5; // 5 images for now
+    if (collectionView == self.carouselCollectionView) {
+        if (self.place.photos.count > 5) {
+            return 5;
+        } else {
+            return self.place.photos.count - 1; // 1st photo is the center pic
+        }
+    } else { // reviews collection view
+        if (self.reviews.count >= 5) { // google returns max 5, but just in case
+            return 5;
+        } else {
+            return self.reviews.count;
+        }
+    }
 }
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CarouselCell" forIndexPath:indexPath];
-    cell.place = self.place;
+    if (collectionView == self.carouselCollectionView) {
+        NSLog(@"carousel collection view");
+        CarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CarouselCell" forIndexPath:indexPath];
+        if (usingRealImages) {
+            GMSPlacePhotoMetadata *photoMetadata = self.place.photos[indexPath.item+1];
+            [_placesClient loadPlacePhoto:photoMetadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                if (photo) {
+                    [cell.pictureView setImage:photo]; // display attribution?
+                } else {
+                    NSLog(@"Error getting place photo: %@", error.localizedDescription);
+                }
+            }];
+        } else { // use random placeholder image
+            NSInteger randint = arc4random_uniform(6) + 1;
+            NSString *imgName = [NSString stringWithFormat:@"%li", randint];
+            [cell.pictureView setImage:[UIImage imageNamed:imgName]];
+        }
+        return cell;
+    }
+    NSLog(@"reviews collection view");
+    ReviewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ReviewCell" forIndexPath:indexPath];
+    NSDictionary *review = self.reviews[indexPath.item];
+    
+    cell.backdropView.layer.cornerRadius = 10;
+    cell.backdropView.layer.masksToBounds = true;
+    cell.shadowView.layer.cornerRadius = 10;
+    cell.shadowView.layer.masksToBounds = true;
+    
+    cell.nameLabel.text = review[@"author_name"];
+    cell.ratingLabel.text = [[NSString stringWithFormat:@"%@", review[@"rating"]] stringByAppendingString:@"/5"];
+    
+    cell.timestampLabel.text = review[@"relative_time_description"];
+    [cell.reviewTextView setTextContainerInset:UIEdgeInsetsZero];
+    cell.reviewTextView.textContainer.lineFragmentPadding = 0;
+    cell.reviewTextView.text = review[@"text"];
+//    [[NSAttributedString alloc] initWithData:[htmlString dataUsingEncoding:NSUTF8StringEncoding]
+//                                     options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
+//                                               NSCharacterEncodingDocumentAttribute: @(NSUTF8StringEncoding)}
+//                          documentAttributes:nil error:nil];
     return cell;
 }
 

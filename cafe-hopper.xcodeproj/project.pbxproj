@@ -25,6 +25,7 @@
 		7C175743269CB13A00393B53 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7C175742269CB13A00393B53 /* Keys.plist */; };
 		7C175746269E03D800393B53 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175745269E03D800393B53 /* SearchViewController.m */; };
 		7C175749269E136E00393B53 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175748269E136E00393B53 /* SearchResultCell.m */; };
+		7C5369FE26AEF697004D061B /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5369FD26AEF697004D061B /* ReviewCell.m */; };
 		7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B4269E57A800D02758 /* MainTabBarController.m */; };
 		7CDB52B8269F299900D02758 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B7269F299900D02758 /* DetailsViewController.m */; };
 		7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52BA269F759400D02758 /* PlacesViewController.m */; };
@@ -96,6 +97,8 @@
 		7C175745269E03D800393B53 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		7C175747269E136E00393B53 /* SearchResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultCell.h; sourceTree = "<group>"; };
 		7C175748269E136E00393B53 /* SearchResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
+		7C5369FC26AEF697004D061B /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewCell.h; sourceTree = "<group>"; };
+		7C5369FD26AEF697004D061B /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewCell.m; sourceTree = "<group>"; };
 		7CDB52B3269E57A800D02758 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		7CDB52B4269E57A800D02758 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		7CDB52B6269F299900D02758 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
@@ -303,6 +306,8 @@
 				7CDB52B7269F299900D02758 /* DetailsViewController.m */,
 				7CDB52CE26A0E5B300D02758 /* CarouselCell.h */,
 				7CDB52CF26A0E5B300D02758 /* CarouselCell.m */,
+				7C5369FC26AEF697004D061B /* ReviewCell.h */,
+				7C5369FD26AEF697004D061B /* ReviewCell.m */,
 			);
 			path = Place;
 			sourceTree = "<group>";
@@ -608,6 +613,7 @@
 				7CDB52D926A5DF6C00D02758 /* TripCell.m in Sources */,
 				7C17573B269C8A9200393B53 /* AccountViewController.m in Sources */,
 				7CDB52DF26A5FF4700D02758 /* NewStopCell.m in Sources */,
+				7C5369FE26AEF697004D061B /* ReviewCell.m in Sources */,
 				7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */,
 				7CDB52D026A0E5B300D02758 /* CarouselCell.m in Sources */,
 				7CDB52C726A0857B00D02758 /* PlaceCell.m in Sources */,
