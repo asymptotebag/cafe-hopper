@@ -39,7 +39,8 @@ Croissavant is a cafe-hopping app that helps you plan routes to coffee shops and
 - [x] User can create (and delete) collections of eateries
 - [x] User can view details of an eatery, such as its address, price level ($ to $$$$), rating, etc.
 - [x] User can see photos of an eatery
-- [x] User can create "trips": an ordered list of eateries that the user wants to visit in a single trip
+- [x] User can create (and delete) "trips": an ordered list of eateries that the user wants to visit in a single trip
+- [x] User can add (and delete) eateries to trips
 - [x] User can be redirected to the Google Maps website/app with preloaded navigation directions for a trip
 
 **Optional Nice-to-have Stories**
@@ -54,9 +55,10 @@ Croissavant is a cafe-hopping app that helps you plan routes to coffee shops and
 - [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
 - [x] User can see the driving duration between eateries using Google Distance Matrix API
 - [x] User can specify and change how long they'd like to spend at each location on a trip
+- [x] User can select "Begin Trip," which sends them local notifications reminding them when to leave for the next stop
 - [x] User can adjust account settings (e.g. email, username, profile pic, notifications)
 - [ ] User can choose to be emailed/texted an itinerary for their trip
-- [ ] User receives push notifications for cafe recommendations or reminders about a route they've planned
+- [ ] User receives push notifications for cafe recommendations
 
 ### 2. Screen Archetypes
 

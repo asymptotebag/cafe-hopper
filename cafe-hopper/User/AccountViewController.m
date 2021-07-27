@@ -175,7 +175,6 @@
 }
 
 - (IBAction)onTapCancel:(id)sender {
-    NSLog(@"tapped cancel");
     [self.editButton setSelected:NO];
     self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
     [UIView animateWithDuration:0.1 animations:^{

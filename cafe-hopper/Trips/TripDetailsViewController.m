@@ -8,15 +8,18 @@
 #import "TripDetailsViewController.h"
 #import "StopCell.h"
 #import <NSString_UrlEncode/NSString+URLEncode.h>
+#import <UserNotifications/UserNotifications.h>
 @import GooglePlaces;
 
-@interface TripDetailsViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TripDetailsViewController () <UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate>
 // public: @property (strong, nonatomic) Trip *trip;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView2;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView3;
 @property (weak, nonatomic) IBOutlet UILabel *tripNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *numStopsLabel;
+@property (weak, nonatomic) IBOutlet UIView *buttonBackground;
+@property (weak, nonatomic) IBOutlet UIButton *beginTripButton;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
@@ -53,6 +56,8 @@
     
     self.tripNameLabel.text = self.trip.tripName;
     self.numStopsLabel.text = [[NSString stringWithFormat:@"%lu", self.trip.stops.count] stringByAppendingString:@" stops"];
+    self.buttonBackground.layer.cornerRadius = 8;
+    self.buttonBackground.clipsToBounds = YES;
     
     self.imageView1.layer.cornerRadius = self.imageView1.layer.frame.size.height/2;
     self.imageView2.layer.cornerRadius = self.imageView2.layer.frame.size.height/2;
@@ -168,14 +173,52 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)onTapBeginTrip:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Begin Trip" message:@"Are you sure you want to begin this trip? The app will generate notifications to remind you of your schedule." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *beginAction = [UIAlertAction actionWithTitle:@"Begin" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        // TODO: change button appearance
+        // create notifications
+        double seconds = 0; // running count of seconds for scheduling notifications
+        for (NSMutableDictionary *stop in self.stops) {
+            seconds += [stop[@"minSpent"] doubleValue];
+            GMSPlace *place = stop[@"place"];
+            UNMutableNotificationContent *notif = [[UNMutableNotificationContent alloc] init];
+            notif.title = [NSString localizedUserNotificationStringForKey:self.trip.tripName arguments:nil];
+            notif.body = [NSString localizedUserNotificationStringForKey:[[@"Time to leave for " stringByAppendingString:place.name] stringByAppendingString:@"!"] arguments:nil];
+            UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:seconds repeats:NO];
+            UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:place.name content:notif trigger:trigger];
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                if (error!=nil) {
+                    NSLog(@"Error scheduling notification: %@", error.localizedDescription);
+                } else {
+                    NSLog(@"Notification scheduled for %@!", place.name);
+                }
+            }];
+            if (stop[@"timeToNext"]) {
+                seconds += [stop[@"timeToNext"] doubleValue];
+            }
+        }
+    }];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:beginAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:^{}];
 }
-*/
+
+- (void)scheduleTestNotification {
+    UNMutableNotificationContent *notif = [[UNMutableNotificationContent alloc] init];
+    notif.title = [NSString localizedUserNotificationStringForKey:@"Notification Title" arguments:nil];
+    notif.body = [NSString localizedUserNotificationStringForKey:@"Notification Body" arguments:nil];
+    UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:10 repeats:NO];
+    UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"Test Notif" content:notif trigger:trigger];
+    NSLog(@"notification set up");
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {}];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+    // handle notification when app is in the foreground
+}
 
 @end
