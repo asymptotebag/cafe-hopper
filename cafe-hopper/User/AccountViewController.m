@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UIImagePickerController *imagePicker;
 @property (strong, nonatomic) UIMenu *sourcePicker;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -52,7 +53,11 @@
         [pfp getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
             if (data) {
                 UIImage *pfpImg = [UIImage imageWithData:data];
+                self.pfpView.alpha = 0;
                 [self.pfpView setImage:pfpImg];
+                [UIView animateWithDuration:0.2 animations:^{
+                    self.pfpView.alpha = 1;
+                }];
             } else {
                 NSLog(@"Error getting pfp: %@", error.localizedDescription);
                 [self.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
@@ -88,6 +93,14 @@
 }
 
 - (void)configButton {
+    // width of cancel button is 75
+    self.cancelButton.hidden = YES;
+    self.cancelButton.layer.cornerRadius = 5;
+    self.cancelButton.clipsToBounds = true;
+    self.cancelButton.layer.backgroundColor = UIColor.clearColor.CGColor;
+    self.cancelButton.layer.borderColor = [UIColor colorNamed:@"MaximumRed"].CGColor;
+    self.cancelButton.layer.borderWidth = 0.5f;
+    
     self.editButton.layer.cornerRadius = 5;
     self.editButton.clipsToBounds = true;
     self.editButton.layer.backgroundColor = UIColor.clearColor.CGColor;
@@ -100,7 +113,7 @@
     
     // set up view while editing
     [self.editButton setTitle:@"Save Changes" forState:UIControlStateSelected];
-    [self.editButton setTitleColor:UIColor.systemGreenColor forState:UIControlStateSelected];
+    [self.editButton setTitleColor:[UIColor colorNamed:@"PakistanGreen"] forState:UIControlStateSelected];
 }
 
 - (IBAction)onTapEditProfile:(id)sender {
@@ -113,6 +126,10 @@
         } else {
             [self.editButton setSelected:NO];
             self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
+            [UIView animateWithDuration:0.1 animations:^{
+                self.cancelButton.alpha = 0;
+            }];
+            self.cancelButton.hidden = YES;
             self.changePfpButton.hidden = YES;
             
             // lock text fields
@@ -137,7 +154,12 @@
         }
     } else { // begin editing
         [self.editButton setSelected:YES];
-        self.editButton.layer.borderColor = UIColor.systemGreenColor.CGColor;
+        self.editButton.layer.borderColor = [UIColor colorNamed:@"PakistanGreen"].CGColor;
+        self.cancelButton.alpha = 0;
+        self.cancelButton.hidden = NO;
+        [UIView animateWithDuration:0.1 animations:^{
+            self.cancelButton.alpha = 1;
+        }];
         self.changePfpButton.hidden = NO;
         
         // unlock text fields
@@ -150,6 +172,27 @@
         self.emailField.textColor = UIColor.labelColor;
         self.minPerStopField.textColor = UIColor.labelColor;
     }
+}
+
+- (IBAction)onTapCancel:(id)sender {
+    NSLog(@"tapped cancel");
+    [self.editButton setSelected:NO];
+    self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
+    [UIView animateWithDuration:0.1 animations:^{
+        self.cancelButton.alpha = 0;
+    }];
+    self.cancelButton.hidden = YES;
+    self.changePfpButton.hidden = YES;
+    
+    // lock text fields
+    [self.nameField setUserInteractionEnabled:NO];
+    [self.usernameField setUserInteractionEnabled:NO];
+    [self.emailField setUserInteractionEnabled:NO];
+    [self.minPerStopField setUserInteractionEnabled:NO];
+    self.nameField.textColor = UIColor.lightGrayColor;
+    self.usernameField.textColor = UIColor.lightGrayColor;
+    self.emailField.textColor = UIColor.lightGrayColor;
+    self.minPerStopField.textColor = UIColor.lightGrayColor;
 }
 
 - (BOOL)fieldsFilled {
