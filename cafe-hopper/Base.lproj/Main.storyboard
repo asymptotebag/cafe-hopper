@@ -231,6 +231,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="CafeAuLait"/>
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
@@ -406,11 +407,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="My Trips" id="fn9-J6-DiE">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="plus.square" catalog="system" id="dzz-V9-mzd">
+                            <color key="tintColor" name="CafeAuLait"/>
                             <connections>
                                 <action selector="onTapCreate:" destination="KNI-vT-fov" id="frR-V8-FyA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="LyM-nk-3uc"/>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="S7Q-ZC-JOB" id="VLK-uJ-dTZ"/>
@@ -561,11 +562,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="Saved Places" id="ksc-RW-6VN">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="plus.app" catalog="system" id="RLs-zs-Dg9">
+                            <color key="tintColor" name="CafeAuLait"/>
                             <connections>
                                 <action selector="onTapCreate:" destination="B9c-ka-PZc" id="u3c-cx-28J"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="wqA-sd-P6e">
+                            <color key="tintColor" name="CafeAuLait"/>
                             <connections>
                                 <action selector="tapEdit:" destination="B9c-ka-PZc" id="j3Q-8p-z5q"/>
                             </connections>
@@ -881,8 +884,12 @@
                     </view>
                     <navigationItem key="navigationItem" title="Place Details" id="awj-Lk-Gh6">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="bookmark" catalog="system" id="94G-ok-nrZ"/>
-                            <barButtonItem title="Item" image="location" catalog="system" id="IDj-uw-YRa"/>
+                            <barButtonItem title="Item" image="bookmark" catalog="system" id="94G-ok-nrZ">
+                                <color key="tintColor" name="CafeAuLait"/>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="location" catalog="system" id="IDj-uw-YRa">
+                                <color key="tintColor" name="CafeAuLait"/>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
@@ -1079,7 +1086,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Collection Name" id="20a-CZ-M4b">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="ysX-Am-B3c"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="ysX-Am-B3c">
+                            <color key="tintColor" name="CafeAuLait"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="bfo-t0-qaj" id="sar-Xu-zYg"/>
@@ -1088,98 +1097,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pne-7R-S9C" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="89.855072463768124" y="2933.7053571428569"/>
-        </scene>
-        <!--New Trip-->
-        <scene sceneID="8SE-p5-AS7">
-            <objects>
-                <viewController title="New Trip" id="NEV-Fc-lXq" customClass="NewTripViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yXv-bS-I1F">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GyS-hl-zVt">
-                                <rect key="frame" x="0.0" y="141" width="414" height="701"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewStopCell" rowHeight="68" id="NRd-TM-TXn" customClass="NewStopCell">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="68"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NRd-TM-TXn" id="Pe9-9P-57n">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgo-sX-g3M">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="68"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                </pickerView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="picker" destination="cgo-sX-g3M" id="NRp-U2-1AE"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name of Trip" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U94-2N-RKe">
-                                <rect key="frame" x="57" y="83" width="227" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stops:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adb-cm-dJ6">
-                                <rect key="frame" x="298" y="88" width="56" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U9q-nv-3Ku">
-                                <rect key="frame" x="362" y="85" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="labelColor"/>
-                                <state key="normal" title="Button" backgroundImage="plus.circle" catalog="system">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pMO-57-dVl">
-                                <rect key="frame" x="20" y="86" width="29" height="28"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <imageReference key="backgroundImage" image="location.fill" catalog="system" symbolScale="large"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
-                                </state>
-                                <connections>
-                                    <action selector="onTapDirections:" destination="zNh-1M-8HY" eventType="touchUpInside" id="F9o-UV-Sui"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="tWZ-31-a1S"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Create New Trip" id="lIh-8y-7Sb">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="xmark.circle" catalog="system" id="1C9-cZ-nDa">
-                            <connections>
-                                <action selector="onTapClose:" destination="NEV-Fc-lXq" id="UW5-Xs-Ovz"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="checkmark.circle" catalog="system" id="uKg-db-qiq">
-                            <connections>
-                                <action selector="onTapCreate:" destination="NEV-Fc-lXq" id="tdZ-2r-KjM"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="tableView" destination="GyS-hl-zVt" id="sKN-Ch-3dV"/>
-                        <outlet property="tripNameField" destination="U94-2N-RKe" id="zsw-c0-mt8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0YX-iH-2OZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="776.81159420289862" y="3612.7232142857142"/>
         </scene>
         <!--Places-->
         <scene sceneID="8lU-I8-gIy">
@@ -1190,6 +1107,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0NR-CZ-0tk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="CafeAuLait"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1450,7 +1368,7 @@
                                     <constraint firstAttribute="height" constant="46" id="ZwY-da-Hi2"/>
                                     <constraint firstAttribute="width" constant="51" id="lKM-OI-chM"/>
                                 </constraints>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.69019607839999997" green="0.53725490200000003" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal">
                                     <imageReference key="backgroundImage" image="ellipsis.circle.fill" catalog="system" symbolScale="large"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
@@ -1517,24 +1435,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJf-46-nev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-584.05797101449275" y="2933.7053571428569"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="kfG-R1-ND7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Mz-4z-6g3" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oBx-8K-r2g">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="NEV-Fc-lXq" kind="relationship" relationship="rootViewController" id="nzn-Bd-f1v"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ir-vb-ZXQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="777" y="2934"/>
         </scene>
         <!--Trip Details-->
         <scene sceneID="3LU-wT-I5a">
@@ -1832,6 +1732,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Trip Details" id="CNL-RG-xFq">
                         <barButtonItem key="rightBarButtonItem" title="Navigate" id="nxT-L4-NtX">
+                            <color key="tintColor" name="CafeAuLait"/>
                             <connections>
                                 <action selector="onTapNavigate:" destination="u8C-Lj-5JG" id="cb6-mC-353"/>
                             </connections>
@@ -1855,6 +1756,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="woe-wn-tSv"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" name="CafeAuLait"/>
     <resources>
         <image name="1" width="800" height="534"/>
         <image name="2" width="900" height="550"/>
@@ -1866,13 +1768,11 @@
         <image name="bookmark" catalog="system" width="112" height="128"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="car" catalog="system" width="128" height="93"/>
-        <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="clock" catalog="system" width="128" height="121"/>
         <image name="ellipsis.circle.fill" catalog="system" width="128" height="121"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
         <image name="icon" width="1108" height="1108"/>
         <image name="location" catalog="system" width="128" height="121"/>
-        <image name="location.fill" catalog="system" width="128" height="121"/>
         <image name="location.north.fill" catalog="system" width="108" height="128"/>
         <image name="macwindow" catalog="system" width="128" height="93"/>
         <image name="map" catalog="system" width="128" height="110"/>
@@ -1881,13 +1781,14 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="phone.fill" catalog="system" width="128" height="114"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="plus.square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CafeAuLait">
+            <color red="0.69019607843137254" green="0.53725490196078429" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MaizeCrayola">
             <color red="0.97647058823529409" green="0.78431372549019607" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

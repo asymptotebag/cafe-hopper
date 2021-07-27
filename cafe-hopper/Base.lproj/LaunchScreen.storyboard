@@ -24,15 +24,15 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Croissavant" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4Q-09-m5P">
-                                <rect key="frame" x="94" y="419" width="226" height="58"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="48"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="90" y="419" width="234.5" height="58"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="48"/>
+                                <color key="textColor" red="0.49803921568627452" green="0.33333333333333331" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brewing..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wdq-iY-law">
                                 <rect key="frame" x="153.5" y="487" width="107" height="28"/>
                                 <fontDescription key="fontDescription" name="Helvetica-LightOblique" family="Helvetica" pointSize="24"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
+                                <color key="textColor" red="0.69019607839999997" green="0.53725490200000003" blue="0.40784313729999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -57,9 +57,6 @@
         <image name="icon" width="1108" height="1108"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
