@@ -278,7 +278,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Origin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFP-Yc-dmL">
                                                     <rect key="frame" x="50" y="59" width="39" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Coffee"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2" translatesAutoresizingMaskIntoConstraints="NO" id="Hml-d3-rRa">
@@ -291,7 +291,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48A-8W-1tj">
                                                     <rect key="frame" x="321" y="59" width="73" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="Coffee"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jW1-fu-fmT">
@@ -340,7 +340,7 @@
                                                                 <constraint firstAttribute="width" constant="22" id="94y-lr-BHj"/>
                                                                 <constraint firstAttribute="height" constant="18" id="PYA-Qf-FUf"/>
                                                             </constraints>
-                                                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="tintColor" name="CafeAuLait"/>
                                                             <state key="normal" title="Button" backgroundImage="arrow.right" catalog="system">
                                                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
@@ -430,6 +430,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nuT-Vg-MA5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="CafeAuLait"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -681,7 +682,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" name="Almond"/>
                                 <constraints>
                                     <constraint firstItem="4LY-aC-WnP" firstAttribute="centerX" secondItem="OFc-Fy-bDg" secondAttribute="centerX" id="5da-oQ-A8i"/>
                                     <constraint firstItem="4LY-aC-WnP" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="lek-Kl-lTM"/>
@@ -707,7 +708,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" name="Tan"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="45" id="NDh-vO-ZkU"/>
                                     <constraint firstItem="Wc7-aC-zhs" firstAttribute="centerY" secondItem="7rM-Wd-gwh" secondAttribute="centerY" id="skj-Of-cTH"/>
@@ -735,7 +736,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <color key="backgroundColor" name="DesertSand"/>
                                 <constraints>
                                     <constraint firstItem="QWe-xz-mZS" firstAttribute="centerY" secondItem="kDe-pe-0qv" secondAttribute="centerY" id="5eH-Id-DXO"/>
                                     <constraint firstItem="QWe-xz-mZS" firstAttribute="centerX" secondItem="kDe-pe-0qv" secondAttribute="centerX" id="9is-Jh-Set"/>
@@ -768,7 +769,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2P-qR-kI2">
                                                     <rect key="frame" x="58" y="16" width="311" height="191"/>
-                                                    <color key="backgroundColor" name="PeachPuff"/>
+                                                    <color key="backgroundColor" name="ChampagnePink"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fc5-Q8-mrR">
                                                     <rect key="frame" x="52" y="10" width="311" height="191"/>
@@ -798,7 +799,7 @@
                                                                 <fragment content="Awesome offices. Great facilities, location and views. Staff are great hosts">
                                                                     <attributes>
                                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Regular"/>
+                                                                        <font key="NSFont" size="14" name="SFProDisplay-Light"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>
@@ -806,7 +807,7 @@
                                                             <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="1" green="0.90588235294117647" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="backgroundColor" red="1" green="0.94692297166786576" blue="0.94192777061899191" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstItem="qY9-sl-IjZ" firstAttribute="leading" secondItem="QbB-UF-Bkb" secondAttribute="trailing" constant="5" id="4Dg-7P-XkC"/>
                                                         <constraint firstItem="QbB-UF-Bkb" firstAttribute="leading" secondItem="Fc5-Q8-mrR" secondAttribute="leading" constant="20" id="4ba-dh-gmb"/>
@@ -1340,6 +1341,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zKS-zW-jcV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="CafeAuLait"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1408,6 +1410,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gN6-Pp-aqY">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="CafeAuLait"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -1787,14 +1790,26 @@
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="Almond">
+            <color red="0.92941176470588238" green="0.8784313725490196" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="CafeAuLait">
             <color red="0.69019607843137254" green="0.53725490196078429" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ChampagnePink">
+            <color red="1" green="0.89803921568627454" blue="0.85098039215686272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Coffee">
+            <color red="0.49803921568627452" green="0.33333333333333331" blue="0.22352941176470589" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="DesertSand">
+            <color red="0.90196078431372551" green="0.80000000000000004" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="MaizeCrayola">
             <color red="0.97647058823529409" green="0.78431372549019607" blue="0.30588235294117649" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="PeachPuff">
-            <color red="1" green="0.84313725490196079" blue="0.72941176470588232" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="Tan">
+            <color red="0.8666666666666667" green="0.72156862745098038" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

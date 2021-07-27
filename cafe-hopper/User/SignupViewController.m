@@ -29,10 +29,6 @@
 
 - (BOOL)fieldsFilled {
     if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Entry" message:@"Username and password field cannot be blank." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:dismissAction];
-        [self presentViewController:alert animated:YES completion:^{}];
         return NO;
     }
     return YES;
@@ -43,13 +39,16 @@
     [userQuery whereKey:@"username" equalTo:self.usernameField.text];
     NSArray *matchingUsers = [userQuery findObjects];
     if (matchingUsers.count > 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Create Account" message:@"The username you entered is already taken." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:dismissAction];
-        [self presentViewController:alert animated:YES completion:^{}];
         return NO;
     }
     return YES;
+}
+
+- (void)presentSignupErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:^{}];
 }
 
 - (void)configView {
@@ -62,7 +61,11 @@
 }
 
 - (IBAction)tapSignup:(id)sender {
-    if ([self fieldsFilled] && [self isUniqueUsername]) {
+    if (![self fieldsFilled]) {
+        [self presentSignupErrorAlertWithTitle:@"Invalid Entry" message:@"Username and password field cannot be blank."];
+    } else if (![self isUniqueUsername]) {
+        [self presentSignupErrorAlertWithTitle:@"Cannot Create Account" message:@"The username you entered is already taken."];
+    } else {
         // initialize user object
         User *newUser = [User user];
         newUser.name = self.nameField.text;

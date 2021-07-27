@@ -97,21 +97,21 @@
     [self showStarRating];
     
     CGFloat buttonRadius = 10;
-    UIColor *borderColor = [UIColor systemGray4Color]; // TODO: test diff gray colors
-    CGFloat borderWidth = 1.f;
-    UIColor *backgroundColor = [UIColor clearColor];
+//    UIColor *borderColor = [UIColor systemGray4Color]; // TODO: test diff gray colors
+//    CGFloat borderWidth = 1.f;
+//    UIColor *backgroundColor = [UIColor clearColor];
     self.buttonBorder1.layer.cornerRadius = buttonRadius;
-    self.buttonBorder1.layer.borderColor = borderColor.CGColor;
-    self.buttonBorder1.layer.borderWidth = borderWidth;
-    self.buttonBorder1.layer.backgroundColor = backgroundColor.CGColor;
     self.buttonBorder2.layer.cornerRadius = buttonRadius;
-    self.buttonBorder2.layer.borderColor = borderColor.CGColor;
-    self.buttonBorder2.layer.borderWidth = borderWidth;
-    self.buttonBorder2.layer.backgroundColor = backgroundColor.CGColor;
     self.buttonBorder3.layer.cornerRadius = buttonRadius;
-    self.buttonBorder3.layer.borderColor = borderColor.CGColor;
-    self.buttonBorder3.layer.borderWidth = borderWidth;
-    self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
+//    self.buttonBorder1.layer.borderColor = borderColor.CGColor;
+//    self.buttonBorder2.layer.borderColor = borderColor.CGColor;
+//    self.buttonBorder3.layer.borderColor = borderColor.CGColor;
+//    self.buttonBorder1.layer.borderWidth = borderWidth;
+//    self.buttonBorder2.layer.borderWidth = borderWidth;
+//    self.buttonBorder3.layer.borderWidth = borderWidth;
+//    self.buttonBorder1.layer.backgroundColor = backgroundColor.CGColor;
+//    self.buttonBorder2.layer.backgroundColor = backgroundColor.CGColor;
+//    self.buttonBorder3.layer.backgroundColor = backgroundColor.CGColor;
     
     [self fetchReviews];
     [self setupMenus];

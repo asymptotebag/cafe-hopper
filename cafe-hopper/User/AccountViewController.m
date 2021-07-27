@@ -106,7 +106,11 @@
 - (IBAction)onTapEditProfile:(id)sender {
     if (self.editButton.isSelected) { // done with editing, save info
         // check for valid/duplicate username (& valid email?)
-        if ([self fieldsFilled] && [self isUniqueUsername]) {
+        if (![self fieldsFilled]) {
+            [self presentChangeUsernameErrorAlertWithTitle:@"Invalid Entry" message:@"Username cannot be blank."];
+        } else if (![self isUniqueUsername]) {
+            [self presentChangeUsernameErrorAlertWithTitle:@"Cannot Change Username" message:@"The username you entered is already taken."];
+        } else {
             [self.editButton setSelected:NO];
             self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;
             self.changePfpButton.hidden = YES;
@@ -150,10 +154,6 @@
 
 - (BOOL)fieldsFilled {
     if ([self.usernameField.text isEqual:@""]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Entry" message:@"Username cannot be blank." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:dismissAction];
-        [self presentViewController:alert animated:YES completion:^{}];
         return NO;
     }
     return YES;
@@ -167,13 +167,16 @@
     [userQuery whereKey:@"username" equalTo:self.usernameField.text];
     NSArray *matchingUsers = [userQuery findObjects];
     if (matchingUsers.count > 0) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Change Username" message:@"The username you entered is already taken." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-        [alert addAction:dismissAction];
-        [self presentViewController:alert animated:YES completion:^{}];
         return NO;
     }
     return YES;
+}
+
+- (void)presentChangeUsernameErrorAlertWithTitle:(NSString *)title message:(NSString *)message {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+    [alert addAction:dismissAction];
+    [self presentViewController:alert animated:YES completion:^{}];
 }
 
 - (void)setupSourcePicker {
