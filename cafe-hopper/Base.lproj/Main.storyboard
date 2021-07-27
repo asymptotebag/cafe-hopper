@@ -37,7 +37,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFZ-cW-mKT">
                                 <rect key="frame" x="50" y="525.5" width="314" height="35"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" name="BrownSugar"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="tkd-yh-VHC"/>
                                 </constraints>
@@ -139,7 +139,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ihc-wC-rxS">
                                 <rect key="frame" x="50" y="565.5" width="314" height="35"/>
-                                <color key="backgroundColor" name="AccentColor"/>
+                                <color key="backgroundColor" name="BrownSugar"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="11h-Uz-j1h"/>
                                 </constraints>
@@ -1195,8 +1195,12 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-oT-cwh">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JGk-oT-cwh">
                                 <rect key="frame" x="311" y="526" width="51" height="31"/>
+                                <color key="onTintColor" name="Tan"/>
+                                <connections>
+                                    <action selector="onToggleNotifications:" destination="eP6-yT-jdr" eventType="valueChanged" id="6PZ-7W-hmQ"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="default time (min) per stop:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXD-nf-kbl">
                                 <rect key="frame" x="50" y="456" width="232" height="24"/>
@@ -1757,7 +1761,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="woe-wn-tSv"/>
+        <segue reference="Dcg-sd-saV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="CafeAuLait"/>
     <resources>
@@ -1787,11 +1791,11 @@
         <image name="plus.square" catalog="system" width="128" height="114"/>
         <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Almond">
             <color red="0.92941176470588238" green="0.8784313725490196" blue="0.83137254901960789" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="BrownSugar">
+            <color red="0.61176470588235299" green="0.40000000000000002" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="CafeAuLait">
             <color red="0.69019607843137254" green="0.53725490196078429" blue="0.40784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

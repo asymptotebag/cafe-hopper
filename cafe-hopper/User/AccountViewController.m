@@ -10,6 +10,7 @@
 #import "SceneDelegate.h"
 #import "User.h"
 #import <Parse/Parse.h>
+#import <UserNotifications/UserNotifications.h>
 
 @interface AccountViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) User *user;
@@ -80,8 +81,7 @@
     self.emailField.textColor = UIColor.lightGrayColor;
     self.minPerStopField.textColor = UIColor.lightGrayColor;
 
-//    [self.notifSwitch setOn:self.user.notifsOn];
-    [self.notifSwitch setOn:NO]; // default no for now
+    [self.notifSwitch setOn:self.user.notifsOn];
     
     self.signoutButton.layer.cornerRadius = 5;
     self.signoutButton.clipsToBounds = true;
@@ -227,6 +227,31 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+}
+
+- (IBAction)onToggleNotifications:(id)sender {
+    if (self.notifSwitch.on) {
+        // request notifications permission
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert | UNAuthorizationOptionSound;
+        [center requestAuthorizationWithOptions:authOptions completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (granted) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                });
+                self.user.notifsOn = [NSNumber numberWithBool:YES];
+                [self.user saveInBackground];
+                NSLog(@"Turned on user notifications!");
+            }
+            if (error) {
+                NSLog(@"Error requesting notification authorization");
+                [self.notifSwitch setOn:NO animated:YES];
+            }
+        }];
+    } else { // turn off notifications
+        self.user.notifsOn = [NSNumber numberWithBool:NO];
+        [self.user saveInBackground];
+    }
 }
 
 - (IBAction)onLogout:(id)sender {

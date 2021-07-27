@@ -11,8 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CarouselCell : UICollectionViewCell
-@property (strong, nonatomic) GMSPlacePhotoMetadata *photo;
-@property (strong, nonatomic) GMSPlace *place; // temporary
+@property (strong, nonatomic) UIImage *photo;
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 
 @end

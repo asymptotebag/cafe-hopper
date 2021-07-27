@@ -9,8 +9,12 @@
 
 @implementation CarouselCell
 
-- (void)setPhoto:(GMSPlacePhotoMetadata *)photo {
-    // TODO: use this later once you start fetching Place photos
+- (void)setPhoto:(UIImage *)photo {
+    self.pictureView.alpha = 0;
+    [self.pictureView setImage:photo];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.pictureView.alpha = 1;
+    }];
 }
 
 - (void)setPlace:(GMSPlace *)place { // temporary setter function
