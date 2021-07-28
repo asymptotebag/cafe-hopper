@@ -56,7 +56,12 @@
         
         self.searchResults = [NSMutableArray new];
         
+        __weak typeof(self) weakSelf = self;
         [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (error) {
                 NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
             } else if (results) {

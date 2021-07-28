@@ -69,8 +69,13 @@
 
 - (void)fetchStops {
     GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress);
+    __weak typeof(self) weakSelf = self;
     for (NSMutableDictionary *stop in self.trip.stops) {
         [_placesClient fetchPlaceFromPlaceID:stop[@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (place) {
                 NSMutableDictionary *newStop = @{@"place":place, @"index":stop[@"index"], @"minSpent":stop[@"minSpent"]}.mutableCopy;
                 if (stop[@"timeToNext"]) { // nil if key doesn't exist
@@ -177,6 +182,7 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Begin Trip" message:@"Are you sure you want to begin this trip? The app will generate notifications to remind you of your schedule." preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *beginAction = [UIAlertAction actionWithTitle:@"Begin" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         // TODO: change button appearance
+        
         // create notifications
         double seconds = 0; // running count of seconds for scheduling notifications
         for (NSMutableDictionary *stop in self.stops) {

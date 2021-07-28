@@ -77,7 +77,12 @@
     
     if (usingRealImages) {
         GMSPlacePhotoMetadata *photoMetadata = self.place.photos[0];
+        __weak typeof(self) weakSelf = self;
         [_placesClient loadPlacePhoto:photoMetadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (photo) {
                 [self.pictureView setImage:photo]; // display attribution?
             } else {
@@ -393,7 +398,12 @@
         CarouselCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CarouselCell" forIndexPath:indexPath];
         if (usingRealImages) {
             GMSPlacePhotoMetadata *photoMetadata = self.place.photos[indexPath.item+1];
+            __weak typeof(self) weakSelf = self;
             [_placesClient loadPlacePhoto:photoMetadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                __typeof__(self) strongSelf = weakSelf;
+                if (strongSelf == nil) {
+                    return;
+                }
                 if (photo) {
                     cell.photo = photo;
                 } else {

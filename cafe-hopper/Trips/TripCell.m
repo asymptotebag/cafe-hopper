@@ -59,7 +59,12 @@
     self.durationLabel.text = [self timestampFromMinutes:duration];
     
     GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
+    __weak typeof(self) weakSelf = self;
     [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
         if (place) {
             self.originNameLabel.text = place.name;
             GMSPlacePhotoMetadata *metadata = place.photos[0];
@@ -75,6 +80,10 @@
         }
     }];
     [_placesClient fetchPlaceFromPlaceID:trip.stops[trip.stops.count-1][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
         if (place) {
             self.destinationNameLabel.text = place.name;
             GMSPlacePhotoMetadata *metadata = place.photos[0];

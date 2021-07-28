@@ -47,8 +47,13 @@
 - (void)fetchPlacesinCollection { // query
     GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate | GMSPlaceFieldRating | GMSPlaceFieldPriceLevel | GMSPlaceFieldPhoneNumber | GMSPlaceFieldWebsite | GMSPlaceFieldPhotos);
     
+    __weak typeof(self) weakSelf = self;
     for (NSString *placeId in self.collection.places) {
         [_placesClient fetchPlaceFromPlaceID:placeId placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (place) {
                 [self.places addObject:place];
                 [self.tableView reloadData];
