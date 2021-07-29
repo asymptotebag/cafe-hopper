@@ -34,4 +34,10 @@
     self.placeAddressLabel.attributedText = result.attributedSecondaryText;
 }
 
+- (void)setRecentResult:(NSDictionary *)recentResult {
+    _recentResult = recentResult;
+    self.placeNameLabel.text = recentResult[@"name"];
+    self.placeAddressLabel.text = recentResult[@"address"];
+}
+
 @end

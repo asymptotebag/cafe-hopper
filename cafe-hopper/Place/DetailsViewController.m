@@ -84,12 +84,14 @@
                 return;
             }
             if (photo) {
+                // TODO: animate the image expanding into place
                 [self.pictureView setImage:photo]; // display attribution?
             } else {
                 NSLog(@"Error getting place photo: %@", error.localizedDescription);
             }
         }];
     } else {
+        // TODO: animate the image expanding into place
         [self.pictureView setImage:[UIImage imageNamed:@"5"]];
     }
     

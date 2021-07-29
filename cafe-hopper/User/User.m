@@ -15,6 +15,7 @@
 @dynamic tripNames;
 @dynamic timePerStop;
 @dynamic notifsOn;
+@dynamic searchHistory;
 
 + (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
     [user.collectionNames addObject:collectionName];

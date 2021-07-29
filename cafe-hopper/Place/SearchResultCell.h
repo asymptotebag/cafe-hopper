@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchResultCell : UITableViewCell
 @property (strong, nonatomic) GMSAutocompletePrediction *result;
+@property (strong, nonatomic) NSDictionary *recentResult;
+
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeAddressLabel;
 
