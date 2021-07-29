@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TripCell : UITableViewCell
 @property (strong, nonatomic) Trip *trip;
 
+@property (weak, nonatomic) IBOutlet UIImageView *activeIndicator;
 @property (weak, nonatomic) IBOutlet UILabel *tripNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *originNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *originImageView;

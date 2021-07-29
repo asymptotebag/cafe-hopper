@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Trip : PFObject <PFSubclassing>
 @property (strong, nonatomic) NSString *tripName;
 @property (strong, nonatomic) User *owner;
+@property (nonatomic) NSNumber *isActive; // boolean
 @property (strong, nonatomic) NSMutableArray<NSMutableDictionary *> *stops;
 
 + (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSMutableDictionary *> * _Nullable)stops completion:(PFBooleanResultBlock)completion;

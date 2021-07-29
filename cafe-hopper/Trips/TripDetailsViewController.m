@@ -67,10 +67,16 @@
     self.imageView2.clipsToBounds = YES;
     self.imageView3.clipsToBounds = YES;
     
-    [self.beginTripButton setTitle:@"Begin Trip" forState:UIControlStateNormal];
-    [self.beginTripButton setTitle:@"Cancel Trip" forState:UIControlStateSelected];
-    [self.beginTripButton setImage:[[UIImage imageNamed:@"play.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateNormal];
-    [self.beginTripButton setImage:[[UIImage imageNamed:@"xmark.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateSelected];
+    [self.beginTripButton setTitle:@" Begin Trip" forState:UIControlStateNormal];
+    [self.beginTripButton setTitle:@" Cancel Trip" forState:UIControlStateSelected];
+    [self.beginTripButton setImage:[[UIImage systemImageNamed:@"play.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateNormal];
+    [self.beginTripButton setImage:[[UIImage systemImageNamed:@"xmark.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateSelected];
+    
+    if ([self.trip.isActive boolValue]) {
+        [self.beginTripButton setSelected:YES];
+    } else {
+        [self.beginTripButton setSelected:NO];
+    }
 }
 
 - (void)fetchStops {
@@ -193,6 +199,8 @@
             [self.beginTripButton setSelected:NO];
             [center removeAllPendingNotificationRequests];
             NSLog(@"Removed all scheduled notifications.");
+            self.trip.isActive = [NSNumber numberWithBool:NO];
+            [self.trip saveInBackground];
         }];
         UIAlertAction *neverMind = [UIAlertAction actionWithTitle:@"Never Mind" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:cancel];
@@ -201,8 +209,10 @@
     } else if (User.currentUser.notifsOn) { // begin trip b/c notifs allowed
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Begin Trip" message:@"Are you sure you want to begin this trip? The app will schedule notifications to remind you when to leave for your next stop." preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *beginAction = [UIAlertAction actionWithTitle:@"Begin" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            // TODO: change button appearance
+            // change button appearance
             [self.beginTripButton setSelected:YES];
+            self.trip.isActive = [NSNumber numberWithBool:YES];
+            [self.trip saveInBackground];
             // create notifications
             double seconds = 0; // running count of seconds for scheduling notifications
             // start from 1 because it doesn't make sense to notify when to leave for the first stop

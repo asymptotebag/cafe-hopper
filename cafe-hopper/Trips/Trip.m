@@ -13,6 +13,7 @@
 @dynamic tripName;
 @dynamic stops;
 @dynamic owner;
+@dynamic isActive;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";
@@ -22,6 +23,7 @@
     Trip *trip = [Trip new];
     trip.tripName = tripName;
     trip.owner = [User currentUser];
+    trip.isActive = [NSNumber numberWithBool:NO];
     if (stops) {
         trip.stops = stops;
     } else {

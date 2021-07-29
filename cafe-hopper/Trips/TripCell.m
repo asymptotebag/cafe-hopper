@@ -39,6 +39,15 @@
 
 - (void)setTrip:(Trip *)trip { // custom setter
     _trip = trip;
+    
+    UIImageSymbolConfiguration *defaultConfig = [UIImageSymbolConfiguration configurationWithScale:UIImageSymbolScaleLarge];
+    if ([trip.isActive boolValue]) {
+        NSLog(@"setting image to stopwatch");
+        [self.activeIndicator setImage:[UIImage systemImageNamed:@"stopwatch.fill" withConfiguration:defaultConfig]];
+    } else {
+        NSLog(@"setting image to map pin");
+        [self.activeIndicator setImage:[UIImage systemImageNamed:@"mappin.circle.fill" withConfiguration:defaultConfig]];
+    }
     self.tripNameLabel.text = trip.tripName;
     
     NSString *numStops = [NSString stringWithFormat:@"%lu", trip.stops.count];
@@ -58,6 +67,8 @@
     }
     self.durationLabel.text = [self timestampFromMinutes:duration];
     
+    // TODO: bring back images when you're ready
+    /*
     GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
     __weak typeof(self) weakSelf = self;
     [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
@@ -98,6 +109,7 @@
             NSLog(@"Error getting destination name: %@", error.localizedDescription);
         }
     }];
+     */
     
 //    [self drawDottedLine];
     
