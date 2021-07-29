@@ -22,7 +22,8 @@
 + (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSMutableDictionary *> *)stops completion:(PFBooleanResultBlock)completion {
     Trip *trip = [Trip new];
     trip.tripName = tripName;
-    trip.owner = [User currentUser];
+    User *user = [User currentUser];
+    trip.owner = user;
     trip.isActive = [NSNumber numberWithBool:NO];
     if (stops) {
         trip.stops = stops;
@@ -32,7 +33,7 @@
 
     [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
-            [User addTripNamed:tripName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            [user addTripNamed:tripName withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
             completion(true, nil);
         } else {
             NSLog(@"Error creating new trip: %@", error.localizedDescription);
@@ -42,10 +43,11 @@
 }
 
 + (void)deleteTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion {
+    User *user = [User currentUser];
     [Trip deleteAllInBackground:@[trip] block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"%@ trip deleted.", trip.tripName);
-            [User removeTripNamed:trip.tripName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            [user removeTripNamed:trip.tripName withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
             completion(true, nil);
         } else {
             NSLog(@"Error deleting trip: %@", error.localizedDescription);

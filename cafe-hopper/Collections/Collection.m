@@ -21,13 +21,14 @@
 + (void)createCollectionWithName:(NSString *)name completion:(PFBooleanResultBlock)completion {
     Collection *collection = [Collection new];
     collection.collectionName = name;
-    collection.owner = [User currentUser];
+    User *user = [User currentUser];
+    collection.owner = user;
     collection.places = [NSMutableArray new];
     [collection saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Created new collection successfully.");
             if (![name isEqualToString:@"All"]) {
-                [User addCollectionNamed:name forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+                [user addCollectionNamed:name withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
             }
             completion(true, nil);
         } else {
@@ -38,48 +39,14 @@
 }
 
 - (void)deleteWithCompletion:(PFBooleanResultBlock)completion {
+    User *user = [User currentUser];
     [Collection deleteAllInBackground:@[self] block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"%@ collection deleted.", self.collectionName);
-            [User removeCollectionNamed:self.collectionName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            [user removeCollectionNamed:self.collectionName withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
             completion(true, nil);
         } else {
             NSLog(@"Error deleting collection: %@", error.localizedDescription);
-            completion(false, error);
-        }
-    }];
-}
-
-+ (void)deleteCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
-    [Collection deleteAllInBackground:@[collection] block:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            NSLog(@"%@ collection deleted.", collection.collectionName);
-            [User removeCollectionNamed:collection.collectionName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
-            completion(true, nil);
-        } else {
-            NSLog(@"Error deleting collection: %@", error.localizedDescription);
-            completion(false, error);
-        }
-    }];
-}
-
-+ (void)deleteCollectionWithName:(NSString *)name completion:(PFBooleanResultBlock)completion {
-    PFQuery *query = [Collection query];
-    [query whereKey:@"collectionName" equalTo:name];
-    [query whereKey:@"owner" equalTo:[User currentUser]];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-        if (object) {
-            [Collection deleteAllInBackground:@[object] block:^(BOOL succeeded, NSError * _Nullable error) {
-                if (succeeded) {
-                    NSLog(@"%@ collection deleted.", name);
-                    [User removeCollectionNamed:name forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
-                    completion(true, nil);
-                } else {
-                    NSLog(@"Error deleting collection: %@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"Couldn't find object.");
             completion(false, error);
         }
     }];

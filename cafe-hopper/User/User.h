@@ -19,17 +19,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) NSNumber *notifsOn;
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *searchHistory;
 
-+ (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+- (void)addCollectionNamed:(NSString *)collectionName withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+- (void)removeCollectionNamed:(NSString *)collectionName withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)addTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+- (void)addTripNamed:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)removeTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion;
+- (void)removeTripNamed:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)changeInfoForUser:(User *)user withName:(NSString *)name username:(NSString *)username email:(NSString *)email completion:(PFBooleanResultBlock)completion;
+- (void)changeInfoWithName:(NSString *)name username:(NSString *)username email:(NSString *)email completion:(PFBooleanResultBlock)completion;
 
-+ (void)changePfpForUser:(User *)user withPfp:(UIImage *)pfp completion:(PFBooleanResultBlock _Nullable)completion;
+- (void)changePfpWithPfp:(UIImage *)pfp completion:(PFBooleanResultBlock)completion;
 
 @end
 

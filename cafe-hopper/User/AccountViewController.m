@@ -142,11 +142,16 @@
             self.emailField.textColor = UIColor.lightGrayColor;
             self.minPerStopField.textColor = UIColor.lightGrayColor;
             
-            [User changeInfoForUser:self.user withName:self.nameField.text username:self.usernameField.text email:self.emailField.text completion:^(BOOL succeeded, NSError * _Nullable error) {
+            __weak typeof(self) weakSelf = self;
+            [weakSelf.user changeInfoWithName:weakSelf.nameField.text username:weakSelf.usernameField.text email:weakSelf.emailField.text completion:^(BOOL succeeded, NSError * _Nullable error) {
+                __typeof__(self) strongSelf = weakSelf;
+                if (strongSelf == nil) {
+                    return;
+                }
                 if (succeeded) {
                     NSLog(@"Successfully saved user info.");
-                    self.nameLabel.text = self.user.name;
-                    self.usernameLabel.text = [@"@" stringByAppendingString:self.user.username];
+                    strongSelf.nameLabel.text = strongSelf.user.name;
+                    strongSelf.usernameLabel.text = [@"@" stringByAppendingString:strongSelf.user.username];
                 } else {
                     NSLog(@"Could not save info: %@", error.localizedDescription);
                 }
@@ -253,7 +258,7 @@
     CGSize size = CGSizeMake(300, 300);
     UIImage *pfp = [self resizeImage:editedImage withSize:size];
     [self.pfpView setImage:pfp];
-    [User changePfpForUser:self.user withPfp:pfp completion:nil];
+    [self.user changePfpWithPfp:pfp completion:^(BOOL succeeded, NSError * _Nullable error) {}];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
