@@ -235,7 +235,7 @@
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
-                            <integer key="value" value="0"/>
+                            <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -662,7 +662,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFc-Fy-bDg">
-                                <rect key="frame" x="124.5" y="502" width="45" height="38"/>
+                                <rect key="frame" x="124.5" y="496" width="45" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-aC-WnP">
                                         <rect key="frame" x="5" y="4" width="35" height="30"/>
@@ -688,7 +688,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7rM-Wd-gwh">
-                                <rect key="frame" x="184.5" y="502" width="45" height="38"/>
+                                <rect key="frame" x="184.5" y="496" width="45" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wc7-aC-zhs">
                                         <rect key="frame" x="5" y="4" width="35" height="30"/>
@@ -716,7 +716,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDe-pe-0qv">
-                                <rect key="frame" x="244.5" y="502" width="45" height="38"/>
+                                <rect key="frame" x="244.5" y="496" width="45" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QWe-xz-mZS">
                                         <rect key="frame" x="9" y="4" width="27" height="29"/>
@@ -750,7 +750,7 @@
                                 </constraints>
                             </imageView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ju5-t6-xsF">
-                                <rect key="frame" x="0.0" y="562" width="414" height="229"/>
+                                <rect key="frame" x="0.0" y="554" width="414" height="236"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="DG4-Ht-DkX">
                                     <size key="itemSize" width="415" height="211"/>
@@ -760,7 +760,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReviewCell" id="4CY-7d-GJR" customClass="ReviewCell">
-                                        <rect key="frame" x="0.0" y="9" width="415" height="211"/>
+                                        <rect key="frame" x="0.0" y="12.5" width="415" height="211"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BwJ-dJ-DnV">
                                             <rect key="frame" x="0.0" y="0.0" width="415" height="211"/>
@@ -854,7 +854,7 @@
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="BQB-7K-sdk" secondAttribute="trailing" constant="15" id="1c9-Dc-0Ue"/>
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="width" secondItem="OFc-Fy-bDg" secondAttribute="width" id="29p-9b-7tg"/>
                             <constraint firstItem="kDe-pe-0qv" firstAttribute="leading" secondItem="7rM-Wd-gwh" secondAttribute="trailing" constant="15" id="4rB-Ew-Iai"/>
-                            <constraint firstItem="9Tu-xR-pnv" firstAttribute="bottom" secondItem="Ju5-t6-xsF" secondAttribute="bottom" constant="22" id="6Py-M2-A3j"/>
+                            <constraint firstItem="9Tu-xR-pnv" firstAttribute="bottom" secondItem="Ju5-t6-xsF" secondAttribute="bottom" constant="23" id="6Py-M2-A3j"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="9HC-WZ-HiV"/>
                             <constraint firstItem="kDe-pe-0qv" firstAttribute="width" secondItem="OFc-Fy-bDg" secondAttribute="width" id="9Hr-GW-9oz"/>
                             <constraint firstItem="zvu-a3-dZB" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="CxJ-0G-OtR"/>
@@ -871,7 +871,7 @@
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="centerX" secondItem="muf-YL-3dy" secondAttribute="centerX" id="a87-qJ-O4R"/>
                             <constraint firstItem="kDe-pe-0qv" firstAttribute="height" secondItem="OFc-Fy-bDg" secondAttribute="height" id="b8D-2W-HIi"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="top" secondItem="muf-YL-3dy" secondAttribute="top" id="bjh-53-45M"/>
-                            <constraint firstItem="Ju5-t6-xsF" firstAttribute="top" secondItem="OFc-Fy-bDg" secondAttribute="bottom" constant="22" id="dqc-7v-jBS"/>
+                            <constraint firstItem="Ju5-t6-xsF" firstAttribute="top" secondItem="OFc-Fy-bDg" secondAttribute="bottom" constant="20" id="dqc-7v-jBS"/>
                             <constraint firstItem="gMK-NB-evC" firstAttribute="centerY" secondItem="sAP-sE-Ayi" secondAttribute="bottom" id="iaD-oX-1XL"/>
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="centerY" secondItem="OFc-Fy-bDg" secondAttribute="centerY" id="inG-ap-cFa"/>
                             <constraint firstItem="BQB-7K-sdk" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" constant="15" id="keo-nB-4GX"/>
@@ -879,7 +879,7 @@
                             <constraint firstItem="9Tu-xR-pnv" firstAttribute="trailing" secondItem="zvu-a3-dZB" secondAttribute="trailing" constant="15" id="qGA-N7-UaA"/>
                             <constraint firstItem="7rM-Wd-gwh" firstAttribute="height" secondItem="OFc-Fy-bDg" secondAttribute="height" id="s9I-9G-BcR"/>
                             <constraint firstItem="sAP-sE-Ayi" firstAttribute="leading" secondItem="9Tu-xR-pnv" secondAttribute="leading" id="sgI-Na-iaf"/>
-                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="top" secondItem="zvu-a3-dZB" secondAttribute="bottom" constant="80" id="uVf-PX-05I"/>
+                            <constraint firstItem="7rM-Wd-gwh" firstAttribute="top" secondItem="zvu-a3-dZB" secondAttribute="bottom" constant="74" id="uVf-PX-05I"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Place Details" id="awj-Lk-Gh6">
@@ -1085,11 +1085,7 @@
                             <constraint firstItem="bfo-t0-qaj" firstAttribute="trailing" secondItem="ddb-pj-rdO" secondAttribute="trailing" id="uRJ-HK-cR2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Collection Name" id="20a-CZ-M4b">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="square.and.pencil" catalog="system" id="ysX-Am-B3c">
-                            <color key="tintColor" name="CafeAuLait"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Collection Name" id="20a-CZ-M4b"/>
                     <connections>
                         <outlet property="tableView" destination="bfo-t0-qaj" id="sar-Xu-zYg"/>
                     </connections>

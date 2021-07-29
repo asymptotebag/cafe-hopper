@@ -37,6 +37,19 @@
     }];
 }
 
+- (void)deleteWithCompletion:(PFBooleanResultBlock)completion {
+    [Collection deleteAllInBackground:@[self] block:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded) {
+            NSLog(@"%@ collection deleted.", self.collectionName);
+            [User removeCollectionNamed:self.collectionName forUser:[User currentUser] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+            completion(true, nil);
+        } else {
+            NSLog(@"Error deleting collection: %@", error.localizedDescription);
+            completion(false, error);
+        }
+    }];
+}
+
 + (void)deleteCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
     [Collection deleteAllInBackground:@[collection] block:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
@@ -72,12 +85,26 @@
     }];
 }
 
+- (void)addPlaceId:(NSString *)placeId withCompletion:(PFBooleanResultBlock)completion {
+    if (![self.places containsObject:placeId]) {
+        [self.places addObject:placeId];
+        self[@"places"] = self.places;
+        [self saveInBackgroundWithBlock:completion];
+    }
+}
+
 + (void)addPlaceId:(NSString *)placeId toCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {
     if (![collection.places containsObject:placeId]) { // only add if it isn't a duplicate
         [collection.places addObject:placeId];
         collection[@"places"] = collection.places;
         [collection saveInBackgroundWithBlock:completion];
     }
+}
+
+- (void)removePlaceId:(NSString *)placeId withCompletion:(PFBooleanResultBlock)completion {
+    [self.places removeObject:placeId];
+    self[@"places"] = self.places;
+    [self saveInBackgroundWithBlock:completion];
 }
 
 + (void)removePlaceId:(NSString *)placeId fromCollection:(Collection *)collection withCompletion:(PFBooleanResultBlock)completion {

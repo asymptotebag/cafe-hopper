@@ -48,7 +48,7 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
   - [ ] User can login with either username or email
 - [x] User can adjust account settings (e.g. email, username, profile pic, notifications)
 - [ ] User can apply search filters (e.g. price level, rating)
-- [ ] User can see recent searches on the search screen
+- [x] User can see recent searches on the search screen
 - [ ] User can see cafe recommendations on the search screen based on previous searches or saves
 - [x] User can be redirected to an eatery's website and call their phone number through the app
 - [x] User can read reviews, or review keywords, of an eatery

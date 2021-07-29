@@ -160,7 +160,7 @@
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete Collection" message:@"Are you sure you want to delete this collection?" preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [Collection deleteCollection:selectedCollection withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
+        [selectedCollection deleteWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];
         [self.collections removeObject:selectedCollection];
         [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];
     }];

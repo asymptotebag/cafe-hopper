@@ -89,10 +89,11 @@
         GMSPlace *place = self.places[indexPath.row];
         [self.places removeObject:place];
         NSString *placeId = place.placeID;
-        [Collection removePlaceId:placeId fromCollection:self.collection withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        __weak typeof(self) weakSelf = self;
+        [self.collection removePlaceId:placeId withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"Removed place successfully");
-                [self.tableView reloadData];
+                [weakSelf.tableView reloadData];
             } else {
                 NSLog(@"Error removing place: %@", error.localizedDescription);
             }

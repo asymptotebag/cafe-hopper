@@ -84,15 +84,21 @@
                 return;
             }
             if (photo) {
-                // TODO: animate the image expanding into place
-                [self.pictureView setImage:photo]; // display attribution?
+                strongSelf.pictureView.alpha = 0;
+                [strongSelf.pictureView setImage:photo];
+                [UIView animateWithDuration:0.3 animations:^{
+                    strongSelf.pictureView.alpha = 1;
+                }];
             } else {
                 NSLog(@"Error getting place photo: %@", error.localizedDescription);
             }
         }];
     } else {
-        // TODO: animate the image expanding into place
+        self.pictureView.alpha = 0;
         [self.pictureView setImage:[UIImage imageNamed:@"5"]];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.pictureView.alpha = 1;
+        }];
     }
     
     self.pictureView.layer.cornerRadius = self.pictureView.frame.size.height/2;
@@ -158,7 +164,7 @@
             NSDictionary *result = jsonDict[@"result"];
             self.reviews = result[@"reviews"];
             NSLog(@"%li reviews fetched", self.reviews.count);
-            // TODO: reload whatever is displaying these reviews
+            // reload whatever is displaying these reviews
             [self.reviewsCollectionView reloadData];
         } else {
             NSLog(@"Error calling Places Details API: %@", error.localizedDescription);
@@ -172,8 +178,12 @@
     PFQuery *query = [Collection query];
     [query whereKey:@"owner" equalTo:self.user];
     [query whereKey:@"collectionName" equalTo:@"All"];
-    
+    __weak typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray<Collection *> * _Nullable objects, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
         if (objects) {
             // there should be only one Collection in objects
             if ([objects[0].places containsObject:self.place.placeID]) {
@@ -190,6 +200,10 @@
     PFQuery *tripQuery = [Trip query];
     [tripQuery whereKey:@"owner" equalTo:self.user];
     [tripQuery findObjectsInBackgroundWithBlock:^(NSArray<Trip *> * _Nullable trips, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
         if (trips) {
             BOOL isSaved = NO;
             for (Trip *trip in trips) {
@@ -260,7 +274,8 @@
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) { // should only have one item
-            [Collection addPlaceId:self.place.placeID toCollection:object withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            Collection *collection = (Collection *)object;
+            [collection addPlaceId:self.place.placeID withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"Saved place to %@", collectionName);
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);
@@ -342,7 +357,7 @@
                             relatedBy:NSLayoutRelationEqual
                             toItem:self.addressLabel
                             attribute:NSLayoutAttributeBottom
-                            multiplier:1.f constant:15.f] setActive:YES];
+                            multiplier:1.f constant:12.f] setActive:YES];
     [[NSLayoutConstraint constraintWithItem:starRatingView
                             attribute:NSLayoutAttributeCenterX
                             relatedBy:NSLayoutRelationEqual
