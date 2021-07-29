@@ -37,9 +37,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *buttonBorder1;
-@property (weak, nonatomic) IBOutlet UIView *buttonBorder2;
-@property (weak, nonatomic) IBOutlet UIView *buttonBorder3;
+@property (weak, nonatomic) IBOutlet UIView *telephoneButtonBackground;
+@property (weak, nonatomic) IBOutlet UIView *websiteButtonBackground;
+@property (weak, nonatomic) IBOutlet UIView *directionsButtonBackground;
 @property (weak, nonatomic) IBOutlet UIButton *telephoneButton;
 @property (weak, nonatomic) IBOutlet UIButton *websiteButton;
 @property (weak, nonatomic) IBOutlet UIButton *directionsButton;
@@ -105,9 +105,9 @@
     UIColor *borderColor = [UIColor systemGray4Color];
     CGFloat borderWidth = 1.f;
     UIColor *backgroundColor = [UIColor clearColor];
-    self.buttonBorder1.layer.cornerRadius = buttonRadius;
-    self.buttonBorder2.layer.cornerRadius = buttonRadius;
-    self.buttonBorder3.layer.cornerRadius = buttonRadius;
+    self.telephoneButtonBackground.layer.cornerRadius = buttonRadius;
+    self.websiteButtonBackground.layer.cornerRadius = buttonRadius;
+    self.directionsButtonBackground.layer.cornerRadius = buttonRadius;
     
     [self fetchReviews];
     [self setupMenus];

@@ -9,6 +9,7 @@
 #import "StopCell.h"
 #import <NSString_UrlEncode/NSString+URLEncode.h>
 #import <UserNotifications/UserNotifications.h>
+#import "User.h"
 @import GooglePlaces;
 
 @interface TripDetailsViewController () <UITableViewDataSource, UITableViewDelegate, UNUserNotificationCenterDelegate>
@@ -65,6 +66,11 @@
     self.imageView1.clipsToBounds = YES;
     self.imageView2.clipsToBounds = YES;
     self.imageView3.clipsToBounds = YES;
+    
+    [self.beginTripButton setTitle:@"Begin Trip" forState:UIControlStateNormal];
+    [self.beginTripButton setTitle:@"Cancel Trip" forState:UIControlStateSelected];
+    [self.beginTripButton setImage:[[UIImage imageNamed:@"play.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateNormal];
+    [self.beginTripButton setImage:[[UIImage imageNamed:@"xmark.circle.fill"] imageWithRenderingMode:UIImageRenderingModeAutomatic] forState:UIControlStateSelected];
 }
 
 - (void)fetchStops {
@@ -179,37 +185,59 @@
 }
 
 - (IBAction)onTapBeginTrip:(id)sender {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Begin Trip" message:@"Are you sure you want to begin this trip? The app will generate notifications to remind you of your schedule." preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *beginAction = [UIAlertAction actionWithTitle:@"Begin" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // TODO: change button appearance
-        
-        // create notifications
-        double seconds = 0; // running count of seconds for scheduling notifications
-        for (NSMutableDictionary *stop in self.stops) {
-            seconds += [stop[@"minSpent"] doubleValue];
-            GMSPlace *place = stop[@"place"];
-            UNMutableNotificationContent *notif = [[UNMutableNotificationContent alloc] init];
-            notif.title = [NSString localizedUserNotificationStringForKey:self.trip.tripName arguments:nil];
-            notif.body = [NSString localizedUserNotificationStringForKey:[[@"Time to leave for " stringByAppendingString:place.name] stringByAppendingString:@"!"] arguments:nil];
-            UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:seconds repeats:NO];
-            UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:place.name content:notif trigger:trigger];
-            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-            [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-                if (error!=nil) {
-                    NSLog(@"Error scheduling notification: %@", error.localizedDescription);
-                } else {
-                    NSLog(@"Notification scheduled for %@!", place.name);
+    UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+    if (self.beginTripButton.isSelected) { // already selected, end trip
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cancel Trip" message:@"Are you sure you want to cancel this trip? This will delete scheduled notifications for ALL active trips." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            // unschedule all pending notification requests
+            [self.beginTripButton setSelected:NO];
+            [center removeAllPendingNotificationRequests];
+            NSLog(@"Removed all scheduled notifications.");
+        }];
+        UIAlertAction *neverMind = [UIAlertAction actionWithTitle:@"Never Mind" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:cancel];
+        [alert addAction:neverMind];
+        [self presentViewController:alert animated:YES completion:^{}];
+    } else if (User.currentUser.notifsOn) { // begin trip b/c notifs allowed
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Begin Trip" message:@"Are you sure you want to begin this trip? The app will schedule notifications to remind you when to leave for your next stop." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *beginAction = [UIAlertAction actionWithTitle:@"Begin" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // TODO: change button appearance
+            [self.beginTripButton setSelected:YES];
+            // create notifications
+            double seconds = 0; // running count of seconds for scheduling notifications
+            // start from 1 because it doesn't make sense to notify when to leave for the first stop
+            for (int i=1; i<self.stops.count; i++) {
+                NSMutableDictionary *stop = self.stops[i];
+                seconds += [stop[@"minSpent"] doubleValue];
+                GMSPlace *place = stop[@"place"];
+                UNMutableNotificationContent *notif = [[UNMutableNotificationContent alloc] init];
+                notif.title = [NSString localizedUserNotificationStringForKey:self.trip.tripName arguments:nil];
+                notif.body = [NSString localizedUserNotificationStringForKey:[[@"Time to leave for " stringByAppendingString:place.name] stringByAppendingString:@"!"] arguments:nil];
+                UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:seconds repeats:NO];
+                UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:place.name content:notif trigger:trigger];
+                
+                [center addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+                    if (error!=nil) {
+                        NSLog(@"Error scheduling notification: %@", error.localizedDescription);
+                    } else {
+                        NSLog(@"Notification scheduled for %@!", place.name);
+                    }
+                }];
+                if (stop[@"timeToNext"]) {
+                    seconds += [stop[@"timeToNext"] doubleValue];
                 }
-            }];
-            if (stop[@"timeToNext"]) {
-                seconds += [stop[@"timeToNext"] doubleValue];
             }
-        }
-    }];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
-    [alert addAction:beginAction];
-    [alert addAction:cancelAction];
-    [self presentViewController:alert animated:YES completion:^{}];
+        }];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:beginAction];
+        [alert addAction:cancelAction];
+        [self presentViewController:alert animated:YES completion:^{}];
+    } else { // user tried to begin trip but notifs are off
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Cannot Begin Trip" message:@"Begin Trip schedules notifications to remind you when to leave for your next stop. You must have notifications enabled in the Account tab to use this feature." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dismiss = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {}];
+        [alert addAction:dismiss];
+        [self presentViewController:alert animated:YES completion:^{}];
+    }
 }
 
 - (void)scheduleTestNotification {

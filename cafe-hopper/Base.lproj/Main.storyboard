@@ -896,12 +896,10 @@
                     <connections>
                         <outlet property="addressLabel" destination="zvu-a3-dZB" id="txr-iB-R64"/>
                         <outlet property="bigHeart" destination="19P-3d-ZEu" id="k0z-JZ-RLz"/>
-                        <outlet property="buttonBorder1" destination="OFc-Fy-bDg" id="5eN-RW-x5r"/>
-                        <outlet property="buttonBorder2" destination="7rM-Wd-gwh" id="2ju-hT-VZJ"/>
-                        <outlet property="buttonBorder3" destination="kDe-pe-0qv" id="Tb4-Q9-d9O"/>
                         <outlet property="carouselCollectionView" destination="sAP-sE-Ayi" id="J6O-u4-ecU"/>
                         <outlet property="carouselFlowLayout" destination="RYY-lI-5bx" id="VsB-Ys-Puk"/>
                         <outlet property="directionsButton" destination="QWe-xz-mZS" id="ORW-rU-Oti"/>
+                        <outlet property="directionsButtonBackground" destination="kDe-pe-0qv" id="brg-bn-w6z"/>
                         <outlet property="doubleTapGesture" destination="iI4-rw-Zj3" id="YDy-zP-goe"/>
                         <outlet property="nameLabel" destination="BQB-7K-sdk" id="RJE-RH-JrS"/>
                         <outlet property="pictureView" destination="gMK-NB-evC" id="c8z-HP-fFm"/>
@@ -909,8 +907,10 @@
                         <outlet property="reviewsFlowLayout" destination="DG4-Ht-DkX" id="aUt-Lq-fhD"/>
                         <outlet property="saveBarButton" destination="94G-ok-nrZ" id="7l0-ll-95V"/>
                         <outlet property="telephoneButton" destination="4LY-aC-WnP" id="X9g-WI-WjZ"/>
+                        <outlet property="telephoneButtonBackground" destination="OFc-Fy-bDg" id="Cec-nb-QV9"/>
                         <outlet property="tripBarButton" destination="IDj-uw-YRa" id="QOr-fV-4X3"/>
                         <outlet property="websiteButton" destination="Wc7-aC-zhs" id="30N-l9-GCJ"/>
+                        <outlet property="websiteButtonBackground" destination="7rM-Wd-gwh" id="KIr-lp-XLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pCv-JF-gFa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

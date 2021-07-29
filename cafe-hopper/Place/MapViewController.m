@@ -103,13 +103,12 @@
     GMSMarker *marker = [[GMSMarker alloc] init];
     marker.position = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude);
     marker.title = place.name;
-//    marker.snippet = @"hello hello";
     marker.map = mapView;
 }
 
-//- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
-//
-//}
+- (void)mapView:(GMSMapView *)mapView didTapInfoWindowOfMarker:(GMSMarker *)marker {
+    // TODO: this should also open up details view
+}
 
 - (void)showSampleMap {
     // Sample code to create a GMSCameraPosition that tells the map to display the
