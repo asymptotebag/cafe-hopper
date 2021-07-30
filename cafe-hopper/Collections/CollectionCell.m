@@ -57,10 +57,8 @@
                             [grid[i] setImage:photo];
                         } else {
                             NSLog(@"Error loading photo: %@", error.localizedDescription);
-                            // set to random placeholder
-                            NSInteger randint = arc4random_uniform(6) + 1;
-                            NSString *imgName = [NSString stringWithFormat:@"%li", randint];
-                            [grid[i] setImage:[UIImage imageNamed:imgName]];
+                            // set to placeholder
+                            [grid[i] setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%i", i]]];
                         }
                     }];
                 }

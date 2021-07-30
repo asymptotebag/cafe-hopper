@@ -67,47 +67,54 @@
     }
     self.durationLabel.text = [self timestampFromMinutes:duration];
     
-    // TODO: bring back images when you're ready
-    GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
-    __weak typeof(self) weakSelf = self;
-    [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
-        __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return;
-        }
-        if (place) {
-            strongSelf.originNameLabel.text = place.name;
-            GMSPlacePhotoMetadata *metadata = place.photos[0];
-            [strongSelf->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-                if (photo) {
-                    [strongSelf.originImageView setImage:photo];
-                } else {
-                    NSLog(@"Error loading photo: %@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"Error getting origin details: %@", error.localizedDescription);
-        }
-    }];
-    [_placesClient fetchPlaceFromPlaceID:trip.stops[trip.stops.count-1][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
-        __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return;
-        }
-        if (place) {
-            strongSelf.destinationNameLabel.text = place.name;
-            GMSPlacePhotoMetadata *metadata = place.photos[0];
-            [strongSelf->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-                if (photo) {
-                    [strongSelf.destinationImageView setImage:photo];
-                } else {
-                    NSLog(@"Error loading photo: %@", error.localizedDescription);
-                }
-            }];
-        } else {
-            NSLog(@"Error getting destination name: %@", error.localizedDescription);
-        }
-    }];
+    // TODO: handle stops having 0 or 1 stop
+    if (trip.stops.count > 0) {
+        GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
+        __weak typeof(self) weakSelf = self;
+        [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
+            if (place) {
+                strongSelf.originNameLabel.text = place.name;
+                GMSPlacePhotoMetadata *metadata = place.photos[0];
+                [strongSelf->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                    if (photo) {
+                        [strongSelf.originImageView setImage:photo];
+                    } else {
+                        NSLog(@"Error loading photo: %@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"Error getting origin details: %@", error.localizedDescription);
+            }
+        }];
+        [_placesClient fetchPlaceFromPlaceID:trip.stops[trip.stops.count-1][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
+            if (place) {
+                strongSelf.destinationNameLabel.text = place.name;
+                GMSPlacePhotoMetadata *metadata = place.photos[0];
+                [strongSelf->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(50, 50) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                    if (photo) {
+                        [strongSelf.destinationImageView setImage:photo];
+                    } else {
+                        NSLog(@"Error loading photo: %@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"Error getting destination name: %@", error.localizedDescription);
+            }
+        }];
+    } else {
+        [self.originImageView setImage:nil];
+        [self.originImageView setBackgroundColor:UIColor.systemGray6Color];
+        [self.destinationImageView setImage:nil];
+        [self.destinationImageView setBackgroundColor:UIColor.systemGray6Color];
+    }
     
     self.originImageView.layer.cornerRadius = self.originImageView.frame.size.height/2;
     self.originImageView.clipsToBounds = true;
