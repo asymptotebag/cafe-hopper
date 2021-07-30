@@ -243,14 +243,14 @@
 			children = (
 				7CDB52C2269FA49100D02758 /* Collection.h */,
 				7CDB52C3269FA49100D02758 /* Collection.m */,
-				7CDB52BC269F88A600D02758 /* CollectionCell.h */,
-				7CDB52BD269F88A600D02758 /* CollectionCell.m */,
-				7CDB52C526A0857B00D02758 /* PlaceCell.h */,
-				7CDB52C626A0857B00D02758 /* PlaceCell.m */,
 				7CDB52B9269F759400D02758 /* PlacesViewController.h */,
 				7CDB52BA269F759400D02758 /* PlacesViewController.m */,
+				7CDB52BC269F88A600D02758 /* CollectionCell.h */,
+				7CDB52BD269F88A600D02758 /* CollectionCell.m */,
 				7CDB52C826A0954600D02758 /* CollectionViewController.h */,
 				7CDB52C926A0954600D02758 /* CollectionViewController.m */,
+				7CDB52C526A0857B00D02758 /* PlaceCell.h */,
+				7CDB52C626A0857B00D02758 /* PlaceCell.m */,
 			);
 			path = Collections;
 			sourceTree = "<group>";

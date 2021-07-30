@@ -41,21 +41,26 @@
         [grid[i] setBackgroundColor:UIColor.systemGray6Color];
 
         // TODO: bring back more code when you want to make actual API calls
-        /*
+        
         if (collection.places.count > i) {
             [_placesClient fetchPlaceFromPlaceID:collection.places[i] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
                 if (error) {
                     NSLog(@"Couldn't fetch place photos from ID: %@", error.localizedDescription);
-                }
-                if (place) {
+                    // set to random placeholder
+                    NSInteger randint = arc4random_uniform(6) + 1;
+                    NSString *imgName = [NSString stringWithFormat:@"%li", randint];
+                    [grid[i] setImage:[UIImage imageNamed:imgName]];
+                } else if (place) {
                     GMSPlacePhotoMetadata *metadata = place.photos[0];
                     [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(200,200) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
                         if (photo) {
                             [grid[i] setImage:photo];
                         } else {
                             NSLog(@"Error loading photo: %@", error.localizedDescription);
-                            [grid[i] setImage:nil];
-                            [grid[i] setBackgroundColor:UIColor.systemGray6Color];
+                            // set to random placeholder
+                            NSInteger randint = arc4random_uniform(6) + 1;
+                            NSString *imgName = [NSString stringWithFormat:@"%li", randint];
+                            [grid[i] setImage:[UIImage imageNamed:imgName]];
                         }
                     }];
                 }
@@ -64,7 +69,7 @@
             [grid[i] setImage:nil];
             [grid[i] setBackgroundColor:UIColor.systemGray6Color];
         }
-         */
+         
     }
 
     if (self.inEditingMode && ![self.collection.collectionName isEqualToString:@"All"]) {

@@ -55,8 +55,8 @@
                 return;
             }
             if (place) {
-                [self.places addObject:place];
-                [self.tableView reloadData];
+                [strongSelf.places addObject:place];
+                [strongSelf.tableView reloadData];
             } else {
                 NSLog(@"Error fetching places in collection: %@", error.localizedDescription);
             }
@@ -73,7 +73,15 @@
     GMSPlace *place = self.places[indexPath.row];
     GMSPlacePhotoMetadata *metadata = place.photos[0];
     [_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(250,250) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-        [cell.pictureView setImage:photo];
+        if (photo) {
+            [cell.pictureView setImage:photo];
+        } else {
+            NSLog(@"Error loading photo: %@", error.localizedDescription);
+            // set to random placeholder
+            NSInteger randint = arc4random_uniform(6) + 1;
+            NSString *imgName = [NSString stringWithFormat:@"%li", randint];
+            [cell.pictureView setImage:[UIImage imageNamed:imgName]];
+        }
     }];
     cell.place = place;
     return cell;
