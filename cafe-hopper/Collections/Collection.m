@@ -40,7 +40,7 @@
 
 - (void)deleteWithCompletion:(PFBooleanResultBlock)completion {
     User *user = [User currentUser];
-    [Collection deleteAllInBackground:@[self] block:^(BOOL succeeded, NSError * _Nullable error) {
+    [self deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"%@ collection deleted.", self.collectionName);
             [user removeCollectionNamed:self.collectionName withCompletion:^(BOOL succeeded, NSError * _Nullable error) {}];

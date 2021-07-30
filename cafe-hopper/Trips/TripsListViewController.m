@@ -85,10 +85,11 @@
         // delete item from trip locally and update Parse
         Trip *trip = self.trips[indexPath.row];
         [self.trips removeObject:trip];
-        [Trip deleteTrip:trip withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        __weak typeof(self) weakSelf = self;
+        [trip deleteWithCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"Deleted trip successfully");
-                [self.tableView reloadData];
+                [weakSelf.tableView reloadData];
             } else {
                 NSLog(@"Error deleting trip: %@", error.localizedDescription);
             }

@@ -298,7 +298,8 @@
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (object) {
-            [Trip addStopWithPlaceId:self.place.placeID toTrip:object completion:^(BOOL succeeded, NSError * _Nullable error) {
+            Trip *trip = (Trip *)object;
+            [trip addStopWithPlaceId:self.place.placeID completion:^(BOOL succeeded, NSError * _Nullable error) {
                 if (succeeded) {
                     NSLog(@"Saved place to %@", tripName);
                     AudioServicesPlayAlertSound(kSystemSoundID_Vibrate);

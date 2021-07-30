@@ -136,14 +136,10 @@
         // delete item from trip locally and update Parse
         NSMutableDictionary *stop = self.stops[indexPath.row];
         __weak typeof(self) weakSelf = self;
-        [Trip removeStopAtIndex:[stop[@"index"] integerValue] fromTrip:self.trip withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            __typeof__(self) strongSelf = weakSelf;
-            if (strongSelf == nil) {
-                return;
-            }
+        [self.trip removeStopAtIndex:stop[@"index"] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"Deleted stop successfully");
-                [self fetchStops];
+                [weakSelf fetchStops];
             } else {
                 NSLog(@"Error deleting stop: %@", error.localizedDescription);
             }

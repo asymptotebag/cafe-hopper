@@ -19,13 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)createTripWithName:(NSString *)tripName stops:(NSMutableArray<NSMutableDictionary *> * _Nullable)stops completion:(PFBooleanResultBlock)completion;
 
-+ (void)deleteTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
+- (void)deleteWithCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)addStopWithPlaceId:(NSString *)placeId toTrip:(Trip *)trip completion:(PFBooleanResultBlock)completion;
+- (void)addStopWithPlaceId:(NSString *)placeId completion:(PFBooleanResultBlock)completion;
 
-+ (void)removeStopAtIndex:(NSInteger)index fromTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
+- (void)removeStopAtIndex:(NSInteger)index withCompletion:(PFBooleanResultBlock)completion;
 
-+ (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration forTrip:(Trip *)trip withCompletion:(PFBooleanResultBlock)completion;
+- (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration withCompletion:(PFBooleanResultBlock)completion;
 
 @end
 

@@ -143,7 +143,7 @@
             self.minPerStopField.textColor = UIColor.lightGrayColor;
             
             __weak typeof(self) weakSelf = self;
-            [weakSelf.user changeInfoWithName:weakSelf.nameField.text username:weakSelf.usernameField.text email:weakSelf.emailField.text completion:^(BOOL succeeded, NSError * _Nullable error) {
+            [self.user changeInfoWithName:self.nameField.text username:self.usernameField.text email:self.emailField.text completion:^(BOOL succeeded, NSError * _Nullable error) {
                 __typeof__(self) strongSelf = weakSelf;
                 if (strongSelf == nil) {
                     return;

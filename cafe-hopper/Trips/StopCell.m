@@ -60,7 +60,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     NSLog(@"Text field ended editing");
-    [Trip changeDurationOfStopAtIndex:self.index toDuration:[textField.text integerValue] forTrip:self.trip withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [self.trip changeDurationOfStopAtIndex:self.index toDuration:[textField.text integerValue] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             NSLog(@"Successfully changed duration");
         } else {
