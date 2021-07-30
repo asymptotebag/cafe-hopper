@@ -238,6 +238,7 @@
                     seconds += [stop[@"timeToNext"] doubleValue];
                 }
             }
+            [self performSelector:@selector(endTrip) withObject:nil afterDelay:seconds];
         }];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
         [alert addAction:beginAction];
@@ -249,6 +250,13 @@
         [alert addAction:dismiss];
         [self presentViewController:alert animated:YES completion:^{}];
     }
+}
+
+- (void)endTrip {
+    [self.beginTripButton setSelected:NO];
+    self.trip.isActive = [NSNumber numberWithBool:NO];
+    [self.trip saveInBackground];
+    NSLog(@"Trip ended automatically.");
 }
 
 - (void)scheduleTestNotification {
