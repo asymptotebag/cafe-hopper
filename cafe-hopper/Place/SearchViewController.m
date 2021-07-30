@@ -54,7 +54,8 @@
 
 - (void)filterSearchResults:(NSArray<GMSAutocompletePrediction *> *)results {
     for (GMSAutocompletePrediction *result in results) {
-        if ([result.types containsObject:@"cafe"] || [result.types containsObject:@"bakery"] || [result.types containsObject:@"bar"]) {
+        // always show cafes and bakeries, only show bar if the place is a bar AND user allows it
+        if ([result.types containsObject:@"cafe"] || [result.types containsObject:@"bakery"] || ([result.types containsObject:@"bar"] && User.currentUser.isShowingBars)) {
             if (![self.searchResults containsObject:result]) {
                 [self.searchResults addObject:result]; // don't add duplicates
             }
@@ -82,7 +83,7 @@
             if (error) {
                 NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
             } else if (results) {
-                [self filterSearchResults:results];
+                [strongSelf filterSearchResults:results];
             }
         }];
     }
@@ -92,7 +93,6 @@
     self.searchBar.showsCancelButton = YES;
     // clear out recent/current searches if the search bar is empty
     if (self.searchBar.text.length == 0) {
-        NSLog(@"search bar text began edting w/ empty text");
         self.searchResults = @[].mutableCopy;
         [self.tableView reloadData];
     }

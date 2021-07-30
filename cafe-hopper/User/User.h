@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSMutableArray *tripNames;
 @property (nonatomic) NSNumber *timePerStop;
 @property (nonatomic) NSNumber *notifsOn;
+@property (nonatomic) NSNumber *isShowingBars;
 @property (nonatomic, strong) NSMutableArray<NSDictionary *> *searchHistory;
 
 - (void)addCollectionNamed:(NSString *)collectionName withCompletion:(PFBooleanResultBlock)completion;

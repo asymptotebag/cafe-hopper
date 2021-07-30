@@ -75,6 +75,7 @@
         newUser.pfp = nil;
         newUser.timePerStop = @20;
         newUser.notifsOn = [NSNumber numberWithBool:NO];
+        newUser.isShowingBars = [NSNumber numberWithBool:NO];
         newUser.searchHistory = [NSMutableArray new];
         
         [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

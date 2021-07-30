@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *minPerStopField;
 
 @property (weak, nonatomic) IBOutlet UISwitch *notifSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *showBarsSwitch;
 @property (weak, nonatomic) IBOutlet UIButton *signoutButton;
 
 @end
@@ -50,17 +51,22 @@
     self.pfpView.layer.cornerRadius = self.pfpView.frame.size.height/2;
     if (self.user.pfp) {
         PFFileObject *pfp = self.user.pfp;
+        __weak typeof(self) weakSelf = self;
         [pfp getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (data) {
                 UIImage *pfpImg = [UIImage imageWithData:data];
-                self.pfpView.alpha = 0;
-                [self.pfpView setImage:pfpImg];
+                strongSelf.pfpView.alpha = 0;
+                [strongSelf.pfpView setImage:pfpImg];
                 [UIView animateWithDuration:0.2 animations:^{
-                    self.pfpView.alpha = 1;
+                    strongSelf.pfpView.alpha = 1;
                 }];
             } else {
                 NSLog(@"Error getting pfp: %@", error.localizedDescription);
-                [self.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
+                [strongSelf.pfpView setImage:[UIImage systemImageNamed:@"person.fill"]];
             }
         }];
     } else {
@@ -87,6 +93,7 @@
     self.minPerStopField.textColor = UIColor.lightGrayColor;
 
     [self.notifSwitch setOn:self.user.notifsOn];
+    [self.showBarsSwitch setOn:self.user.isShowingBars];
     
     self.signoutButton.layer.cornerRadius = 5;
     self.signoutButton.clipsToBounds = true;
@@ -301,18 +308,28 @@
     }
 }
 
+- (IBAction)onToggleBars:(id)sender {
+    self.user.isShowingBars = [NSNumber numberWithBool:self.showBarsSwitch.on];
+    [self.user saveInBackground];
+}
+
 - (IBAction)onLogout:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Confirmation" message:@"Are you sure you want to log out?" preferredStyle:UIAlertControllerStyleActionSheet];
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:@"Logout" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        __weak typeof(self) weakSelf = self;
         [User logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (error) {
                 NSLog(@"Error: %@", error.localizedDescription);
                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Logout Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:dismissAction];
-                [self presentViewController:alert animated:YES completion:^{}];
+                [strongSelf presentViewController:alert animated:YES completion:^{}];
             } else {
-                SceneDelegate *sceneDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+                SceneDelegate *sceneDelegate = (SceneDelegate *)strongSelf.view.window.windowScene.delegate;
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 LoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
                 sceneDelegate.window.rootViewController = loginController;
