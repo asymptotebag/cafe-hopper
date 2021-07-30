@@ -46,7 +46,8 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
 **Optional Nice-to-have Stories**
 - [ ] User has multiple options to create a new account (e.g. with email, Google, Facebook)
   - [ ] User can login with either username or email
-- [x] User can adjust account settings (e.g. email, username, profile pic, notifications)
+- [x] User can adjust account settings (e.g. email, username, profile pic, notifications on/off)
+- [x] User has the option to show/hide bars in search results (for those 21+ who enjoy bar-hopping)
 - [ ] User can apply search filters (e.g. price level, rating)
 - [x] User can see recent searches on the search screen
 - [ ] User can see cafe recommendations on the search screen based on previous searches or saves
@@ -59,7 +60,7 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
 - [x] User can see the driving duration between eateries using Google Distance Matrix API
 - [x] User can specify and change how long they'd like to spend at each location on a trip
 - [x] User can select "Begin Trip," which sends them local notifications reminding them when to leave for the next stop
-- [ ] User receives push notifications for cafe recommendations
+  - [x] User can cancel an active trip to stop further notifications; if not cancelled, the app will automatically set the trip as inactive after the trip's duration has elapsed
 
 ### 2. Screen Archetypes
 
