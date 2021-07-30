@@ -23,22 +23,10 @@
     [self saveInBackgroundWithBlock:completion];
 }
 
-+ (void)addCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
-    [user.collectionNames addObject:collectionName];
-    user[@"collectionNames"] = user.collectionNames;
-    [user saveInBackgroundWithBlock:completion];
-}
-
 - (void)removeCollectionNamed:(NSString *)collectionName withCompletion:(PFBooleanResultBlock)completion {
     [self.collectionNames removeObject:collectionName];
     self[@"collectionNames"] = self.collectionNames;
     [self saveInBackgroundWithBlock:completion];
-}
-
-+ (void)removeCollectionNamed:(NSString *)collectionName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
-    [user.collectionNames removeObject:collectionName];
-    user[@"collectionNames"] = user.collectionNames;
-    [user saveInBackgroundWithBlock:completion];
 }
 
 - (void)addTripNamed:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion {
@@ -47,22 +35,10 @@
     [self saveInBackgroundWithBlock:completion];
 }
 
-+ (void)addTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
-    [user.tripNames addObject:tripName];
-    user[@"tripNames"] = user.tripNames;
-    [user saveInBackgroundWithBlock:completion];
-}
-
 - (void)removeTripNamed:(NSString *)tripName withCompletion:(PFBooleanResultBlock)completion {
     [self.tripNames removeObject:tripName];
     self[@"tripNames"] = self.tripNames;
     [self saveInBackgroundWithBlock:completion];
-}
-
-+ (void)removeTripNamed:(NSString *)tripName forUser:(User *)user withCompletion:(PFBooleanResultBlock)completion {
-    [user.tripNames removeObject:tripName];
-    user[@"tripNames"] = user.tripNames;
-    [user saveInBackgroundWithBlock:completion];
 }
 
 - (void)changeInfoWithName:(NSString *)name username:(NSString *)username email:(NSString *)email completion:(PFBooleanResultBlock)completion {
@@ -70,13 +46,6 @@
     self.username = username;
     self.email = email;
     [self saveInBackgroundWithBlock:completion];
-}
-
-+ (void)changeInfoForUser:(User *)user withName:(NSString *)name username:(NSString *)username email:(NSString *)email completion:(PFBooleanResultBlock)completion {
-    user.name = name;
-    user.username = username;
-    user.email = email;
-    [user saveInBackgroundWithBlock:completion];
 }
 
 - (void)changePfpWithPfp:(UIImage *)pfp completion:(PFBooleanResultBlock)completion {
