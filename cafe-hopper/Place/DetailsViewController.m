@@ -59,7 +59,7 @@
     [super viewDidLoad];
     self.user = [User currentUser];
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = NO;
+    usingRealImages = YES;
     self.reviews = @[];
     self.placePhotos = @[];
     
@@ -287,7 +287,6 @@
             NSLog(@"Error finding a collection with that name");
         }
     }];
-    
     [self.saveBarButton setImage:[UIImage systemImageNamed:@"bookmark.fill"]];
 }
 
@@ -311,6 +310,7 @@
             NSLog(@"Error finding a trip with that name");
         }
     }];
+    [self.tripBarButton setImage:[UIImage systemImageNamed:@"location.fill"]];
 }
 
 - (IBAction)onDoubleTap:(id)sender {
