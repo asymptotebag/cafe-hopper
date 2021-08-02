@@ -177,7 +177,7 @@
                 prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
                 
                 // decrement index of all future stops
-                for (int i=index+1; i<self.stops.count; i++) {
+                for (long i=index+1; i<self.stops.count; i++) {
                     NSMutableDictionary *currentStop = self.stops[i];
                     currentStop[@"index"] = [NSNumber numberWithLong:[currentStop[@"index"] integerValue]-1];
                 }

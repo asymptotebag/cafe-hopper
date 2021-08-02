@@ -13,11 +13,13 @@
 
 @implementation CollectionCell {
     GMSPlacesClient *_placesClient;
+    BOOL usingRealImages;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     _placesClient = [GMSPlacesClient sharedClient];
+    usingRealImages = NO;
 }
 
 - (void)setSelected:(BOOL)selected {
@@ -37,11 +39,6 @@
     NSArray *grid = @[self.topLeftView, self.topRightView, self.bottomLeftView, self.bottomRightView];
     
     for (int i=0; i<4; i++) {
-        [grid[i] setImage:nil];
-        [grid[i] setBackgroundColor:UIColor.systemGray6Color];
-
-        // TODO: bring back more code when you want to make actual API calls
-        
         if (collection.places.count > i) {
             [_placesClient fetchPlaceFromPlaceID:collection.places[i] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
                 if (error) {

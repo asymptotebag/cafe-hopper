@@ -28,7 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *carouselCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionViewFlowLayout *carouselFlowLayout;
-// TODO: set array of photos property to populate carousel with real photos
 @property (strong, nonatomic) NSArray<GMSPlacePhotoMetadata *> *placePhotos;
 
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
@@ -110,9 +109,6 @@
     [self showStarRating];
     
     CGFloat buttonRadius = 10;
-    UIColor *borderColor = [UIColor systemGray4Color];
-    CGFloat borderWidth = 1.f;
-    UIColor *backgroundColor = [UIColor clearColor];
     self.telephoneButtonBackground.layer.cornerRadius = buttonRadius;
     self.websiteButtonBackground.layer.cornerRadius = buttonRadius;
     self.directionsButtonBackground.layer.cornerRadius = buttonRadius;
