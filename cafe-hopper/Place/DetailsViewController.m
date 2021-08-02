@@ -71,6 +71,10 @@
     self.reviewsCollectionView.dataSource = self;
     self.reviewsCollectionView.delegate = self;
     
+    CGFloat fontSize = self.view.frame.size.width * 0.0851 - 5.23;
+    CGFloat secondaryFontSize = self.view.frame.size.width * 0.0319 + 3.79;
+    [self.nameLabel setFont:[UIFont systemFontOfSize:fontSize weight:UIFontWeightThin]];
+    [self.addressLabel setFont:[UIFont systemFontOfSize:secondaryFontSize weight:UIFontWeightThin]];
     self.nameLabel.text = self.place.name;
     self.addressLabel.text = self.place.formattedAddress;
     
