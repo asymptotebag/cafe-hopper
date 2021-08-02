@@ -39,14 +39,11 @@
     NSArray *grid = @[self.topLeftView, self.topRightView, self.bottomLeftView, self.bottomRightView];
     
     for (int i=0; i<4; i++) {
-        if (collection.places.count > i) {
+        if (usingRealImages && collection.places.count > i) {
             [_placesClient fetchPlaceFromPlaceID:collection.places[i] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
                 if (error) {
                     NSLog(@"Couldn't fetch place photos from ID: %@", error.localizedDescription);
-                    // set to random placeholder
-                    NSInteger randint = arc4random_uniform(6) + 1;
-                    NSString *imgName = [NSString stringWithFormat:@"%li", randint];
-                    [grid[i] setImage:[UIImage imageNamed:imgName]];
+                    [grid[i] setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%i", i]]]; // set to placeholder
                 } else if (place) {
                     GMSPlacePhotoMetadata *metadata = place.photos[0];
                     [self->_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(200,200) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
@@ -61,7 +58,7 @@
                 }
             }];
         } else { // not enough places in collection yet
-            [grid[i] setImage:nil];
+            [grid[i] setImage:[UIImage imageNamed:@""]]; // empty image
             [grid[i] setBackgroundColor:UIColor.systemGray6Color];
         }
          

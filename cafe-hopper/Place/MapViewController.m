@@ -34,7 +34,7 @@
     self.searchBar.delegate = self;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
     
-    MainTabBarController *tabBar = self.tabBarController;
+    MainTabBarController *tabBar = (MainTabBarController *)self.tabBarController;
     self.placeId = tabBar.placeId;
     
     if (self.placeId) {

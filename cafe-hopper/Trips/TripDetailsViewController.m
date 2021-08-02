@@ -57,7 +57,7 @@
     
     self.tripNameLabel.text = self.trip.tripName;
     self.numStopsLabel.text = [[NSString stringWithFormat:@"%lu", self.trip.stops.count] stringByAppendingString:@" stops"];
-    self.buttonBackground.layer.cornerRadius = 8;
+    self.buttonBackground.layer.cornerRadius = self.buttonBackground.layer.frame.size.height/2;
     self.buttonBackground.clipsToBounds = YES;
     
     self.imageView1.layer.cornerRadius = self.imageView1.layer.frame.size.height/2;
@@ -136,7 +136,7 @@
         // delete item from trip locally and update Parse
         NSMutableDictionary *stop = self.stops[indexPath.row];
         __weak typeof(self) weakSelf = self;
-        [self.trip removeStopAtIndex:stop[@"index"] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        [self.trip removeStopAtIndex:(NSInteger)stop[@"index"] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
                 NSLog(@"Deleted stop successfully");
                 [weakSelf fetchStops];

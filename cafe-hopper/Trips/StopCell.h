@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSNumber *_Nullable timeToNext;
 
 @property (weak, nonatomic) IBOutlet UIView *indexBorder;
+@property (weak, nonatomic) IBOutlet UIView *indexLeftLine;
+@property (weak, nonatomic) IBOutlet UIView *indexRightLine;
 @property (weak, nonatomic) IBOutlet UILabel *stopIndexLabel;
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;

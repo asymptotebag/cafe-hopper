@@ -29,12 +29,17 @@
     self.timeSpentField.text = [NSString stringWithFormat:@"%ld", [self.minSpent integerValue]];
     self.stopIndexLabel.text = [NSString stringWithFormat:@"%li", self.index+1];
     self.indexBorder.layer.cornerRadius = self.indexBorder.layer.frame.size.height/2;
-
-    // Below 4 lines toggle a different look for the circle with the stop's index
-//    self.stopIndexLabel.textColor = UIColor.labelColor;
-//    self.indexBorder.layer.borderColor = UIColor.lightGrayColor.CGColor;
-//    self.indexBorder.layer.borderWidth = 1.f;
-//    self.indexBorder.layer.backgroundColor = UIColor.clearColor.CGColor;
+    if ((self.index + 1) % 2 == 0) {
+        UIColor *evenColor = [UIColor colorNamed:@"CafeAuLait"];
+        self.indexBorder.layer.backgroundColor = evenColor.CGColor;
+        [self.indexLeftLine setBackgroundColor:evenColor];
+        [self.indexRightLine setBackgroundColor:evenColor];
+    } else {
+        UIColor *oddColor = [UIColor colorNamed:@"Tan"];
+        self.indexBorder.layer.backgroundColor = oddColor.CGColor;
+        [self.indexLeftLine setBackgroundColor:oddColor];
+        [self.indexRightLine setBackgroundColor:oddColor];
+    }
     
     if (!self.isLastStop && self.timeToNext) { // add distance to next stop
         self.betweenStopsView.hidden = NO;
@@ -75,6 +80,10 @@
     if (self.timeSpentField.isEditing) { // only end editing if it's editing now
         [self.contentView endEditing:true];
     }
+}
+
+- (IBAction)onTapTravelMode:(id)sender {
+    // TODO: show UIMenu with multiple travel options
 }
 
 @end

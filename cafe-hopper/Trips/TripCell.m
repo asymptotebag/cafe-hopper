@@ -10,12 +10,14 @@
 
 @implementation TripCell {
     GMSPlacesClient *_placesClient;
+    BOOL usingRealImages;
 }
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
     _placesClient = [GMSPlacesClient sharedClient];
+    usingRealImages = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -67,8 +69,8 @@
     }
     self.durationLabel.text = [self timestampFromMinutes:duration];
     
-    // TODO: handle stops having 0 or 1 stop
-    if (trip.stops.count > 0) {
+    // handle stops having 0 or 1 stop
+    if (usingRealImages && trip.stops.count > 0) {
         GMSPlaceField fields = (GMSPlaceFieldName | GMSPlaceFieldPhotos);
         __weak typeof(self) weakSelf = self;
         [_placesClient fetchPlaceFromPlaceID:trip.stops[0][@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
