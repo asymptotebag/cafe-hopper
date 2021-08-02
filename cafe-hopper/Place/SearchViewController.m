@@ -64,28 +64,34 @@
     [self.tableView reloadData];
 }
 
+- (void)performSearchWithText:(NSString *)searchText {
+    GMSAutocompleteSessionToken *token = [[GMSAutocompleteSessionToken alloc] init];
+    // create type filter
+    GMSAutocompleteFilter *_filter = [[GMSAutocompleteFilter alloc] init];
+    _filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
+    
+    self.searchResults = [NSMutableArray new];
+    
+    __weak typeof(self) weakSelf = self;
+    [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
+        if (error) {
+            NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
+        } else if (results) {
+            [strongSelf filterSearchResults:results];
+        }
+    }];
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     self.isShowingHistory = NO;
-    if (searchText.length > 0) { // idk i want to prevent making too many requests
-        GMSAutocompleteSessionToken *token = [[GMSAutocompleteSessionToken alloc] init];
-        // create type filter
-        GMSAutocompleteFilter *_filter = [[GMSAutocompleteFilter alloc] init];
-        _filter.type = kGMSPlacesAutocompleteTypeFilterEstablishment;
-        
-        self.searchResults = [NSMutableArray new];
-        
-        __weak typeof(self) weakSelf = self;
-        [_placesClient findAutocompletePredictionsFromQuery:searchText filter:_filter sessionToken:token callback:^(NSArray<GMSAutocompletePrediction *> * _Nullable results, NSError * _Nullable error) {
-            __typeof__(self) strongSelf = weakSelf;
-            if (strongSelf == nil) {
-                return;
-            }
-            if (error) {
-                NSLog(@"Error in getting autocomplete predictions: %@", error.localizedDescription);
-            } else if (results) {
-                [strongSelf filterSearchResults:results];
-            }
-        }];
+    if (searchText.length > 0) {
+        // to limit network activity, reload 0.5s after last key press
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(performSearchWithText:) object:searchText];
+        [self performSelector:@selector(performSearchWithText:) withObject:searchText afterDelay:0.5];
     }
 }
 
