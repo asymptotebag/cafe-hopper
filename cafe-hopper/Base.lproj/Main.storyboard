@@ -235,7 +235,7 @@
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
-                            <integer key="value" value="1"/>
+                            <integer key="value" value="0"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -789,7 +789,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j1L-sD-clJ">
-                                                            <rect key="frame" x="20" y="68" width="276" height="113"/>
+                                                            <rect key="frame" x="20" y="68" width="276" height="108"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <attributedString key="attributedText">
                                                                 <fragment content="Awesome offices. Great facilities, location and views. Staff are great hosts">
@@ -816,7 +816,7 @@
                                                         <constraint firstItem="j1L-sD-clJ" firstAttribute="top" secondItem="Khv-dV-K3h" secondAttribute="bottom" constant="8" id="aIk-xq-J8f"/>
                                                         <constraint firstAttribute="trailing" secondItem="j1L-sD-clJ" secondAttribute="trailing" constant="15" id="eF8-uk-RzY"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qY9-sl-IjZ" secondAttribute="trailing" constant="10" id="ez1-jS-lFX"/>
-                                                        <constraint firstAttribute="bottom" secondItem="j1L-sD-clJ" secondAttribute="bottom" constant="10" id="pvt-OJ-e9y"/>
+                                                        <constraint firstAttribute="bottom" secondItem="j1L-sD-clJ" secondAttribute="bottom" constant="15" id="pvt-OJ-e9y"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -1830,7 +1830,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Dcg-sd-saV"/>
+        <segue reference="woe-wn-tSv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" name="CafeAuLait"/>
     <resources>
