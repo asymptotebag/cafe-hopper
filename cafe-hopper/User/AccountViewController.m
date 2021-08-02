@@ -203,6 +203,10 @@
     [self.usernameField setUserInteractionEnabled:NO];
     [self.emailField setUserInteractionEnabled:NO];
     [self.minPerStopField setUserInteractionEnabled:NO];
+    self.nameField.text = self.user.name;
+    self.usernameField.text = self.user.username;
+    self.emailField.text = self.user.email;
+    self.minPerStopField.text = [NSString stringWithFormat:@"%@", self.user.timePerStop];
     self.nameField.textColor = UIColor.lightGrayColor;
     self.usernameField.textColor = UIColor.lightGrayColor;
     self.emailField.textColor = UIColor.lightGrayColor;
