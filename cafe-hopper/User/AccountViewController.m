@@ -11,6 +11,7 @@
 #import "User.h"
 #import <Parse/Parse.h>
 #import <UserNotifications/UserNotifications.h>
+#import "NSString+EmailValidation.h"
 
 @interface AccountViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) User *user;
@@ -130,6 +131,8 @@
             [self presentChangeUsernameErrorAlertWithTitle:@"Invalid Entry" message:@"Username cannot be blank."];
         } else if (![self isUniqueUsername]) {
             [self presentChangeUsernameErrorAlertWithTitle:@"Cannot Change Username" message:@"The username you entered is already taken."];
+        } else if (![self.emailField.text isValidEmail]) {
+            [self presentChangeUsernameErrorAlertWithTitle:@"Invalid Email" message:@"The email you entered is invalid."];
         } else {
             [self.editButton setSelected:NO];
             self.editButton.layer.borderColor = UIColor.darkGrayColor.CGColor;

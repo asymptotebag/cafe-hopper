@@ -45,7 +45,7 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
 
 **Optional Nice-to-have Stories**
 - [ ] User has multiple options to create a new account (e.g. with email, Google, Facebook)
-  - [ ] User can login with either username or email
+- [x] User can login with either username or email
 - [x] User can adjust account settings (e.g. email, username, profile pic, notifications on/off)
 - [x] User has the option to show/hide bars in search results (for those 21+ who enjoy bar-hopping)
 - [ ] User can apply search filters (e.g. price level, rating)

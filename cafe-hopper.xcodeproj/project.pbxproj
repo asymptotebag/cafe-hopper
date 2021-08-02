@@ -26,6 +26,7 @@
 		7C175746269E03D800393B53 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175745269E03D800393B53 /* SearchViewController.m */; };
 		7C175749269E136E00393B53 /* SearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C175748269E136E00393B53 /* SearchResultCell.m */; };
 		7C5369FE26AEF697004D061B /* ReviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C5369FD26AEF697004D061B /* ReviewCell.m */; };
+		7C536A0126B84FD2004D061B /* NSString+EmailValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C536A0026B84FD2004D061B /* NSString+EmailValidation.m */; };
 		7CDB52B5269E57A800D02758 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B4269E57A800D02758 /* MainTabBarController.m */; };
 		7CDB52B8269F299900D02758 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52B7269F299900D02758 /* DetailsViewController.m */; };
 		7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CDB52BA269F759400D02758 /* PlacesViewController.m */; };
@@ -97,6 +98,8 @@
 		7C175748269E136E00393B53 /* SearchResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultCell.m; sourceTree = "<group>"; };
 		7C5369FC26AEF697004D061B /* ReviewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewCell.h; sourceTree = "<group>"; };
 		7C5369FD26AEF697004D061B /* ReviewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewCell.m; sourceTree = "<group>"; };
+		7C5369FF26B84FD2004D061B /* NSString+EmailValidation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+EmailValidation.h"; sourceTree = "<group>"; };
+		7C536A0026B84FD2004D061B /* NSString+EmailValidation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+EmailValidation.m"; sourceTree = "<group>"; };
 		7CDB52B3269E57A800D02758 /* MainTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		7CDB52B4269E57A800D02758 /* MainTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		7CDB52B6269F299900D02758 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
@@ -277,6 +280,8 @@
 				7C175734269C797700393B53 /* LoginViewController.m */,
 				7C175739269C8A9200393B53 /* AccountViewController.h */,
 				7C17573A269C8A9200393B53 /* AccountViewController.m */,
+				7C5369FF26B84FD2004D061B /* NSString+EmailValidation.h */,
+				7C536A0026B84FD2004D061B /* NSString+EmailValidation.m */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -604,6 +609,7 @@
 				7C5369FE26AEF697004D061B /* ReviewCell.m in Sources */,
 				7CDB52BB269F759400D02758 /* PlacesViewController.m in Sources */,
 				7CDB52D026A0E5B300D02758 /* CarouselCell.m in Sources */,
+				7C536A0126B84FD2004D061B /* NSString+EmailValidation.m in Sources */,
 				7CDB52C726A0857B00D02758 /* PlaceCell.m in Sources */,
 				7CDB52CA26A0954600D02758 /* CollectionViewController.m in Sources */,
 				7CDB52C4269FA49100D02758 /* Collection.m in Sources */,

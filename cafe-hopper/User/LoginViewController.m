@@ -8,6 +8,7 @@
 #import "LoginViewController.h"
 #import "User.h"
 #import <Parse/Parse.h>
+#import "NSString+EmailValidation.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -50,18 +51,42 @@
         NSString *username = self.usernameField.text;
         NSString *password = self.passwordField.text;
         
-        [User logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
-            if (error) {
-                NSLog(@"Login error: %@", error.localizedDescription);
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+        // check if username field contains an email
+        if ([username isValidEmail]) { // try to log in with email
+            PFQuery *query = [User query];
+            [query whereKey:@"email" equalTo:username];
+            User *correspondingUser = [query getFirstObject];
+            if (correspondingUser) {
+                [User logInWithUsernameInBackground:correspondingUser.username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+                    if (error) {
+                        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                        UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+                        [alert addAction:dismissAction];
+                        [self presentViewController:alert animated:YES completion:^{}];
+                    } else {
+                        NSLog(@"%@ logged in successfully", user.username);
+                        [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+                    }
+                }];
+            } else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:@"The email you entered is not associated with an account." preferredStyle:UIAlertControllerStyleAlert];
                 UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
                 [alert addAction:dismissAction];
                 [self presentViewController:alert animated:YES completion:^{}];
-            } else {
-                NSLog(@"%@ logged in successfully", user.username);
-                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
             }
-        }];
+        } else {
+            [User logInWithUsernameInBackground:username password:password block:^(PFUser * _Nullable user, NSError * _Nullable error) {
+                if (error) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login Error" message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {}];
+                    [alert addAction:dismissAction];
+                    [self presentViewController:alert animated:YES completion:^{}];
+                } else {
+                    NSLog(@"%@ logged in successfully", user.username);
+                    [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+                }
+            }];
+        }
     }
 }
 

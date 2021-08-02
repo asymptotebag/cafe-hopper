@@ -9,6 +9,7 @@
 #import "User.h"
 #import "Collection.h"
 #import <Parse/Parse.h>
+#import "NSString+EmailValidation.h"
 
 @interface SignupViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
@@ -28,7 +29,7 @@
 }
 
 - (BOOL)fieldsFilled {
-    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]) {
+    if ([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""] || [self.nameField.text isEqual:@""] || [self.emailField.text isEqual:@""]) {
         return NO;
     }
     return YES;
@@ -62,9 +63,11 @@
 
 - (IBAction)tapSignup:(id)sender {
     if (![self fieldsFilled]) {
-        [self presentSignupErrorAlertWithTitle:@"Invalid Entry" message:@"Username and password field cannot be blank."];
+        [self presentSignupErrorAlertWithTitle:@"Invalid Entry" message:@"Fields cannot be blank."];
     } else if (![self isUniqueUsername]) {
         [self presentSignupErrorAlertWithTitle:@"Cannot Create Account" message:@"The username you entered is already taken."];
+    } else if (![self.emailField.text isValidEmail]) {
+        [self presentSignupErrorAlertWithTitle:@"Invalid Email" message:@"The email you entered is invalid."];
     } else {
         // initialize user object
         User *newUser = [User user];
