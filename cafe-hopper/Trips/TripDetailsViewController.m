@@ -34,11 +34,13 @@
 
 @implementation TripDetailsViewController {
     GMSPlacesClient *_placesClient;
+    BOOL usingRealImages;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
+    usingRealImages = YES;
     self.stopsLoaded = 0;
     self.stops = [NSMutableArray new];
     for (int i=0; i<self.trip.stops.count; i++) {
@@ -60,12 +62,7 @@
     self.buttonBackground.layer.cornerRadius = self.buttonBackground.layer.frame.size.height/2;
     self.buttonBackground.clipsToBounds = YES;
     
-    self.imageView1.layer.cornerRadius = self.imageView1.layer.frame.size.height/2;
-    self.imageView2.layer.cornerRadius = self.imageView2.layer.frame.size.height/2;
-    self.imageView3.layer.cornerRadius = self.imageView3.layer.frame.size.height/2;
-    self.imageView1.clipsToBounds = YES;
-    self.imageView2.clipsToBounds = YES;
-    self.imageView3.clipsToBounds = YES;
+    [self setupImages];
     
     [self.beginTripButton setTitle:@" Begin Trip" forState:UIControlStateNormal];
     [self.beginTripButton setTitle:@" Cancel Trip" forState:UIControlStateSelected];
@@ -79,8 +76,17 @@
     }
 }
 
+- (void)setupImages {
+    self.imageView1.layer.cornerRadius = self.imageView1.layer.frame.size.height/2;
+    self.imageView2.layer.cornerRadius = self.imageView2.layer.frame.size.height/2;
+    self.imageView3.layer.cornerRadius = self.imageView3.layer.frame.size.height/2;
+    self.imageView1.clipsToBounds = YES;
+    self.imageView2.clipsToBounds = YES;
+    self.imageView3.clipsToBounds = YES;
+}
+
 - (void)fetchStops {
-    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress);
+    GMSPlaceField fields = (GMSPlaceFieldPlaceID | GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldPhotos);
     __weak typeof(self) weakSelf = self;
     for (NSMutableDictionary *stop in self.trip.stops) {
         [_placesClient fetchPlaceFromPlaceID:stop[@"placeId"] placeFields:fields sessionToken:nil callback:^(GMSPlace * _Nullable place, NSError * _Nullable error) {
@@ -94,11 +100,24 @@
                     newStop[@"timeToNext"] = stop[@"timeToNext"];
                 }
                 NSLog(@"Setting index %@", stop[@"index"]);
-                [self.stops setObject:newStop atIndexedSubscript:[stop[@"index"] integerValue]];
+                NSInteger stopIndex = [stop[@"index"] integerValue];
+                [strongSelf.stops setObject:newStop atIndexedSubscript:stopIndex];
                 self.stopsLoaded++;
                 if (self.stopsLoaded == self.trip.stops.count) {
                     NSLog(@"Loaded %li stops, now reloading table view", self.stopsLoaded);
                     [self.tableView reloadData];
+                }
+                
+                NSArray *images = @[strongSelf.imageView1, strongSelf.imageView2, strongSelf.imageView3];
+                if (strongSelf->usingRealImages && stopIndex < 3) {
+                    GMSPlacePhotoMetadata *metadata = place.photos[0];
+                    [strongSelf->_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+                        if (photo) {
+                            [images[stopIndex] setImage:photo];
+                        } else {
+                            NSLog(@"Error loading photo: %@", error.localizedDescription);
+                        }
+                    }];
                 }
             } else {
                 NSLog(@"Error fetching place: %@", error.localizedDescription);
