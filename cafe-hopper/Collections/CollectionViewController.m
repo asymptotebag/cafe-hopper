@@ -20,11 +20,13 @@
 
 @implementation CollectionViewController {
     GMSPlacesClient *_placesClient;
+    BOOL _usingRealImages;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
+    _usingRealImages = NO;
     [self setupTableView];
     self.places = [NSMutableArray new];
     [self fetchPlacesinCollection];
@@ -71,18 +73,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PlaceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PlaceCell"];
     GMSPlace *place = self.places[indexPath.row];
-    GMSPlacePhotoMetadata *metadata = place.photos[0];
-    [_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(250,250) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
-        if (photo) {
-            [cell.pictureView setImage:photo];
-        } else {
-            NSLog(@"Error loading photo: %@", error.localizedDescription);
-            // set to random placeholder
-            NSInteger randint = arc4random_uniform(6) + 1;
-            NSString *imgName = [NSString stringWithFormat:@"%li", randint];
-            [cell.pictureView setImage:[UIImage imageNamed:imgName]];
-        }
-    }];
+    if (_usingRealImages) {
+        GMSPlacePhotoMetadata *metadata = place.photos[0];
+        [_placesClient loadPlacePhoto:metadata constrainedToSize:CGSizeMake(250,250) scale:1.f callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
+            if (photo) {
+                [cell.pictureView setImage:photo];
+            } else {
+                NSLog(@"Error loading photo: %@", error.localizedDescription);
+                // set to random placeholder
+                NSInteger randint = arc4random_uniform(6) + 1;
+                NSString *imgName = [NSString stringWithFormat:@"%li", randint];
+                [cell.pictureView setImage:[UIImage imageNamed:imgName]];
+            }
+        }];
+    }
     cell.place = place;
     return cell;
 }
