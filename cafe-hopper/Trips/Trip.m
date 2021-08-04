@@ -68,12 +68,58 @@
     [self saveInBackgroundWithBlock:completion];
 }
 
+- (void)changeTravelModeOfStopAtIndex:(NSInteger)index toMode:(NSString *)newMode withCompletion:(PFBooleanResultBlock)completion {
+    NSMutableDictionary *stopToChange = self.stops[index];
+    stopToChange[@"travelMode"] = newMode;
+    // recalculate distance to next stop using newMode
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"Keys" ofType:@"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSString *googleAPIKey = [dict objectForKey:@"googleMapsAPIKey"];
+    NSMutableString *URLString = @"https://maps.googleapis.com/maps/api/distancematrix/json?".mutableCopy;
+    
+    NSMutableDictionary *nextStop = self.stops[index+1];
+    NSString *originsParameter = [@"origins=place_id:" stringByAppendingString:stopToChange[@"placeId"]];
+    NSString *destinationsParameter = [@"&destinations=place_id:" stringByAppendingString:nextStop[@"placeId"]];
+    NSString *modeParameter = [@"&mode=" stringByAppendingString:newMode];
+    NSString *keyParameter = [@"&key=" stringByAppendingString:googleAPIKey];
+    [URLString appendString:originsParameter];
+    [URLString appendString:destinationsParameter];
+    [URLString appendString:modeParameter];
+    [URLString appendString:keyParameter];
+    NSLog(@"Full API request URL: %@", URLString);
+    
+    NSURL *url = [NSURL URLWithString:URLString];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(self) weakSelf = self;
+    NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
+        if (error == nil) {
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            NSArray *distanceMatrix = jsonDict[@"rows"];
+            NSArray *elements = distanceMatrix[0][@"elements"];
+            NSInteger durationSecs = [elements[0][@"duration"][@"value"] integerValue]; // value is in seconds, so convert to minutes
+            NSInteger duration = durationSecs/60; // this truncates, doesn't round
+            NSLog(@"duration = %li", duration);
+            stopToChange[@"timeToNext"] = [NSNumber numberWithLong:duration];
+        } else {
+            NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
+        }
+        strongSelf[@"stops"] = strongSelf.stops;
+        [strongSelf saveInBackgroundWithBlock:completion];
+    }];
+    [task resume];
+}
+
 - (void)addStopWithPlaceId:(NSString *)placeId completion:(PFBooleanResultBlock)completion {
     // duplicates are okay here
     NSMutableDictionary *newStop = [NSMutableDictionary new];
     [newStop setValue:placeId forKey:@"placeId"];
     [newStop setObject:@20 forKey:@"minSpent"]; // default 20 min per cafe
     [newStop setObject:[NSNumber numberWithUnsignedLong:self.stops.count] forKey:@"index"];
+    [newStop setObject:@"driving" forKey:@"travelMode"];
     NSLog(@"newStop = %@", newStop);
     [self.stops addObject:newStop];
     
@@ -104,7 +150,12 @@
     // make actual network request:
     NSURL *url = [NSURL URLWithString:URLString];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+    __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf == nil) {
+            return;
+        }
         if (error == nil) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSArray *distanceMatrix = jsonDict[@"rows"];
@@ -112,12 +163,12 @@
             NSInteger durationSecs = [elements[0][@"duration"][@"value"] integerValue]; // value is in seconds, so convert to minutes
             NSInteger duration = durationSecs/60; // this truncates, doesn't round
             NSLog(@"duration = %li", duration);
-            prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
+            prevStop[@"timeToNext"] = [NSNumber numberWithLong:duration];
         } else {
             NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
         }
-        self[@"stops"] = self.stops;
-        [self saveInBackgroundWithBlock:completion];
+        strongSelf[@"stops"] = strongSelf.stops;
+        [strongSelf saveInBackgroundWithBlock:completion];
     }];
     [task resume];
 }
@@ -166,7 +217,12 @@
         
         NSURL *url = [NSURL URLWithString:URLString];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
             if (error == nil) {
                 NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
                 NSArray *distanceMatrix = jsonDict[@"rows"];
@@ -177,16 +233,16 @@
                 prevStop[@"timeToNext"] = [NSNumber numberWithUnsignedLong:duration];
                 
                 // decrement index of all future stops
-                for (long i=index+1; i<self.stops.count; i++) {
-                    NSMutableDictionary *currentStop = self.stops[i];
+                for (long i=index+1; i<strongSelf.stops.count; i++) {
+                    NSMutableDictionary *currentStop = strongSelf.stops[i];
                     currentStop[@"index"] = [NSNumber numberWithLong:[currentStop[@"index"] integerValue]-1];
                 }
-                [self.stops removeObject:stopToRemove];
+                [strongSelf.stops removeObject:stopToRemove];
             } else {
                 NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
             }
-            self[@"stops"] = self.stops;
-            [self saveInBackgroundWithBlock:completion];
+            strongSelf[@"stops"] = strongSelf.stops;
+            [strongSelf saveInBackgroundWithBlock:completion];
         }];
         [task resume];
     }

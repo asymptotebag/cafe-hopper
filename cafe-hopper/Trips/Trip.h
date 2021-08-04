@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)changeDurationOfStopAtIndex:(NSInteger)index toDuration:(NSInteger)newDuration withCompletion:(PFBooleanResultBlock)completion;
 
+- (void)changeTravelModeOfStopAtIndex:(NSInteger)index toMode:(NSString *)newMode withCompletion:(PFBooleanResultBlock)completion;
+
 @end
 
 NS_ASSUME_NONNULL_END

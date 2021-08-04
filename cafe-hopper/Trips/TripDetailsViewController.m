@@ -34,13 +34,13 @@
 
 @implementation TripDetailsViewController {
     GMSPlacesClient *_placesClient;
-    BOOL usingRealImages;
+    BOOL _usingRealImages;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = YES;
+    _usingRealImages = YES;
     self.stopsLoaded = 0;
     self.stops = [NSMutableArray new];
     for (int i=0; i<self.trip.stops.count; i++) {
@@ -95,21 +95,21 @@
                 return;
             }
             if (place) {
-                NSMutableDictionary *newStop = @{@"place":place, @"index":stop[@"index"], @"minSpent":stop[@"minSpent"]}.mutableCopy;
+                NSMutableDictionary *newStop = @{@"place":place, @"index":stop[@"index"], @"minSpent":stop[@"minSpent"], @"travelMode":stop[@"travelMode"]}.mutableCopy;
                 if (stop[@"timeToNext"]) { // nil if key doesn't exist
                     newStop[@"timeToNext"] = stop[@"timeToNext"];
                 }
                 NSLog(@"Setting index %@", stop[@"index"]);
                 NSInteger stopIndex = [stop[@"index"] integerValue];
                 [strongSelf.stops setObject:newStop atIndexedSubscript:stopIndex];
-                self.stopsLoaded++;
-                if (self.stopsLoaded == self.trip.stops.count) {
-                    NSLog(@"Loaded %li stops, now reloading table view", self.stopsLoaded);
-                    [self.tableView reloadData];
+                strongSelf.stopsLoaded++;
+                if (strongSelf.stopsLoaded == strongSelf.trip.stops.count) {
+                    NSLog(@"Loaded %li stops, now reloading table view", strongSelf.stopsLoaded);
+                    [strongSelf.tableView reloadData];
                 }
                 
                 NSArray *images = @[strongSelf.imageView1, strongSelf.imageView2, strongSelf.imageView3];
-                if (strongSelf->usingRealImages && stopIndex < 3) {
+                if (strongSelf->_usingRealImages && stopIndex < 3) {
                     GMSPlacePhotoMetadata *metadata = place.photos[0];
                     [strongSelf->_placesClient loadPlacePhoto:metadata callback:^(UIImage * _Nullable photo, NSError * _Nullable error) {
                         if (photo) {
@@ -137,6 +137,7 @@
     cell.index = indexPath.row;
     cell.isLastStop = indexPath.row == self.trip.stops.count-1;
     cell.minSpent = (NSNumber *)stop[@"minSpent"];
+    cell.travelMode = stop[@"travelMode"];
     if (stop[@"timeToNext"]) {
         cell.timeToNext = stop[@"timeToNext"];
     } else {

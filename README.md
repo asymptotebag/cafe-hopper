@@ -57,7 +57,8 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
 - [ ] User can see tags for cafes
   - [ ] User can filter places based on tags
 - [ ] User can attach their own notes and photos to an eatery, such as their favorite menu items and pictures of food / atmosphere
-- [x] User can see the driving duration between eateries using Google Distance Matrix API
+- [x] User can see the travel duration between eateries using Google Distance Matrix API
+- [x] User can change the travel mode between eateries to either driving (default), walking, or biking, and see the updated travel duration
 - [x] User can specify and change how long they'd like to spend at each location on a trip
 - [x] User can select "Begin Trip," which sends them local notifications reminding them when to leave for the next stop
   - [x] User can cancel an active trip to stop further notifications; if not cancelled, the app will automatically set the trip as inactive after the trip's duration has elapsed

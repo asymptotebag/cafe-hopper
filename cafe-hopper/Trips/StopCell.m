@@ -8,11 +8,14 @@
 #import "StopCell.h"
 #import "Trip.h"
 
-@implementation StopCell
+@implementation StopCell {
+    NSDictionary<NSString*, UIImage*> *_travelModeIcons;
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     self.timeSpentField.delegate = self;
+    _travelModeIcons = @{@"driving":[UIImage systemImageNamed:@"car"], @"walking":[UIImage systemImageNamed:@"figure.walk"], @"bicycling":[UIImage systemImageNamed:@"bicycle"]};
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -44,6 +47,10 @@
     if (!self.isLastStop && self.timeToNext) { // add distance to next stop
         self.betweenStopsView.hidden = NO;
         self.travelTimeLabel.text = [[NSString stringWithFormat:@"%@", self.timeToNext] stringByAppendingString:@" min"];
+        
+        [self.travelModeButton setImage:_travelModeIcons[self.travelMode] forState:UIControlStateNormal];
+        self.travelModeButton.showsMenuAsPrimaryAction = YES;
+        [self setupTravelModePicker];
         self.dot1.layer.cornerRadius = self.dot1.frame.size.height/2;
         self.dot1.clipsToBounds = true;
         self.dot2.layer.cornerRadius = self.dot2.frame.size.height/2;
@@ -55,6 +62,66 @@
     } else {
         self.betweenStopsView.hidden = YES;
     }
+}
+
+- (void)setupTravelModePicker {
+    // show UIMenu with multiple travel options
+    UIAction *driving = [UIAction actionWithTitle:@"Driving" image:[UIImage systemImageNamed:@"car"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) { // set mode to driving
+        self.travelMode = @"driving";
+        [self.travelModeButton setImage:self->_travelModeIcons[self.travelMode] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [self.trip changeTravelModeOfStopAtIndex:self.index toMode:@"driving" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully changed travel mode to driving");
+                strongSelf.timeToNext = self.trip.stops[self.index][@"timeToNext"];
+                strongSelf.travelTimeLabel.text = [[NSString stringWithFormat:@"%@", strongSelf.timeToNext] stringByAppendingString:@" min"];
+            } else {
+                NSLog(@"Error changing travel mode: %@", error.localizedDescription);
+            }
+        }];
+    }];
+    UIAction *walking = [UIAction actionWithTitle:@"Walking" image:[UIImage systemImageNamed:@"figure.walk"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) { // set mode to walking
+        self.travelMode = @"walking";
+        [self.travelModeButton setImage:self->_travelModeIcons[self.travelMode] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [self.trip changeTravelModeOfStopAtIndex:self.index toMode:@"walking" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully changed travel mode to walking");
+                strongSelf.timeToNext = self.trip.stops[self.index][@"timeToNext"];
+                strongSelf.travelTimeLabel.text = [[NSString stringWithFormat:@"%@", strongSelf.timeToNext] stringByAppendingString:@" min"];
+            } else {
+                NSLog(@"Error changing travel mode: %@", error.localizedDescription);
+            }
+        }];
+    }];
+    UIAction *biking = [UIAction actionWithTitle:@"Biking" image:[UIImage systemImageNamed:@"bicycle"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) { // set mode to bicycling
+        self.travelMode = @"bicycling";
+        [self.travelModeButton setImage:self->_travelModeIcons[self.travelMode] forState:UIControlStateNormal];
+        __weak typeof(self) weakSelf = self;
+        [self.trip changeTravelModeOfStopAtIndex:self.index toMode:@"bicycling" withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf == nil) {
+                return;
+            }
+            if (succeeded) {
+                NSLog(@"Successfully changed travel mode to biking");
+                strongSelf.timeToNext = self.trip.stops[self.index][@"timeToNext"];
+                strongSelf.travelTimeLabel.text = [[NSString stringWithFormat:@"%@", strongSelf.timeToNext] stringByAppendingString:@" min"];
+            } else {
+                NSLog(@"Error changing travel mode: %@", error.localizedDescription);
+            }
+        }];
+    }];
+    self.travelModePicker = [UIMenu menuWithTitle:@"Change travel mode:" children:@[driving, walking, biking]];
+    [self.travelModeButton setMenu:self.travelModePicker];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -80,10 +147,6 @@
     if (self.timeSpentField.isEditing) { // only end editing if it's editing now
         [self.contentView endEditing:true];
     }
-}
-
-- (IBAction)onTapTravelMode:(id)sender {
-    // TODO: show UIMenu with multiple travel options
 }
 
 @end
