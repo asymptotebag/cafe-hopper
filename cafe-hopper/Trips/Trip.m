@@ -124,6 +124,7 @@
     [self.stops addObject:newStop];
     
     if (self.stops.count < 2) {
+        NSLog(@"first stop added");
         self[@"stops"] = self.stops;
         [self saveInBackgroundWithBlock:completion];
         return;
@@ -150,12 +151,7 @@
     // make actual network request:
     NSURL *url = [NSURL URLWithString:URLString];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    __weak typeof(self) weakSelf = self;
     NSURLSessionDataTask *task = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return;
-        }
         if (error == nil) {
             NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
             NSArray *distanceMatrix = jsonDict[@"rows"];
@@ -167,8 +163,8 @@
         } else {
             NSLog(@"Error calling Distance Matrix API: %@", error.localizedDescription);
         }
-        strongSelf[@"stops"] = strongSelf.stops;
-        [strongSelf saveInBackgroundWithBlock:completion];
+        self[@"stops"] = self.stops;
+        [self saveInBackgroundWithBlock:completion];
     }];
     [task resume];
 }
