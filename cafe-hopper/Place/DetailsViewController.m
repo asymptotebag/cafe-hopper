@@ -58,7 +58,7 @@
     [super viewDidLoad];
     self.user = [User currentUser];
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = NO;
+    usingRealImages = YES;
     self.reviews = @[];
     self.placePhotos = @[];
     

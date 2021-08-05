@@ -19,7 +19,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = NO;
+    usingRealImages = YES;
 }
 
 - (void)setSelected:(BOOL)selected {

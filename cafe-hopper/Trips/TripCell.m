@@ -17,7 +17,7 @@
     [super awakeFromNib];
     // Initialization code
     _placesClient = [GMSPlacesClient sharedClient];
-    usingRealImages = NO;
+    usingRealImages = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -112,6 +112,8 @@
             }
         }];
     } else {
+        self.originNameLabel.text = @"Origin";
+        self.destinationNameLabel.text = @"Destination";
         [self.originImageView setImage:nil];
         [self.originImageView setBackgroundColor:UIColor.systemGray6Color];
         [self.destinationImageView setImage:nil];

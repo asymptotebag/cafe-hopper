@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
-    _usingRealImages = NO;
+    _usingRealImages = YES;
     [self setupTableView];
     self.places = [NSMutableArray new];
     [self fetchPlacesinCollection];
