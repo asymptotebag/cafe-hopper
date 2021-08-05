@@ -794,7 +794,8 @@
                                                                 <fragment content="Awesome offices. Great facilities, location and views. Staff are great hosts">
                                                                     <attributes>
                                                                         <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                                        <font key="NSFont" size="14" name="SFProDisplay-Light"/>
+                                                                        <font key="NSFont" size="14" name="SFProText-Light"/>
+                                                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                                     </attributes>
                                                                 </fragment>
                                                             </attributedString>

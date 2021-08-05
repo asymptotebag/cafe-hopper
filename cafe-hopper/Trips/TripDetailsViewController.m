@@ -26,10 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) NSMutableArray *stops;
-// stops: [{place: GMSPlace, minSpent:20, timeToNext:14, index:0}]
-
 @property (nonatomic) NSInteger stopsLoaded;
-
 @end
 
 @implementation TripDetailsViewController {

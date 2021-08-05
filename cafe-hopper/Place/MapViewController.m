@@ -10,10 +10,13 @@
 #import "DetailsViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <CoreLocation/CoreLocation.h>
 @import GooglePlaces;
 
-@interface MapViewController () <UISearchBarDelegate, GMSMapViewDelegate>
+@interface MapViewController () <UISearchBarDelegate, GMSMapViewDelegate, CLLocationManagerDelegate>
 // public: @property (strong, nonatomic) NSString *placeId;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) GMSMapView *mapView;
 @property (strong, nonatomic) UISearchController *searchController;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) NSMutableArray *searchResults;
@@ -30,6 +33,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _placesClient = [GMSPlacesClient sharedClient];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    
     self.searchResults = [NSMutableArray new];
     self.searchBar.delegate = self;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
@@ -40,8 +46,20 @@
     if (self.placeId) {
         [self showPlaceFromId:self.placeId];
     } else { // show user's location on first load
-//        [self displayUserLocation];
-        [self showSampleMap];
+        if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+            [self.locationManager requestWhenInUseAuthorization];
+        }
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.64542 longitude:-74.0851 zoom:15];
+        self.mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
+        self.mapView.hidden = YES;
+        [self.view insertSubview:self.mapView atIndex:0];
+        if ([self.locationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [self.locationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+            NSLog(@"Location services authorized.");
+            [self displayUserLocation];
+        } else {
+            NSLog(@"Location services not authorized.");
+            self.mapView.hidden = NO;
+        }
     }
 }
 
@@ -65,30 +83,39 @@
     }];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    
+}
+
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+    if ([self.locationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedWhenInUse || [self.locationManager authorizationStatus] == kCLAuthorizationStatusAuthorizedAlways) {
+        NSLog(@"Location services authorized.");
+        [self displayUserLocation];
+    }
+}
+
 - (void)displayUserLocation {
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    [self.locationManager startUpdatingLocation];
+    CLLocationDegrees lat = self.locationManager.location.coordinate.latitude;
+    CLLocationDegrees lon = self.locationManager.location.coordinate.longitude;
+    [self.locationManager stopUpdatingLocation];
     
-    GMSPlaceField placeFields = (GMSPlaceFieldName | GMSPlaceFieldFormattedAddress | GMSPlaceFieldCoordinate);
+    NSLog(@"latitude: %f", lat);
+    NSLog(@"longitude: %f", lon);
     
-    __weak typeof(self) weakSelf = self;
-    [_placesClient findPlaceLikelihoodsFromCurrentLocationWithPlaceFields:placeFields callback:^(NSArray<GMSPlaceLikelihood *> * _Nullable likelihoods, NSError * _Nullable error) {
-        __typeof__(self) strongSelf = weakSelf;
-        if (strongSelf == nil) {
-            return;
-        }
-        if (error) {
-            NSLog(@"Error occurred: %@", error.localizedDescription);
-            return;
-        }
-        GMSPlace *place = likelihoods.firstObject.place;
-        if (place == nil) {
-            NSLog(@"NO current place");
-            return;
-        }
-        NSLog(@"Place: %@", place.name);
-        NSLog(@"Address: %@", place.formattedAddress);
-        [self showLocationAtPlace:place];
-    }];
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:lat longitude:lon zoom:15.f];
+    [self.mapView setCamera:camera];
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.hidden = NO;
+    
+    // Create a marker in the center of the map.
+    GMSMarker *marker = [[GMSMarker alloc] init];
+    marker.position = CLLocationCoordinate2DMake(lat, lon);
+    marker.title = @"You are here";
+    marker.snippet = @"Welcome!";
+    marker.map = self.mapView;
+    [MBProgressHUD hideHUDForView:self.view animated:true];
 }
 
 - (void)showLocationAtPlace:(GMSPlace *)place {
@@ -110,12 +137,13 @@
     // TODO: this should also open up details view
 }
 
-- (void)showSampleMap {
+- (void)showSampleMap { // currently unused
     // Sample code to create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:40.64542 longitude:-74.0851 zoom:15];
     GMSMapView *mapView = [GMSMapView mapWithFrame:self.view.frame camera:camera];
-    mapView.myLocationEnabled = YES;
+
     [self.view insertSubview:mapView atIndex:0];
     
     // Create a marker in the center of the map.
