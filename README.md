@@ -90,33 +90,30 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
 **Tab Navigation** (Tab to Screen)
 
 From left to right:
-* Maps / Search Screen
+* Map / Search Screen
 * Saved Places Screen
-* Possibly a middle "+" button to create a trip quickly? for symmetry
-* Routes / Trips Screen
+* Trips Screen
 * Account Screen (login/logout/settings)
 
 **Flow Navigation** (Screen to Screen)
 
 * Login Screen
     * Registration Screen
-    * Maps / Search Screen
+    * Map Screen
 * Registration Screen
     * Login Screen
-    * Maps / Search Screen
+    * Map Screen
+* Map Screen
+    * Search Screen 
+    * Cafe Details Screen
+* Saved Places Screen
+    * Collection Screen
+* Collection Screen
+    * Cafe Details Screen
+* Trips Screen
+    * (Single) Trip Screen
 * Account Screen
     * Login Screen
-    * Registration Screen
-    * [optional] Settings Screen
-* Maps / Search Screen
-    * Cafe Details Screen
-* Cafe Details Screen
-    * Back to the screen you came from
-* Saved Places Screen
-    * Cafe Details Screen
-* Routes / Trips Screen
-    * Cafe Details Screen (to see cafes on your trip)
-
 
 ## Wireframes
 <img src="/wireframes.jpg" width=800>
@@ -125,27 +122,34 @@ From left to right:
 ### Models:
 
 **User**
-| Property    | Type     | 
-| ----------- | -------- | 
-| email       | NSString |
-| username    | NSString |
-| password    | NSString |
-| name        | NSString |
-| pfp         | PFFileObject |
-
-**Collection (of Places)**
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
-| name        | NSString | user-defined name of collection |
-| author      | Pointer to User object | user who created the collection |
-| places      | NSArray  | array of cafes, each a pointer to a Cafe object |
+| email       | String | |
+| username    | String | |
+| password    | String | |
+| name        | String | |
+| pfp         | File | user's profile picture |
+| collectionNames | Array | names of the user's saved collections |
+| tripNames | Array | names of the user's trips |
+| timePerStop | Integer | default min/stop on a trip |
+| notifsOn | Boolean | whether the user has enabled notifications |
+| isShowingBars | Boolean | whether the user wants to see bars in search results |
+| searchHistory | Array | name, address, and placeID of user's 5 recent searches |
+
+**Collection**
+| Property    | Type     | Description |
+| ----------- | -------- | ----------- |
+| collectionName | String | user-defined name of collection |
+| owner | Pointer to User object | user who created the collection |
+| places | Array | array of cafe placeIDs |
 
 **Trip**
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
-| name        | NSString | user-defined name of trip |
-| author      | Pointer to User object | user who created the trip |
-| stops       | NSArray  | array of stops, each a pointer to a Cafe object |
+| tripName    | String | user-defined name of trip |
+| owner       | Pointer to User object | user who created the trip |
+| stops       | Array  | dictionary containing placeID, minutes spent, travel mode, and travel time to next stop |
+| isActive    | Boolean | whether the trip is currently active (sending notifs) |
 
 ### Networking
 
