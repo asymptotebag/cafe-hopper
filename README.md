@@ -121,7 +121,7 @@ From left to right:
 ## Schema 
 ### Models:
 
-**User**
+#### User
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
 | email       | String | |
@@ -136,14 +136,14 @@ From left to right:
 | isShowingBars | Boolean | whether the user wants to see bars in search results |
 | searchHistory | Array | name, address, and placeID of user's 5 recent searches |
 
-**Collection**
+#### Collection
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
 | collectionName | String | user-defined name of collection |
 | owner | Pointer to User object | user who created the collection |
 | places | Array | array of cafe placeIDs |
 
-**Trip**
+#### Trip
 | Property    | Type     | Description |
 | ----------- | -------- | ----------- |
 | tripName    | String | user-defined name of trip |
@@ -153,31 +153,46 @@ From left to right:
 
 ### Networking
 
-**List of network requests by screen**
+#### Parse network requests by screen
 
 * Login Screen
     * (Read/GET) Query User object
 * Registration Screen
     * (Create/POST) Create new User object
+* Search Screen
+    * (Read/GET) Query logged in User object (for searchHistory, isShowingBars)
+* Cafe Details Screen
+    * (Read/GET) Query logged in User object (for collectionNames, tripNames)
+    * (Read/GET) Query Collection object named "All" owned by current User
+    * (Read/GET) Query Trip objects owned by current User
+    * (Update/PUT) Add cafe's placeID to Collection object
+    * (Update/PUT) Add cafe's placeID to Trip object
+* Saved Places Screen
+    * (Read/GET) Query all Collection objects owned by current User
+    * (Create/POST) Create new Collection object
+    * (Delete) Delete existing Collection
+* Collection Screen
+    * (Update/PUT) Remove cafe's placeID from Collection object
+* Trips Screen
+    * (Read/GET) Query all Trip objects owned by current User
+    * (Create/POST) Create new Trip
+    * (Delete) Delete existing Trip
+* Trip Screen
+    * (Update/PUT) Remove stop from Trip
+    * (Update/PUT) Edit stop's duration and travel mode to next stop
+    * (Update/PUT) Set Trip as active/inactive
 * Account Screen
     * (Read/GET) Query logged in User object
     * (Update/PUT) Update user information (email, name, profile pic, etc.)
-    * (Delete) Delete existing User object
-* Maps / Search Screen
-* Cafe Details Screen
-    * (Read/GET) Query Cafe object
-    * (Read/GET) Query Place Collection objets containing current Cafe object
-    * (Update/PUT) Update existing Place Collection (by adding/removing current Cafe object)
-* Saved Places Screen
-    * (Read/GET) Query all Place Collection objects
-    * (Create/POST) Create new Place Collection object
-    * (Update/PUT) Update existing Place Collection
-    * (Delete) Delete existing Place Collection
-* Routes / Trips Screen
-    * (Read/GET) Query all Trip objects
-    * (Create/POST) Create new trip
-    * (Update/PUT) Update existing Trip object
-    * (Delete) Delete existing trip
 
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+#### Existing API Endpoints
+
+##### Google Maps API
+- Base URL: [maps.googleapis.com/maps/api](https://maps.googleapis.com/maps/api)
+
+| HTTP Verb | Endpoint | Description |
+| --------- | -------- | ----------- |
+| `GET`     | /place/details/json?place_id={placeID}&fields=reviews&key={key} | Fetch up to 5 place reviews |
+| `GET`     | /distancematrix/json?origins=place_id:{originID}&destinations=place_id:{destinationID}&mode={travelMode}&key={key} | Calculate travel distance between 2 places |
+
+
