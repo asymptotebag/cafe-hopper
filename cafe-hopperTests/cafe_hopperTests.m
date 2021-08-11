@@ -6,6 +6,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "NSString+EmailValidation.h"
 
 @interface cafe_hopperTests : XCTestCase
 
@@ -31,6 +32,22 @@
     [self measureBlock:^{
         // Put the code you want to measure the time of here.
     }];
+}
+
+- (void)testEmailVerification {
+    NSString *validEmail = @"emily.s.jiang@gmail.com";
+    NSString *invalidEmail1 = @"@.";
+    NSString *invalidEmail2 = @"email";
+    NSString *invalidEmail3 = @".com";
+    NSString *invalidEmail4 = @"@e.com";
+    NSString *invalidEmail5 = @"a@b";
+    
+    XCTAssertTrue([validEmail isValidEmail]);
+    XCTAssertFalse([invalidEmail1 isValidEmail]);
+    XCTAssertFalse([invalidEmail2 isValidEmail]);
+    XCTAssertFalse([invalidEmail3 isValidEmail]);
+    XCTAssertFalse([invalidEmail4 isValidEmail]);
+    XCTAssertFalse([invalidEmail5 isValidEmail]);
 }
 
 @end
