@@ -72,17 +72,24 @@ Croissavant is an iOS app for cafe hoppers — people who like to visit multipl
    * User can create a new account
    * User can be redirected to Login Screen if they already have an account
 * Account Screen
-    * User can login/logout/register here, and also change settings
+    * User can logout here, and also change settings
 * Maps / Search Screen
-    * User can view cafes / eateries based on current location / zipcode
-    * User can search for & filter cafes based on keyword, price point, etc.
+    * User can search for eateries and view their location on the map
+    * Users can open a Cafe Details screen for a particular eatery
 * Cafe Details Screen
-    * User can see reviews and photos of the restaurant (perhaps posted to either Google, Yelp, or similar rating sites)
-    * User can save eateries to lists / favorites -> possibly using double-tap feature
+    * User can see the rating, top 5 Google reviews, and photos of the restaurant
+    * User can call the cafe, view its website in a browser, and get Google Maps navigation directions
+    * User can save eateries to collections and/or trips, including with a double-tap
 * Saved Places Screen
-    * User can view lists of saved eateries
-* Routes / Trips Screen
-    * [optional feature] User can see routes/trips they've saved
+    * User can create and delete collections
+    * User can view their collections of saved eateries
+    * User can tap a collection to open its Collection Screen view
+* Collection Screen
+    * User can view a list of the eateries saved to the collection
+    * User can tap an eatery to open its Cafe Details screen
+* Trips Screen
+    * User can create and delete trips
+    * User can see all the trips they've created
     * User can plan trips between multiple cafes (using Google Maps API to determine walking/biking/driving distance between them), specifying how long they'd like to spend at each one
 
 ### 3. Navigation
